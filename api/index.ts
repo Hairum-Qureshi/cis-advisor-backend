@@ -70,6 +70,8 @@ app.get("/", (req: Request, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
 });
 
-app.listen(PORT, () => {
-	console.log(`Server is running at http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+// 	console.log(`Server is running at http://localhost:${PORT}`);
+// });
+
+export default app;
