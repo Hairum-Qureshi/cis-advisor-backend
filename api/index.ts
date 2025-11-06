@@ -19,7 +19,7 @@ app.use(
 	})
 );
 
-app.get("/data-source-json", async (req, res) => {
+app.get("/api/data-source-json", async (req, res) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 
 	try {
@@ -33,7 +33,7 @@ app.get("/data-source-json", async (req, res) => {
 	}
 });
 
-app.post("/ask-gemini", async (req: Request, res: Response) => {
+app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	try {
 		const { query, jsonData } = req.body;
 
