@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
+import cors from "cors";
 
 dotenv.config();
 
@@ -11,6 +12,11 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 app.use(express.json());
+
+app.use(cors({
+  origin: "*", 
+}));
+
 
 app.get("/data-source-json", async (req, res) => {
 	try {
