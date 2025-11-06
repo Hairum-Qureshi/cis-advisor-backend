@@ -13,12 +13,15 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 app.use(express.json());
 
-app.use(cors({
-  origin: "*", 
-}));
-
+app.use(
+	cors({
+		origin: "*"
+	})
+);
 
 app.get("/data-source-json", async (req, res) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+
 	try {
 		const response = await axios.get(
 			"https://bpb-us-w2.wpmucdn.com/sites.udel.edu/dist/4/14087/files/2025/04/QnA_3.json"
