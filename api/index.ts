@@ -59,6 +59,10 @@ app.post("/ask-gemini", async (req: Request, res: Response) => {
 	}
 });
 
+app.get("/", (req: Request, res: Response) => {
+	res.send("Welcome to the CIS Advisor Backend API");
+});
+
 app.listen(POST, () => {
 	console.log(`Server is running at http://localhost:${POST}`);
 });
