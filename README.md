@@ -23,7 +23,7 @@ However, it currently runs a full Express server **on Vercel**, which is functio
 
 | Endpoint                | Method | Description                                  |
 | ----------------------- | ------ | -------------------------------------------- |
-| `/api/data-source-json` | GET    | Fetches official UD CS Q&A JSON dataset      |
+| `/api/data-source-json` | GET    | Displays the Q&A JSON dataset      |
 | `/api/ask-gemini`       | POST   | Sends user query + dataset context to Gemini |
 | `/`                     | GET    | Basic server check                           |
 
@@ -104,7 +104,6 @@ http://localhost:3000
 ```json
 {
   "query": "What are the MS CS credit requirements at UD?",
-  "jsonData": { /* dataset returned from /api/data-source-json */ }
 }
 ```
 
