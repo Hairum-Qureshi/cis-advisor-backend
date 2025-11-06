@@ -7,7 +7,7 @@ However, it currently runs a full Express server **on Vercel**, which is functio
 
 ---
 
-## 🎯 Core Goals
+## Core Goals
 
 * Serve Gemini responses securely (no API keys in client code)
 * Fetch structured UD CS program Q&A data
@@ -17,7 +17,7 @@ However, it currently runs a full Express server **on Vercel**, which is functio
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 ### Endpoints
 
@@ -39,7 +39,7 @@ This is a prompt-control strategy — **not** a substitute for full safety enfor
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 CIS-ADVISOR-BACKEND/
@@ -57,7 +57,7 @@ CIS-ADVISOR-BACKEND/
 
 ---
 
-## ⚙️ Environment Variables
+## Environment Variables
 
 | Variable         | Required | Description                            |
 | ---------------- | -------- | -------------------------------------- |
@@ -73,7 +73,7 @@ PORT=3000
 
 ---
 
-## 🏗️ Installation & Local Development
+## Installation & Local Development
 
 ```bash
 git clone <repo-url>
@@ -95,7 +95,7 @@ http://localhost:3000
 
 ---
 
-## 📡 API Usage
+## API Usage
 
 ### POST `/api/ask-gemini`
 
@@ -119,7 +119,7 @@ http://localhost:3000
 ```
 ---
 
-## 🌐 CORS Policy
+## CORS Policy
 
 Current config:
 
@@ -132,7 +132,7 @@ If public, restrict origins to prevent external sites from hitting your LLM prox
 
 ---
 
-## 🛡️ Security Considerations
+## Security Considerations
 
 | Concern              | Current State     | Recommendation                        |
 | -------------------- | ----------------- | ------------------------------------- |
