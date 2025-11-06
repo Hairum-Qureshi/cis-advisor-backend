@@ -20,8 +20,6 @@ app.use(
 );
 
 app.get("/api/data-source-json", async (req, res) => {
-	res.setHeader("Access-Control-Allow-Origin", "*");
-
 	try {
 		const response = await axios.get(
 			"https://bpb-us-w2.wpmucdn.com/sites.udel.edu/dist/4/14087/files/2025/04/QnA_3.json"
