@@ -5,6 +5,8 @@ It provides a secure proxy layer for interacting with the Google Gemini API and 
 
 However, it currently runs a full Express server **on Vercel**, which is functional for a capstone but not the most efficient architecture for Vercel’s serverless runtime model. This README explains both *usage* and *limitations* transparently.
 
+**Note:** at this time (2025), Gemini-2.5-flash was utilized. If, in the future this version of Gemini gets voided or no longer maintained, you may need to change it if needed.
+
 ---
 
 ## Core Goals
