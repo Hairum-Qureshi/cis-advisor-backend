@@ -1,11 +1,9 @@
 # CIS Advisor Backend (Gemini-Powered Academic Q&A API)
 
-This backend powers the **CIS Advisor Chatbot** for the University of Delaware Graduate Computer Science program.
+This backend aims to power the chatbot functionality for the **CIS Advisor Chatbot** for the University of Delaware Graduate Computer Science program.
 It provides a secure proxy layer for interacting with the Google Gemini API and ensures that no API keys are exposed in the client application.
 
-Unlike many student AI projects that call LLMs directly from the browser (a rookie and insecure move), this backend enforces proper API separation and key protection.
-
-However — it currently runs a full Express server **on Vercel**, which is functional for a capstone but not the most efficient architecture for Vercel’s serverless runtime model. This README explains both *usage* and *limitations* transparently.
+However, it currently runs a full Express server **on Vercel**, which is functional for a capstone but not the most efficient architecture for Vercel’s serverless runtime model. This README explains both *usage* and *limitations* transparently.
 
 ---
 
@@ -16,8 +14,6 @@ However — it currently runs a full Express server **on Vercel**, which is func
 * Constrain model behavior to domain-specific content
 * Reject irrelevant queries cleanly
 * Output HTML-formatted responses for frontend rendering
-
-This system is intentionally narrow, which is correct for academic advising — minimizing hallucination risk matters more than creative freedom.
 
 ---
 
@@ -56,13 +52,8 @@ CIS-ADVISOR-BACKEND/
 ├── tsconfig.json       # TypeScript configuration
 ├── package.json
 ├── package-lock.json
-├── .env                # Environment variables (never commit)
 └── .gitignore
 ```
-
-> ⚠️ **Note on architecture:**
-> Vercel is optimized for serverless functions, not persistent Express servers. This works for a capstone but has trade-offs (cold starts, unnecessary process spin-ups, less efficient scaling).
-> If this evolves beyond academic/demo use, migrate to **Railway, Render, or Fly.io**, or convert endpoints into Vercel serverless functions.
 
 ---
 
@@ -79,8 +70,6 @@ CIS-ADVISOR-BACKEND/
 GEMINI_API_KEY=your_key_here
 PORT=3000
 ```
-
-Only one critical secret — good discipline.
 
 ---
 
@@ -110,7 +99,7 @@ http://localhost:3000
 
 ### POST `/api/ask-gemini`
 
-**Request body:**
+**Request body example:**
 
 ```json
 {
@@ -119,17 +108,15 @@ http://localhost:3000
 }
 ```
 
-**Response:**
+**Response example:**
 
 ```json
 {
-  "reply": "<p>Valid HTML response...</p>"
+"Question": "How do I request an admissions deferment when I cannot attend during my expected enrollment term?",
+"Answer": "Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.",
+"Category": "Advising"
 }
 ```
-
-> ✅ Safe proxy behavior
-> ⚠️ `jsonData` comes from client — acceptable in capstone but consider validation later
-
 ---
 
 ## 🌐 CORS Policy
@@ -153,33 +140,3 @@ If public, restrict origins to prevent external sites from hitting your LLM prox
 | Client-supplied JSON | ✔️ but unchecked  | Validate structure before injection   |
 | Rate limiting        | ❌                 | Add if going public                   |
 | CORS                 | `*`               | Lock down domains for production      |
-
-For a capstone, this setup is responsible and sufficient.
-For production, you'd harden request filtering and apply usage throttling.
-
----
-
-## 🚀 Deployment Notes (Vercel)
-
-You have a `vercel.json` and a root-level Express entry, which Vercel **can run**, but it's not its preferred pattern.
-
-Better long-term options:
-
-* Convert each endpoint to `api/*.ts` serverless functions **OR**
-* Move to a platform meant for long-running servers
-
-Nothing is “wrong” here — the README simply acknowledges platform trade-offs instead of pretending they're invisible.
-
----
-
-## 🧭 Future Improvements (Realistic Roadmap)
-
-| Area                                                       | Why It Matters                              |
-| ---------------------------------------------------------- | ------------------------------------------- |
-| Switch to serverless handlers OR migrate to a backend host | Align compute with use case                 |
-| Add schema validation to JSON dataset                      | Prevent prompt injection                    |
-| Add rate limiting                                          | Prevent abuse if public                     |
-| Add logs + analytics                                       | Understand failure modes and model behavior |
-| Introduce retrieval layer (RAG-lite)                       | More predictable outputs                    |
-
-Again — not required for a capstone, but useful if you scale this beyond classwork.
