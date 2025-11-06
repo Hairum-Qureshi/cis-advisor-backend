@@ -7,7 +7,7 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-const POST = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
@@ -72,6 +72,6 @@ app.get("/", (req: Request, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
 });
 
-app.listen(POST, () => {
-	console.log(`Server is running at http://localhost:${POST}`);
+app.listen(PORT, () => {
+	console.log(`Server is running at http://localhost:${PORT}`);
 });
