@@ -102,7 +102,7 @@ http://localhost:3000
 
 ```json
 {
-  "query": "What are the MS CS credit requirements at UD?",
+  "query": "How do I request an admissions deferment when I cannot attend during my expected enrollment term?",
 }
 ```
 
@@ -110,9 +110,7 @@ http://localhost:3000
 
 ```json
 {
-"Question": "How do I request an admissions deferment when I cannot attend during my expected enrollment term?",
-"Answer": "Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.",
-"Category": "Advising"
+"reply": "Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.",
 }
 ```
 ---
