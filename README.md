@@ -44,15 +44,14 @@ This is a prompt-control strategy — **not** a substitute for full safety enfor
 ```
 CIS-ADVISOR-BACKEND/
 │
-├── api/                # Vercel serverless dir (currently unused but reserved)
-│   └── node_modules/   # Auto-created dependency folder for Vercel builds
-│
-├── index.ts            # Main Express server entry point
-├── vercel.json         # Vercel deployment configuration
-├── tsconfig.json       # TypeScript configuration
-├── package.json
-├── package-lock.json
-└── .gitignore
+└── api/                    # Vercel serverless dir
+    ├── node_modules/       # Auto-created dependency folder for Vercel builds
+    ├── index.ts            # Main Express server entry point
+    ├── vercel.json         # Vercel deployment configuration
+    ├── tsconfig.json       # TypeScript configuration
+    ├── package.json
+    ├── package-lock.json
+    └── .gitignore
 ```
 
 ---
