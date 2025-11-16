@@ -76,33 +76,6 @@ app.get("/", (req: Request, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
 });
 
-export default async function handler(req: Request, res: Response) {
-	try {
-		const body = {
-			access_key: process.env.WEB3FORMS_KEY,
-			from_name: "Chatbot Weekly Reminder",
-			subject: "Weekly Feedback Reminder",
-			message:
-				"Hello! This is your weekly reminder to check your feedback dashboard:\n\nhttps://sites.udel.edu/your-link-here",
-			to_email: "wemef86542@agenra.com"
-		};
-
-		const result = await fetch("https://api.web3forms.com/submit", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(body)
-		});
-
-		const data = await result.json();
-		console.log("Web3Forms response:", data);
-
-		return res.status(200).json({ success: true, data });
-	} catch (error) {
-		console.error("Cron error:", error);
-		return res.status(500).json({ error: "Cron failed" });
-	}
-}
-
 app.listen(PORT, () => {
 	console.log(`Server is running at http://localhost:${PORT}`);
 });
