@@ -12,5 +12,11 @@
 			"source": "/(.*)",
 			"destination": "/index.ts"
 		}
+	],
+	"crons": [
+		{
+			"path": "/api/index",
+			"schedule": "* * * * *"
+		}
 	]
 }
