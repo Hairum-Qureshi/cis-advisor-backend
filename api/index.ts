@@ -88,9 +88,7 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 			});
 		}
 
-		// Changes made:
-		// - updated Gemini API key with a new one
-		// - updated error handling
+
 
 		console.error("Gemini error:", err);
 		return res.status(500).json({ error: "Gemini request failed" });
