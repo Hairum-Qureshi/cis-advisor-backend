@@ -10,8 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
 	cors({
@@ -63,12 +63,37 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 
 		const text = result.response?.candidates?.[0]?.content?.parts?.[0]?.text;
 
+		// genAI.models.count_tokens does not exist on GoogleGenerativeAI; rely on usage_metadata instead
+		if ((result as any).usage_metadata)
+			console.log(
+				`Total tokens used in the full request/response cycle: ${(result as any).usage_metadata.total_token_count}`
+			);
+
 		return res.json({ reply: text ?? "Unexpected model response." });
 	} catch (err) {
-		console.error(err);
-		return res
-			.status(500)
-			.json({ error: "Failed to get response from Gemini AI" });
+		if ((err as any)?.status === 429) {
+			const retryInfo = (err as any)?.errorDetails?.find((d: any) =>
+				d["@type"]?.includes("RetryInfo")
+			);
+
+			if ((retryInfo as any)?.retryDelay) {
+				return res.status(429).json({
+					error: "Rate limited by AI provider"
+				});
+			}
+
+			return res.status(429).json({
+				error: "AI quota exhausted",
+				message: "Daily request limit reached"
+			});
+		}
+
+		// Changes made:
+		// - updated Gemini API key with a new one
+		// - updated error handling
+
+		console.error("Gemini error:", err);
+		return res.status(500).json({ error: "Gemini request failed" });
 	}
 });
 
