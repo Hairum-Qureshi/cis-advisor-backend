@@ -1,0 +1,1382 @@
+[
+	{
+		"Question": "Who should I contact for graduate advising questions?",
+		"Answer": "Contact the CIS Graduate Academic Advisor for advising questions related to your program, registration, or degree progress.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Can this chatbot give academic advising?",
+		"Answer": "No. This chatbot provides general information only and cannot give academic advising or make decisions about your academic record. For advising, contact the Graduate Academic Advisor.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can I log into UDSIS?",
+		"Answer": "You can access UDSIS through the University of Delaware student portal: https://my.udel.edu/task/all/udsisstudent",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can I log into Stellic?",
+		"Answer": "ou can access your degree audit and plan courses in Stellic here: https://www.udel.edu/students/dem/stellic/",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "How do I know if I am eligible to graduate this semester?",
+		"Answer": "Check your degree audit in Stellic and confirm requirements with the Graduate Academic Advisor.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What should I do if my degree audit looks incorrect?",
+		"Answer": "Contact the Graduate Academic Advisor so they can review and update your record if needed.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Who should I contact about CPT or OPT questions?",
+		"Answer": "For immigration-related questions such as CPT or OPT, contact the Center for Global Programs & Services (CGPS). https://www.udel.edu/academics/global/",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Does the CIS department handle visa or immigration questions?",
+		"Answer": "No. Visa and immigration matters are handled by the Center for Global Programs & Services (CGPS). https://www.udel.edu/academics/global/",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "How often should I meet with my academic advisor?",
+		"Answer": "You should meet with your advisor at least once each semester to plan courses and discuss academic progress.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "When should PhD students find a research advisor?",
+		"Answer": "PhD students are encouraged to find a research advisor within their first year and must have one before starting the preliminary exam.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Can my research advisor be from another department?",
+		"Answer": "Yes, but you must also have a co-advisor from within the CIS department.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there CIS student organizations I can join?",
+		"Answer": "Yes. The CIS department and university offer multiple student organizations, including ACM, ACM-W, GSA, and others.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "When should I submit my PhD committee approval form?",
+		"Answer": "Submit the completed form and required explanations at least three weeks before your proposal presentation.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What should I do if I cannot register for a required course?",
+		"Answer": "Contact the Graduate Academic Advisor or submit the CIS Registration Help Form for assistance.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "How do I contact my academic advisor?",
+		"Answer": "You can email your assigned advisor or check UDSIS/Stellic for advisor information.",
+		"Category": "",
+		"Notes": ""
+	},
+	{
+		"Question": "What courses are required for the CIS PhD program?\n",
+		"Answer": "To view the Graduate Catalog for CIS PhD course requirements go to this link\nhttps://catalog.udel.edu/preview_program.php?catoid=93&poid=84134&returnto=30538\n",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What documents need to be submitted after complting the proposal defense ",
+		"Answer": "•        Signed Doctoral Degree Candidacy Recommendation  form (with committee member signatures)\n•        Copy of  transcript\n•        PhD checkout sheet\n",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I'm applying for CPT and my student status is Docotoral Sustaining. What course do I need to enroll in",
+		"Answer": "Docotoral Sustatining status student should enroll in UNIV999. Please contact the Gradaute Academic Advisor for assistance.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "How do I change my expected graduation term",
+		"Answer": "Student would send an email request to Graduate Acdemic Advisor including full name, UD ID, updated term, and reason for request",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I secured a research advisor, how do I have their name updated in UDSIS",
+		"Answer": "Provide your research advisor name to the Graduate Academic Advisor to update ",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "My elective course appears unmatched in Stellic how do I have this updated",
+		"Answer": "Contact Graduate Academic Advisor to update your Stellic record",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I'm a international graduate student and applied for a CPT application, which course should I enroll to be eligible for CPT ",
+		"Answer": "Student would enroll in CISC699.  Prior to course enrollment approval is required from the Graduate Director. ",
+		"Category": "Advisng",
+		"Notes": ""
+	},
+	{
+		"Question": "My external committee member for my proposal asked if it would be possible to record the proposal defense and send it to them after. Is this possible?",
+		"Answer": "Please contact the Graduate Director for approval",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I dropped a course in WebReg how long does it take to update my Stellic",
+		"Answer": "It takes 24 hours for Stellic to update",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "My transcript includes an L next to the course I audited. What does L signify in UD grading system",
+		"Answer": "The L refers to Listener/Audit Status",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the procedure to change a F grade letter in CISC890 Colloquium",
+		"Answer": "Student would contract Professor directly ",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Do I need to enroll in a course every semester while in Doctoral Sustaining Status",
+		"Answer": "Yes and beginning each semester through graduation send an email to Graduate Academic Advisor to register you for Sustaining Status course UNIV999.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I need assistance with a course override",
+		"Answer": "The student should complete the CIS\nRegistration Help Form to request an override.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Should I register for CISC890-19",
+		"Answer": "If you have taken CIS890-019 in a previous semester, then register for CISC 890-20 Colloquium.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "How do I establish a Prelim or Proposal committee",
+		"Answer": "Please establish a committee in accordance with the requirements from program policy document: https://catalog.udel.edu/mime/media/93/6775/PPD+PhD+Degree+in+Computer+and+Information+Sciences.pdf.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the process to submit department keys and UD credit card",
+		"Answer": "Before leaving UD, please return any keys, UD credit card (close out any open reports) or other department- issued items to the CIS main office. Do not leave keys with another student or a faculty member. If we never receive the keys, your $10 key deposit refund may be forfeited.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the process to request a change to my expected graduation date",
+		"Answer": "If you need to request a later Expected Graduation Term send an email request to Graduate Academic Advisor and include your full name, UD ID, and updated term ",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the suggested CIS PhD Study Plan",
+		"Answer": "Find a reserach advisor within 1 year 2) Pass the preliminary Exam within 2 years 3) Enter Doctoral Candidacy withing 4 years 4) Pass disseration exam and Defend within 5-7 years",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Where should I submit my final approved version of my thesis",
+		"Answer": "When you have the final approved version of your thesis/dissertation by your committee, submit your thesis/dissertation to the ETD site http://www.etdadmin.com/udel.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the next steps after I submit my thesis/ disseration to EDT",
+		"Answer": "When you submit to the ETD site, the dissertation or thesis goes to the Graduate College where the Graduate College will review the PDF and will let you know if there are formatting corrections to make or not.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "My formatting corrections are complete for my thesis/disseration what are my next steps",
+		"Answer": "send the following to the person in your College who is listed below so that the Dean of your College can sign your Dean’s signature page.\n                    You need to include two attachments:\n                        1. A PDF of your final dissertation (no signatures on the signature pages in the PDF).\n                        2. A separate attachment in one file that includes: the title page, abstract, committee signature page (with all signatures) and the first signature page that includes the signature of the chair of your department, where the Dean of your College will sign.  Once your college dean signs, the dean’s office will then send those pages to Graduate College who will then have the Vice Provost for Graduate and Professional Education/Graduate College Dean sign.  You do not need to contact the Graduate College dean for his signature.\n",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Who should I contact if I have a missing grade or S (Satisfactory) grade letter  for Research Thesis or Dissertation ",
+		"Answer": "Check your Degree Audit in Stellic and pay special attention to any missing grades for Research, Thesis or Dissertation or ‘S’ grade letters which are temporary letter grade. Ask your faculty advisor to submit grades in advance of your graduation date. Note: if you submitted the AAD form for a prior semester but delayed graduation, you do not need to re-submit the form.  \n",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What documents or approvals are required for the proposal defense?",
+		"Answer": "Complete the Doctoral Degree Candidacy Recommendation Form (DDR). Gather electronic signatures from committee members. After all committee signatures are acquired, form is submitted back to Graduate Academic Advisor along with a copy of transcript and PhD\nCheckout sheet. Leave the Department Chair and Program Director signature line blank. ",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "When should I enroll in 9 credits of CISC964 Pre Candidacy Study?",
+		"Answer": "Durign the semester student plan to schedule Proposal Exam",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I'm a PhD student when would I be eligible to enroll in Doctoral Sustaining status?",
+		"Answer": "After you have successfully passed the proposal exam and applied for Doctoral Degree Candidacy Recommendation. Contact Graduate Academic Advisor for assistance.",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the total amount of online course credits can I enroll as an international student?",
+		"Answer": "Total of 3 credits",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What information do I need to provide to update my expected graduation term ?",
+		"Answer": "Please provide your Name, UD ID, and updated term to CIS Graduate Academic Advisor",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "If I add/drop a course after the deadline will I be charged a fee? ",
+		"Answer": "Yes, after the free drop/add deadlines, there are no tuition rebates",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "This is my first semester how do I activate my UD email account ?\n",
+		"Answer": "Please proceed to this link for steps to activate your UD email account https://services.udel.edu/TDClient/32/Portal/KB/ArticleDet?ID=26",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can I view my degree audit?",
+		"Answer": "To access your degree audit you would need to log into Stellic (https://www.udel.edu/students/dem/stellic/)",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can I plan my courses for different terms?",
+		"Answer": "To plan courses for future terms log into Stellic. If you need further assistance contact the Graduate Academic Advisor",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I'm a 4+1 student and earned graduate credits that will not count toward my bachelors degree. How do I transfer those credits to my graduate record?",
+		"Answer": "To transfer graduate credits a Request for Internal Graduate Transfer Credit form would need to be completed. For more detailed instruction please go to https://www.udel.edu/academics/registrar/students/transfer-credit/grad-internal/",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Where do I submit the PhD defense social media announcement?",
+		"Answer": "Please contact Graduate Academic Advisor for instruction on how to submit PhD social media announcement",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "I'm not able to register this term due to a financial hold on my account?",
+		"Answer": "Contact Student Financial Services to provide assistance  https://services.udel.edu/TDClient/32/Portal/Requests/TicketRequests/NewForm?ID=xTeNTWqCqJ0_&RequestorType=Service",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the process for Graduate Student Travel Award?",
+		"Answer": "For complete details on the award and to obtain an application form, visit: https://www.udel.edu/academics/colleges/grad/research/graduate-student-travel-award/",
+		"Category": "Advising",
+		"Notes": ""
+	},
+	{
+		"Question": "Is admission guaranteed if I meet the minimum requirements?",
+		"Answer": "No. Admission to all graduate programs in CIS is competitive. Meeting the stated minimum requirements does not guarantee admission. Conversely, applicants who may not meet all requirements are not necessarily precluded from admission if they offer other appropriate strengths.",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can I find more information or contact the department?",
+		"Answer": "For more information about the Computer and Information Sciences graduate programs, you can contact the department by email at cis-gradprgm@udel.edu or by phone at (302) 831-2712. Additional details are available on the department’s website at https://www.cis.udel.edu/academics/graduate-programs/, and the faculty directory can be accessed at https://www.cis.udel.edu/people/faculty-directory/. For inquiries related to the Bioinformatics Data Science programs, the contact email is bioinformatics@udel.edu and the phone number is (302) 831-6173. More information can be found on their program-specific pages: PhD Program: https://bioinformatics.udel.edu/education/binf-phd/, MS Program: https://bioinformatics.udel.edu/education/bicb-ms/, and Graduate Certificate: https://bioinformatics.udel.edu/education/degrees/graduate-certificate-in-bioinformatics-data-science-bids-cert/.",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "What programs are offered?",
+		"Answer": "The University of Delaware’s Computer and Information Sciences (CIS) department offers two main graduate programs. The Master of Science (MS) in Computer and Information Sciences has two tracks: a non-thesis track designed for students who view the MS as a terminal professional degree, and a thesis track intended for those interested in research or planning to pursue a PhD. Students are initially admitted to the non-thesis track, and approval from an advisory committee is required to transition into the thesis track. The Doctor of Philosophy (PhD) in Computer and Information Sciences is a research-intensive program that requires students to conduct substantial, original, and publishable research, produce a written dissertation, and demonstrate mastery of their chosen research area.",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "Which department require CISC courses in their degree programs",
+		"Answer": "The Department of Computer and Information Sciences (CIS) requires CISC courses for all of its graduate degree and certificate programs. These programs include the MS and PhD in Computer and Information Sciences, the MS and Certificate in Artificial Intelligence, the MS, PhD, and Certificate in Bioinformatics Data Science (which is administered through the Department of Computer and Information Sciences), and the Computational Science and Engineering Certificate. In addition, students enrolled in Accelerated Bachelor/Master’s (4+1) programs in Computer Science, Artificial Intelligence, or Bioinformatics Data Science from specific departments are also required to complete CISC courses as part of the graduate portion of their combined degree. These departments include Applied Molecular Biology & Biotechnology (for the Bioinformatics Data Science 4+1 BS/MS), Biological Science (for the Bioinformatics Data Science 4+1 BA/MS and BS/MS), Biomedical Engineering (for Computer Science 4+1 BBE/MS and Bioinformatics Data Science 4+1 BBE/MS), Chemical Engineering (for Computer Science 4+1 BChE/MS), Civil Engineering (for Computer Science 4+1 BCE/MS), Computer Engineering (for Computer Science 4+1 BCpE/MS), Construction Engineering and Management (for Computer Science 4+1 BCEM/MS), Electrical Engineering (for Computer Science 4+1 BEE/MS), Environmental Engineering (for Computer Science 4+1 BENE/MS), Information Systems (for Computer Science 4+1 BS/MS and Artificial Intelligence 4+1 BS/MS), Materials Science and Engineering (for Computer Science 4+1 BMSE/MS), and Mechanical Engineering (for Computer Science 4+1 BME/MS).",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "What graduate degrees does the University of Delaware Computer and Information Sciences department offer?",
+		"Answer": "The CIS department offers PhD and MS degrees in Computer and Information Sciences, a new MS in Artificial Intelligence, and several graduate certificates. They also provide dual degree programs and accelerated 4+1 programs for qualified undergraduates.",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there interdisciplinary graduate programs offered through the CIS department?",
+		"Answer": "Yes. CIS coordinates interdisciplinary PhD, MS, and Graduate Certificate programs in Bioinformatics Data Science in partnership with the Center for Bioinformatics and Computational Biology. ",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the research areas for PhD CIS?",
+		"Answer": "The department’s research spans artificial intelligence and machine learning, bioinformatics and health informatics, computer systems, networks, and security, computer vision, robotics, and autonomous systems, computing foundations, human-computer interaction ",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "Does admission to a CIS graduate program guarantee financial aid?",
+		"Answer": "No. Admission does not automatically guarantee financial aid",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "Are master's students eligible for CIS assistantships?",
+		"Answer": "Unfortunately, our department does not offer scholarships for Master's students. However, we encourage you to explore alternative avenues to secure financial support, such as internships and scholarships offered at the university or college level.\n\nHere are some suggestions to help you in your pursuit of financial assistance:\n\nUD scholarship page: https://www.udel.edu/students/student-financial-services/additional-scholarships/\n\nUD student employment page\nhttps://www.udel.edu/students/student-financial-services/find-a-job/\n\nUD Graduate College funding opportunities\nhttps://www.udel.edu/academics/colleges/grad/current-students/funding/\n\n",
+		"Category": "",
+		"Notes": ""
+	},
+	{
+		"Question": "Are recommendation letters required?",
+		"Answer": "Yes. Three letters of recommendation are required for CIS PhD and MS programs.",
+		"Category": "UD Catalog",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits are required for MS in Artificial Intelligence?",
+		"Answer": "The MS in Artificial Intelligence requires a total of 30 credits.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the MS AI Non-thesis Track Requirements?",
+		"Answer": "The coursework requirement comprises five categories. The Fundamentals of AI and Computing (Category 1) ensures that all students are introduced to the necessary technical background for AI and the subsequent categories. The Topics in Mathematics and Theoretical Computer Science Closely Related to AI (Category 2) ensures a deeper understanding of the mathematical methods underlying AI and machine learning algorithms. The Topics in AI (Category 3) contains fundamental technical courses focused on one or more subfields of AI that are generally applicable in many different domains. The Electives (Category 4) are either fundamental technical CS courses generally applicable in many different domains of AI or application/domain specific courses in which AI plays a crucial role. The Seminar (Category 5) prepares students to successfully complete the MS and exposes them to broader issues such as professional and ethical responsibilities and the impacts of computer and information sciences on society.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the MS AI Thesis Track Requirements?",
+		"Answer": "The coursework requirement comprises five categories. The Fundamentals of AI and Computing (Category 1) ensures that all students are introduced to the necessary technical background for AI and the subsequent categories. The Topics in Mathematics and Theoretical Computer Science Closely Related to AI (Category 2) ensures a deeper understanding of the mathematical methods underlying AI and machine learning algorithms. The Topics in AI (Category 3) contains fundamental technical courses focused on one or more subfields of AI that are generally applicable in many different domains. The Research (Category 4) for the thesis option, all six credits must be taken as research credits under the supervision of one of the CIS faculty. The Seminar (Category 5) prepares students to successfully complete the MS and exposes them to broader issues such as professional and ethical responsibilities and the impacts of computer and information sciences on society.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the admission requirements of MS in AI?",
+		"Answer": "Applicants must hold a bachelor’s degree with a minimum GPA of 3.2 in the major and 3.0 overall, demonstrate competence in programming, data structures, algorithms, and mathematics (calculus, discrete math, probability, statistics), and have prior coursework in AI or related fields. GRE (Verbal 153, Quantitative 155, Analytical Writing 4.0), TOEFL score 79 (for international applicants), three recommendation letters, a graduate essay, and a CV are required. Full details: Program Website",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are GRE scores required for the MS in Artificial Intelligence program?\n",
+		"Answer": "Minimum GRE scores are 153 (Verbal), 155 (Quantitative), and 4.0 (Analytical Writing). The GRE subject test is not required. More details about test score requirements can be found at UD Graduate Test Scores.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How many letters of recommendation are required for MS in AI?",
+		"Answer": "Three (3) letters of recommendation from professors (preferably), employers, or others who are able to assess your potential for success in graduate studies.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How can I apply to the MS in AI?",
+		"Answer": "Applications can be submitted through the UD Graduate Admissions portal.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the MS in AI application deadlines?",
+		"Answer": "For Fall admission: February 1 is the priority deadline, and the final deadline is typically in mid-August. For Spring admission: the final deadline is usually in early December. Applicants should always verify the exact dates on the program website or UD Graduate Admissions.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How long does it take to complete the MS in AI?",
+		"Answer": "Most students complete the program in 2 years of full-time study. It can be finished faster by taking extra credits during winter or summer sessions.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the cost per credit for the MS in AI program?",
+		"Answer": " Please refer to the Graduate College for UD Tuition add this link https://www.udel.edu/academics/colleges/grad/prospective-students/programs/artificial-intelligence/",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Does the department offer optional graduate specializations for students who wish to focus their studies in a specific area in AI?",
+		"Answer": "Yes, specializations in Autonomous Driving, Health and Biomedical Informatics, Human-Computer Interaction, Network Science, Quantum Computing, Robotics. Contact cis-gradprgm@udel.edu for more information",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the MS in Artificial Intelligence program at the University of Delaware?",
+		"Answer": "The Master of Science in Artificial Intelligence (MS in AI) at the University of Delaware is a graduate program designed to equip students with advanced technical expertise and theoretical knowledge in AI, preparing them to solve complex, real-world problems. The program supports students aiming for careers in research, industry, and entrepreneurship, and emphasizes both the development of cutting-edge AI systems and the ethical, societal considerations that accompany them. Students may pursue either a thesis or a non-thesis track, depending on their academic and professional goals.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the learning outcomes for graduates of this program?",
+		"Answer": "Graduates of the MS in AI program are expected to master several core competencies. First, they should be able to utilize and develop advanced AI technologies such as machine learning, neural networks, natural language processing, and computer vision to design innovative solutions for real-world challenges. Second, they must demonstrate a rigorous understanding of both theoretical foundations and practical applications, which enables excellence in AI research, development, and system implementation. Third, they are trained to ethically analyze and address the societal impacts of AI, understanding issues like bias, fairness, and accountability. Finally, graduates are expected to exhibit strong critical thinking and problem-solving skills within the AI domain.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the difference between the thesis and non-thesis track in the MS in AI program?",
+		"Answer": "The non-thesis track is designed as a professional degree focused entirely on coursework (30 credits total), ideal for students planning to work in industry. The thesis track includes 6 research credits under CIS faculty supervision and is better suited for students interested in research or pursuing a PhD.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits are required in each category for the MS in AI?",
+		"Answer": "Category 1: Fundamentals of AI and Computing -12 credits.\nCategory 2: Topics in Mathematics and Theoretical Computer Science -3 credits.\nCategory 3: Topics in AI -9 credits.\nCategory 4: Electives/Research -6 credits. \nCategory 5: CISC 890 Seminar -0 credits\nTotal = 30 credits.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is the CISC 890 Seminar course required for all MS in AI students?",
+		"Answer": "Yes. All students must enroll in CISC 890 Departmental Seminar each semester to meet Category 5 requirements.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "In the MS in AI program, can one course count toward more than one category?",
+		"Answer": "In the MS in Artificial Intelligence program the same course cannot be used to satisfy more than one category simultaneously.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there optional specializations in the MS in AI program, and what areas can I choose from?",
+		"Answer": "Yes. The MS in AI program offers optional specializations that allow students to focus their studies in specific areas. Available specializations include Autonomous Driving, Health and Biomedical Informatics, Human-Computer Interaction, Network Science, Quantum Computing, and Robotics.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What courses are included in the Fundamentals of AI and Computing category  in the MS in Artificial Intelligence program?",
+		"Answer": "The Fundamentals of AI and Computing (Category 1) requires 12 credits and includes:\nCISC 684 - Introduction to Machine Learning\nCISC 681 - Artificial Intelligence\nCISC 621 - Algorithm Design and Analysis\nCISC 889 - Ethics in AI",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What courses are included in the Topics in Mathematics and Theoretical Computer Science category in the MS in Artificial Intelligence program?\n",
+		"Answer": "The Topics in Mathematics and Theoretical Computer Science (Category 2) requires 3 credits and includes:\nMATH 612 - Computational Methods for Equation Solving and Function Minimization\nMATH 631 - Introduction to Stochastic Processes\nMATH 630 - Probability Theory and Applications\nSTAT 603 - Statistical Computing and Optimization\nSTAT 617 - Multivariate Methods and Statistical Learning\nCISC 604 - Logic in Computer Science",
+		"Category": "MS in Artificial Intelligence\n",
+		"Notes": ""
+	},
+	{
+		"Question": "What courses are included in the Topics in AI category in the MS in Artificial Intelligence program?",
+		"Answer": "The Topics in AI (Category 3) requires 9 credits and includes:\nCISC 642 - Introduction to Computer Vision \nCISC 686 - Introduction to Multi-Agent Systems\nCISC 688 - Introduction to Natural Language Processing\nCISC 689 - Topics in AI\nCISC 683 - Introduction to Data Mining\nCISC 822 - Graph Mining \nCISC 817 - Large Scale Machine Learning (or cross-listed ELEG 817)\nCISC 820 - Quantum Algorithms\nCISC 886 - Multi-Agent Systems\nSTAT 619 - Time-Series Analysis\nSTAT 622 Statistical Network Analysis\nELEG 602 - Advanced Machine Learning\nELEG 604 - Imaging and Deep Learning\nCISC 889 - Advanced Topics in AI\nAdditional approved technical AI courses may also be included with advisor consent.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": "Add ELEG 604 Imaging and Deep Learning and STAT 622 Statistical Newwork Analysis\n(DONE)"
+	},
+	{
+		"Question": "What courses are included in the Electives category in the MS in Artificial Intelligence program?",
+		"Answer": "The Electives (Category 4) requires 6 credits and includes:\nQSEG 851 -Advanced Topics in Quantum Information\nBINF 620 -Big Data Analytics in Healthcare\nBINF 644 -Bioinformatics\nBINF 695 -Computational Systems Biology (or ELEG 697)\nCISC 844 -Computational Biomedicine (crosslisted with BMEG 844)\nCISC 682 -Introduction to Human-Computer Interaction (Prereq: Software Eng. experience; Restriction: No credit with CISC 482)\nBINF 685 -Modeling and Simulation for Bioinformatics Systems (crosslited with CISC 685. Prereq: CISC636)\nCISC 601 -Elements of the Theory of Computation\nCISC 848 -Computing and Data Science for Soft Materials Innovation (or MSEG 848, ELEG 848)\nMEEG 671 -Introduction to Robotics\nCISC 649 -Topics in Computer Applications\nCPEG 657 -Search and Data Mining\nELEG 601 -Optimization for Signal Processing, Machine Learning, and Data Science\nELEG 630 -Information Theory\nCISC 830 -Combinatorial Optimization and Advanced Algorithms\nLING 604 -Structure of Language\nCGSC 696 -Psycholinguistics\nCGSC 670 -Elements of Cognitive Science\nAINT 699 -Internship in Artificial Intelligence (up to 3 credits)\nAINT 869 -Master’s Thesis in AI (6 credits)\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": "ADD CISC682 Introduction to Human-Computer Interaction. PreReq Software enginerring experience. Restrictions: Credit cannot be received for both CISC482 and CISC682\n(DONE)"
+	},
+	{
+		"Question": "Is it possible to switch from non-thesis to thesis track in the MS in AI program?",
+		"Answer": "Yes. Students begin in the non-thesis track. Switching to the thesis track is possible once their advisory committee is approved by the department.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can elective courses in the MS in AI program come from outside the CIS department?\n",
+		"Answer": "Yes. In the MS in Artificial Intelligence program, elective courses (Category 4) can be taken from other related departments such as BINF, ELEG, MEEG, CGSC, LING, and others, provided they meet program guidelines and receive advisor approval.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What kind of AI skills and knowledge does the MS in AI program focus on developing?\n",
+		"Answer": "The MS in AI program emphasizes a strong foundation in machine learning, neural networks, optimization, algorithm design, and analysis. It prepares students to build custom AI models, solve real-world problems in areas like NLP, computer vision, and networks, and innovate beyond existing tools.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What makes the MS in AI program at UD unique?",
+		"Answer": "The program is designed to train advanced AI professionals who can push the boundaries of AI research and applications. It focuses on both technical depth and research, offering thesis and non-thesis tracks, interdisciplinary electives, and optional specializations in cutting-edge fields.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What programming and technical background should applicants to the MS in AI program have?Applicants should have a strong foundation in programming, data structures, algorithms, operating systems, and computer architecture, along with mathematical skills in calculus, discrete math, statistics, probability, and logic.\n\n",
+		"Answer": "Applicants should have a strong foundation in programming, data structures, algorithms, operating systems, and computer architecture, along with mathematical skills in calculus, discrete math, statistics, probability, and logic.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is work experience required to apply to the MS in AI program?\n",
+		"Answer": "No. Work experience is not required for admission, but relevant professional or research experience can strengthen your application.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Do I need to meet all the admission requirements to get into the MS in AI program?",
+		"Answer": " Admission is competitive. Meeting all minimum requirements does not guarantee admission, and applicants who do not meet every requirement may still be considered if they have other strong qualifications.\n\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there research opportunities for MS in AI students who are not in the thesis track?",
+		"Answer": "Yes. Non-thesis students may participate in faculty research projects or take research-focused electives, even if they are not completing a formal thesis.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the English proficiency requirements for international applicants to the MS in AI program?\n",
+		"Answer": "International applicants must meet UD’s minimum English proficiency scores: TOEFL iBT 79 or IELTS 6.5 overall (no speaking score below 6.0). A TOEFL of 100 or IELTS 7.0 overall is required to be considered for a teaching assistantship.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are internships allowed as part of the MS in AI program?",
+		"Answer": "Yes. Students may take AINT 699 Industry or Academic Internship for up to 3 credits as part of Category 4 (Electives). Internship approval and supervision are required.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can students take advanced topics courses more than once?",
+		"Answer": "Yes. CISC 889 (Advanced Topics in AI) and CISC 689 (Topics in AI) may be taken multiple times if the content differs by section. The same subject cannot be counted twice under both course numbers.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What courses are included in the Fundamentals of AI and Computing category?",
+		"Answer": "The Fundamentals of AI and Computing (12 credits) ensures all students build a strong technical base. Required courses include:\n-CISC 621: Algorithm Design and Analysis (3 credits)\n-CISC 681: Artificial Intelligence (3 credits)\n-CISC 684: Introduction to Machine Learning (3 credits)\n-CISC 889: Advanced Topics in Artificial Intelligence (3 credits)",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Why is mathematics emphasized in the MS in AI program, and what are the options?",
+		"Answer": "AI is deeply rooted in mathematical principles such as probability, statistics, logic, and optimization. To address this, students must take 3 credits in Topics in Mathematics and Theoretical Computer Science closely related to AI and ML. Options include:\n-CISC 604 (Logic in Computer Science)\n-MATH 612 (Computational Methods)\n-MATH 630 (Probability Theory and Applications)\n-MATH 631 (Stochastic Processes)\n-STAT 603 (Statistical Computing and Optimization)\n-STAT 617 (Multivariate Methods and Statistical Learning).\n\nThis requirement ensures graduates can understand and develop the mathematical underpinnings of complex AI algorithms.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the options for the Electives/Thesis requirement?",
+		"Answer": "Students must complete 6 credits through either electives or a thesis. Elective Option: Students can choose additional technical courses in computer science or application areas where AI plays a significant role. These electives can be drawn from Categories 2 and 3 or from other approved departments such as BINF (Bioinformatics), CGSC (Cognitive Science), CPEG (Computer Engineering), ELEG (Electrical and Computer Engineering), LING (Linguistics), MEEG (Mechanical Engineering), and QSEG (Quantum Science and Engineering).\n\nThesis Option: Students may instead choose to complete 6 credits of AINT 869 (Master’s Thesis in Artificial Intelligence). This track is well-suited for those interested in research-intensive careers or doctoral study.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the seminar requirement, and why is it important?",
+		"Answer": "Although it carries 0 credits, students are required to take CISC 890 - Colloquium: Computer Science every fall and spring semester. This seminar series exposes students to current research, industry trends, and professional issues in computer science and AI. It also emphasizes ethical considerations and societal impacts of technology—core themes in responsible AI development. Participation in the colloquium helps students stay engaged with the research community and fosters professional growth beyond coursework.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How does the MS in AI program prepare students for different career paths?",
+		"Answer": "The MS in AI program is deliberately structured to support multiple career trajectories. Students who pursue the thesis track gain substantial research experience, which positions them well for doctoral studies or R&D (Research and Development) roles in industry and academia. The non-thesis track, with its emphasis on advanced technical coursework, is well suited for students planning to enter the workforce directly, particularly in roles involving applied machine learning, AI engineering, data science, or AI product development. Furthermore, the program’s emphasis on ethics and interdisciplinary learning prepares students to lead responsible AI initiatives in both technical and policy-oriented environments.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": "What is R& D roles?\n(DONE)"
+	},
+	{
+		"Question": "How does this program emphasize ethics and societal impact?",
+		"Answer": "Unlike many technical programs that focus solely on algorithms and applications, the MS in AI at the University of Delaware explicitly integrates ethical and societal considerations into its curriculum. Through required seminars and coursework, students examine issues such as algorithmic bias, data privacy, fairness in AI, and the broader implications of AI technologies on society. This ensures graduates not only possess technical excellence but also the capacity to critically assess the consequences of deploying AI in real-world contexts.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What distinguishes this program from a general computer science master’s?",
+		"Answer": "While a traditional computer science master’s might include AI as one of several areas of specialization, this program places AI at the core of its curriculum. It integrates AI theory, advanced mathematics, specialized subfields, and ethical considerations into a coherent framework designed to prepare students to become leaders in AI innovation. The focused course structure and flexibility between thesis and non-thesis tracks also allow students to customize their learning path according to their professional goals.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can students find additional program details?",
+		"Answer": "For comprehensive policies, including details on course selection, program timelines, and administrative requirements, students are directed to consult the official Program Policy Document and the university’s Graduate Catalog. This ensures that students understand both the academic expectations and the procedural requirements needed to complete the degree successfully.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I apply to the MS in AI program with a degree in a field other than computer science?",
+		"Answer": "Yes, but you must meet the program’s academic requirements. Applicants are expected to have knowledge in programming, data structures, architecture, OS, and algorithms; at least four math courses (e.g., calculus, discrete math, probability, logic, theory); and at least one AI/ML-related course (e.g., machine learning, data mining, AI, or data science). A CS degree is not required, but equivalent coursework or preparation is.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are GRE waivers available for the MS in AI program?",
+		"Answer": " GRE waivers are generally not offered.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the minimum GPA requirements for admission to the MS in AI program?\n",
+		"Answer": "Applicants must have a minimum GPA of 3.2 in the major and an overall GPA of 3.0 to be considered for admission.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I transfer graduate credits from another institution into the MS in AI program?",
+		"Answer": "Transfer of credits is considered on a case-by-case basis and requires departmental and Graduate College approval. Typically, a maximum of 9 credits may be transferred.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the graduate application essay requirement for the MS in AI program?",
+		"Answer": "The MS in AI program uses UD’s standard graduate essay (no program-specific prompt). The essay should be 1–5 pages and outline your educational plans, career goals, how the program fits those goals, and any areas of special interest. Full details: https://www.udel.edu/academics/colleges/grad/prospective-students/grad-admissions/application-essays/",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What career opportunities are available to graduates of the MS in AI program?\n",
+		"Answer": "The program equips students with both technical and research skills to work in industry or research settings.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Does the MS in AI program prepare students for PhD studies?\n",
+		"Answer": "Yes. The program provides a strong foundation in AI theory and research, and the thesis track is specifically designed for students who may pursue a PhD after graduation.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What kinds of projects can students work on in the MS in AI program?\n",
+		"Answer": "Students can work on research and applied projects in areas such as natural language processing, computer vision, autonomous systems, healthcare analytics, and quantum computing.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can I find official information about the MS in AI program?\n",
+		"Answer": "Official details, requirements, and updates are available on the University of Delaware CIS Graduate Program page: https://www.cis.udel.edu/academics/graduate-programs/ms-in-artificial-intelligence/",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there networking or industry partnership opportunities for MS in AI students?",
+		"Answer": "Yes. The program is part of UD’s College of Engineering, which connects students with industry partners, research groups, and events that support collaboration and career development.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is there a minimum GPA required to graduate from the MS in AI program?",
+		"Answer": "Yes. Students must maintain a minimum GPA of 3.0 to remain in good academic standing and graduate.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is it possible to transition from the MS in AI program to a PhD program at UD?",
+		"Answer": "Yes. Students who excel in the MS in AI program may apply to UD’s PhD programs, but admission is not automatic and requires a separate application and approval.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is it possible to finish the MS in AI program in less than two years?",
+		"Answer": "Yes. While the program is designed to be completed in about 2 years, students may finish sooner by taking additional credits per semester or enrolling in summer and winter sessions, since the degree requires 30 total credits.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are specializations required to complete the MS in AI program?",
+		"Answer": "No. Specializations are optional. Students can choose to complete the program without selecting a specialization.",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I pursue more than one specialization in the MS in AI program?\n\n",
+		"Answer": "Yes, it’s possible to complete more than one specialization if students meet the course requirements for each, though this may require taking additional credits.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Will the specialization appear on my transcript after I complete it in the MS in AI program?\n",
+		"Answer": "No. Optional specializations in the MS in AI program are not official transcript concentrations. Instead, students receive a certificate of completion for the specialization after graduating.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What courses are included in the optional specializations in the MS in AI program?\n",
+		"Answer": "Each specialization has a set of designated courses (e.g., Autonomous Driving, Health Informatics, HCI, Network Science, Quantum Computing, and Robotics). Full course lists are available at: https://www.cis.udel.edu/academics/graduate-programs/graduate-specializations/\n\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Who should I contact if I have questions about the MS in AI program?\n",
+		"Answer": "For academic or program-specific questions, students can contact the Department of Computer and Information Sciences at cis-gradprgm@udel.edu.\n",
+		"Category": "MS in Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the advantage of doing the dual MBA + MS in Computer Science, instead of doing each separately?",
+		"Answer": "The dual program reduces total required credit hours (from 68 to 56) by allowing overlap between the MBA and MSCS curricula.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credit hours are required for the MS in Computer Science portion in the dual program?",
+		"Answer": "24 credits of MSCS courses are required in the dual degree setup.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credit hours are required for the MBA portion of the MBA+ MS CIS dual degree?",
+		"Answer": "The MBA requires 32 credits.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What is one requirement common to all MSCS students in this program?",
+		"Answer": "All MSCS students must take a graduate course in either algorithm design & analysis (e.g. CISC 621) or theory of computation (e.g. CISC 601).",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the STEM-designation benefit for international students?",
+		"Answer": "Because the dual degree is STEM-designated, international students completing it may apply for up to a 24-month extension on their OPT (Optional Practical Training).",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the four core areas in which MSCS students must take one course each?",
+		"Answer": "The four core areas are: Theory, Systems & Networks, Software, and Information.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Can someone already enrolled in one of the separate degrees later apply to convert into the dual program?",
+		"Answer": "Yes, you can either apply directly into the dual degree or apply while completing either the MSCS or MBA program.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "If I apply first to the dual program, which department reviews my application first?",
+		"Answer": "The application is first considered by the computer science program; if accepted there, you’re then automatically accepted into the MBA as well.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are two of the professional development seminars required in the MBA portion?",
+		"Answer": "Two of the seminars are BUEC 601 -Building Emotional Intelligence and Critical Thinking (1 credit) and BUEC 603 -Communicating, Branding and Career Networking (1 credit).",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What is one of the contact points or email addresses for further information about this dual-degree program?\r\n\r\n",
+		"Answer": "You can contact cis-gradprgm@udel.edu or mbaprogram@udel.edu for more information about the dual degree.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "In the MSCS portion of the program, how many electives and core area courses are required?",
+		"Answer": "Students take 6 elective credits, plus 12 credits (one course from each of 4 core areas: Theory, Systems & Networks, Software, Information).",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits are required in total to complete the dual MBA + MS in Computer Science program?\n",
+		"Answer": "56 credits (reduced from 68 by allowing overlapping coursework). ",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What is one of the required colloquium courses for MSCS students?",
+		"Answer": "All MSCS students must register for CISC 890 Colloquium",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Which MBA course covers ethical issues in business in this dual program?",
+		"Answer": "BUAD 640 -Ethical Issues in Domestic and Global Business Environments.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What is one prerequisite for admission into the CIS graduate programs including MSCS at UD?",
+		"Answer": "Applicants are expected to have competence in mathematics and computer programming; also, they should have taken undergraduate courses such as structured high-level language programming; data structures; computer architecture; operating systems; and analysis of algorithms",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits does the stand-alone MS in Computer Science require for students not in dual degree?",
+		"Answer": "The MSCS standalone degree requires 30 credits total for the non-thesis track.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "In the MBA part, what kind of elective is required, and how many credits is it?",
+		"Answer": "One 3-credit elective with an international perspective is required. Options include courses such as BUAD 641, BUAD 678, BUAD 682, or FINC 615.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the admission criteria for the Computer and Information Sciences side for this dual program?",
+		"Answer": "Applicants must hold a bachelor’s degree, with a minimum GPA of about 3.2 in the major and 3.0 cumulative. They also should have competency in mathematics and computer programming, and must have taken undergraduate courses in data structures, algorithms, calculus, discrete math. For more admission details, please refer to https://www.cis.udel.edu/academics/graduate-programs/master-of-science-in-computer-science/",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Does the CIS department require GRE scores for admission to their graduate programs?\n",
+		"Answer": "No, GRE scores are optional (i.e. not required) for the CIS graduate admission. \n",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "In the MSCS portion in the dual program, how many credits come from electives?\n",
+		"Answer": "6 elective credits are required in the MSCS portion.\n",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How many semesters must a student register for the CS department’s colloquium CISC 890?",
+		"Answer": "Three semesters (totaling 9 credits). \n",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I apply to the MBA + MS in Computer Science program if I don’t have a computer science background?\n",
+		"Answer": "Yes, but you must show strong programming and math skills. Applicants are expected to have completed undergraduate coursework in areas like data structures, algorithms, discrete mathematics, and calculus. If you’re missing some, you may need to take prerequisite courses first.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Do I need to submit separate applications for the MBA and the MS in CS?",
+		"Answer": "No, if you apply directly to the dual degree, your application is first reviewed by the Computer & Information Sciences Department, and if accepted, you are automatically accepted into the MBA program as well.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Can international students work in the U.S. after graduation?\n",
+		"Answer": "Yes, since the dual degree is STEM-designated, international graduates can apply for Optional Practical Training (OPT) and a 24-month STEM extension, giving up to 36 months of work authorization in the U.S. For more details, refer to the CGPS – Employment & OPT Page",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": "Add the OISSS website that refers to OPT\n(DONE)"
+	},
+	{
+		"Question": "Can I start with one program MBA or MSCS and switch later to the dual degree?",
+		"Answer": "Yes, students can apply to join the dual degree while already enrolled in either the MBA or the MSCS, as long as they haven’t finished the first degree yet.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What kinds of career paths does the dual degree prepare graduates for?\r\n\r",
+		"Answer": "The program is designed to open doors to roles such as technical leadership, management consulting, product management, executive positions in technology firms, or entrepreneurship.",
+		"Category": "MBA + MS in Computer Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the Bioinformatics Data Science Certificate?",
+		"Answer": "The Bioinformatics Data Science Certificate is offered as a graduate level program ideally suited for working professionals and students interested in fields where systems biology, biomedicine, precision medicine, health informatics, and data science intersect.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What types of courses are offered?",
+		"Answer": "Both online and hybrid courses are offered.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits are needed for the Bioinformatics Data Science Graduate Certificate?",
+		"Answer": "The certificate requires 12 Credits",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the Bioinformatics Core Courses?",
+		"Answer": "The courses are: BINF610: Applied Machine Learning, BINF620: Big Data Analytics in Healthcare. BINF640: Databases for Bioinformatics. BINF644: Bioinformatics. BINF690: Programming for Bioinformatics. BINF694: Systems Biology, and BINF695: Computational Systems Biology",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Do any of the courses have prerequisites?",
+		"Answer": "Yes. BINF610 requires programming knowledge (BINF690 DOES count as programming knowledge) and BINF620 requires Graduate level statistics knowledge.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are foundational courses?",
+		"Answer": "Foundational Courses are often used to act as prereqs for the Graduate Program",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are some of the foundational courses I can take?",
+		"Answer": "You can take BINF601: Introduction to Big Data Science as a Data Science Foundational Course. You can take BISC609: Molecular Biology of the Cell or BISC654: Biochemical Genetics as a Life Science requirement. You can take STAT656 or BINF667-014 Introduction to Biostatistics w/ Biomed App as a Statistics requirement",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Do I need a specific grade in the foundational courses in order to enroll in a core course?",
+		"Answer": "Yes. You need at least a B- in any foundational course in order to enroll into the core courses.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Who offers the Bioinformatics Data Science Graduate Certificate?",
+		"Answer": "The Graduate Certificate in Bioinformatics Data Science is offered by the Center for Bioinformatics and Computational Biology (CBCB) at the University of Delaware.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Who is the program designed for?",
+		"Answer": "The program is designed for working professionals and students interested in fields where systems biology, biomedicine, precision medicine, health informatics, and data science intersect.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Can the certificate program be completed in one year?",
+		"Answer": "Yes. Since two eligible courses are offered each semester, students can complete the program in as little as one year.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Are the courses lecture-based or hands-on?",
+		"Answer": "Both. The courses combine lecture-based instruction with hands-on exercises and term projects in an interactive and multidisciplinary team environment.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What background knowledge is recommended before enrolling?",
+		"Answer": "While no previous programming or database experience is required, familiarity with molecular biology and statistics is recommended.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the main academic outcomes of the program?",
+		"Answer": "Students will earn a graduate-level credential, gain core competencies for bioinformatics careers, and earn credits applicable toward a Master’s or PhD degree.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What kinds of job opportunities can this certificate help prepare for?",
+		"Answer": "The certificate prepares students for roles in genomics, pharmaceuticals, healthcare, big data analytics, and biomedical research.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Can credits from the certificate be applied toward another degree?",
+		"Answer": "Yes. The 12 graduate-level credits earned in the certificate program can be applied toward a Master’s or PhD in Bioinformatics Data Science.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "How often are courses offered?",
+		"Answer": "Each core course is offered annually during either the Fall or Spring semester.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Where can students find information about course offerings and formats?",
+		"Answer": "Students can use UD’s Course Search tool to determine course instruction modes and availability.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Who teaches in the Bioinformatics Data Science program?",
+		"Answer": "Courses are taught by nationally and internationally renowned researchers and practitioners in the field of bioinformatics and data science.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "What types of learning environments does the program emphasize?",
+		"Answer": "The program emphasizes an interactive, experiential, and multidisciplinary team environment that combines theory with real-world applications.",
+		"Category": "Graduate Certificate in Bioinformatics Data Science",
+		"Notes": ""
+	},
+	{
+		"Question": "Is the CSE Certificate a graduate level program and where else is it shown on UD sites?",
+		"Answer": "CSE is a graduate certificate and appears in UD’s Graduate Programs portal. It’s also listed on the Computer & Information Sciences (CIS) site under Graduate Certificates alongside AI and Bioinformatics Data Science.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits are required to complete the CSE Certificate, and what are the named core requirements?",
+		"Answer": "The UD Catalog specifies 15 total credits. It also names required coursework: CISC 621 (Algorithm Design and Analysis), plus one of PHYS 660 or CHEG 827; the remaining credits are chosen from an approved list in the catalog. ",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I pursue the CSE Certificate while enrolled in another UD graduate program?",
+		"Answer": "Yes, CIS’s Graduate Certificates page explicitly frames certificates including CSE as options to complete as part of a degree program, which many students pair with an MS or PhD.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Is part-time study possible for the CSE Certificate (e.g., for working professionals)?",
+		"Answer": "Yes, The CIS Graduate Certificates page highlights CSE as suitable for part-time study for working professionals, so you can progress alongside full-time employment.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Does UD publish tuition context that’s useful when planning for the CSE Certificate?",
+		"Answer": "UD’s Cost of Attendance and Graduate College tuition pages summarize typical credit loads, fees, and the reminder that some programs differ from the base rate; they consistently list $1,116 per credit as the 2025–26 baseline. Verify the exact figure on the program listing when applying.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Is there an 800-level course requirement in the CSE Certificate?",
+		"Answer": "At least one 800-level course from the approved list is required; note that CHEG 827 does not satisfy the 800-level requirement.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the minimum grades/GPA to earn the CSE Certificate?",
+		"Answer": "You must earn B- or better in each certificate course and maintain at least a 3.0 cumulative GPA across the approved certificate courses.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What background preparation is expected for the CSE Certificate?",
+		"Answer": "The program policy statement expects a bachelor’s degree in science/engineering and a background in a programming language, linear algebra, differential equations, multivariable calculus, and undergraduate data structures.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Does the CSE Certificate allow waivers of required courses?",
+		"Answer": "A student with sufficient background may waive up to 6 credits from the required courses.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the application components for the CSE Certificate (per the program policy statement)?\n",
+		"Answer": "Applications use UD’s online graduate application and include a statement of purpose, two letters of recommendation, and official transcripts; current UD grad students add the certificate via the Change of Classification form.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Do CSE Certificate courses need to come from at least three different departments?",
+		"Answer": "You must complete approved courses from at least three departments (e.g., CHEG, CIEG, CISC, ELEG/CPEG, MATH, MEEG, PHYS)",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "How long does it typically take to finish the CSE Certificate if I’m full-time in a degree program?",
+		"Answer": "Most grad students complete it in 1–2 years alongside their degree, timing the core course and one 800-level elective early, then finishing the remaining approved electives. (Exact pacing depends on offerings; coordinate with your advisor.) ",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What’s a realistic semester-by-semester plan to complete the CSE Certificate alongside a thesis/dissertation?",
+		"Answer": "A common plan is 5 courses × 3 credits: take CISC 621 + (PHYS 660 or CHEG 827) in year 1, add one 800-level elective, then 2 more approved electives in year 1–2. Ensure coverage of more than 3 departments and maintain B- /3.0 GPA minimums.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Are transfer credits from another university allowed toward the CSE Certificate?",
+		"Answer": "The policy states no transfer credits from other universities/degree programs can be applied to this certificate.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "If I’m pursuing the CSE Certificate, who should be my primary point of contact for course selection questions?",
+		"Answer": "Start with the advisor affiliated with the certificate (or assigned) and the CIS Graduate Certificates contact. The Program Finder page also lists departmental contact info.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "As an international student, what counts as full-time enrollment, and can CSE courses help me maintain status?",
+		"Answer": "Full-time for international graduate students is typically 9 credits (or 6 with a graduate contract) during fall/spring. CSE courses may count toward that load; always coordinate with your advisor.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What HPC resources are available at UD for CSE projects?",
+		"Answer": "UD’s DARWIN community cluster and related HPC resources are documented by UD IT/RCI and the HPC wiki. These systems support campus research with CPU/GPU nodes and research-computing support.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there stated review points/deadlines for non-degree CSE applicants?",
+		"Answer": "The policy proposes November 15 and April 1 review points (verify current practice on the Program Finder page).",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What’s the admin path for me if I’m already a UD grad student and want to add the CSE Certificate?",
+		"Answer": "The policy states current grad students use a Change of Classification request to add the Certificate; applicants from outside use UD’s online grad application (statement, 2 letters, transcripts).",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What if it takes three years to complete the CSE Certificate?",
+		"Answer": "The CSE policy doesn’t impose a universal certificate time limit. Many finish in 1–2 years, but three years is typically fine if you stay in good standing B- / 3.0 GPA.",
+		"Category": "Certificate in Computational Science and Engineering",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the academic program requirements for the AI Graduate Certificate ?",
+		"Answer": "The Graduate Certificate in Artificial Intelligence requires 9 credits of graduate-level courses.  Please refer to this link for chosen courses https://sites.udel.edu/ai/ai-graduate-certificate/",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What form would need to be completed if I'm already enrolled in UD to apply for the AI Graduate Certificate ?",
+		"Answer": "Applicants who are currently enrolled in another program at UD may use the graduate certificate form for UD undergraduate students, or the graduate form for UD graduate students ",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the expected time to complete this  AI Graduate Certificate ?",
+		"Answer": "One (1) year. Students are expected to complete the Graduate Certificate Completion Form at the beginning of the semester in which they are registered for the last course needed to complete the certificate.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is this certificate open to students who are not enrolled in a master’s or doctoral program?",
+		"Answer": "While the program description doesn’t explicitly state this, many graduate certificates at the University of Delaware allow both degree-seeking and non-degree-seeking students to enroll. It’s best to confirm with the Graduate Program Director.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What academic departments oversee the Graduate Certificate Artificial Intelligence program?",
+		"Answer": "The program is offered through the Department of Computer and Information Sciences (CISC), which is part of the university’s broader graduate studies framework.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the minimum acceptable grade for each course in the Graduate Certificate Artificial Intelligence program?",
+		"Answer": "Students must earn no lower than a B- in each course to have it count toward the certificate.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What cumulative GPA is required to successfully receive the certificate?",
+		"Answer": "A minimum 3.0 cumulative GPA across all certificate courses is required.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What happens if I receive a grade lower than B- in one of the courses?",
+		"Answer": "A course with a grade below B- will not count toward the certificate. The student would likely need to retake the course or substitute it with another approved course (subject to program approval).",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How many courses must I complete for the certificate?",
+		"Answer": "Students must complete three (3) approved courses, each worth 3 credits, totaling at least 9 credits.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Which courses are eligible to count toward the certificate?",
+		"Answer": "Students can choose from the following:\n-CISC 642 -Introduction to Computer Vision\n-CISC 681 -Artificial Intelligence\n-CISC 683 -Introduction to Data Mining\n-CISC 684 -Introduction to Machine Learning\n-CISC 686 -Introduction to Multi-Agent Systems\n-CISC 688 -Introduction to Natural Language Processing\n-CISC 689 -Topics: Artificial Intelligence (may only count once)\n-CISC 886 -Multi-Agent Systems\n-CISC 889 -Advanced Topics in Artificial Intelligence",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Where do I find the Graduate Certificate Artificial Intelligence program Completion Form?",
+		"Answer": "You can find the Graduate Certificate Completion Form within the \"Certificate Requirements\" section of the Artificial Intelligence Certificate program page. Students are expected to complete this form at the beginning of the semester in which they are registered for their last course needed for the certificate. Here is the direct link to the form: https://www.udel.edu/content/dam/udelImages/grad-college/graduate-college-pdfs/Graduate_Certificate_Completion.pdf",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I take CISC 689 more than once to count toward the certificate?",
+		"Answer": "No. Only one instance (3 credits) can be applied toward the AI certificate.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are CISC 886 or CISC 889 mandatory?",
+		"Answer": "No. CISC 886 or CISC 889 is not mandatory it is one of the options that can be chosen when selecting your three graduate courses to meet the academic requirements. For more information on Graduate Certificate AI please refer to  https://sites.udel.edu/ai/ai-graduate-certificate/",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is it possible to substitute a course not listed in the curriculum?",
+		"Answer": "Yes. A single 3-credit course substitution may be considered, but it requires approval from the Graduate Program Director and a completed course substitution form with supporting documentation.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "How do I officially complete the certificate program?",
+		"Answer": "You must fill out the Graduate Certificate Completion Form at the beginning of the semester in which you’re enrolled in your final course for the certificate.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What if I want to take longer than one year to complete the certificate?",
+		"Answer": "While the expected completion time is one year, it’s often possible to take longer, depending on course availability and university policies. It’s wise to consult the program advisor to ensure compliance with any time limits.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Is there a capstone or final project required for completion?",
+		"Answer": "No. The certificate is based solely on successful completion of coursework; no additional thesis, project, or comprehensive exam is required.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Does this certificate appear on my official transcript?",
+		"Answer": "Yes. Upon successful completion and submission of the required forms, the AI Graduate Certificate will appear on your official University of Delaware transcript.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Can I transfer these certificate credits into a master’s program later?",
+		"Answer": "In many cases, yes. Graduate certificate credits can be applied toward a relevant master’s program at the university if you are later admitted, though this is subject to departmental approval.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there prerequisites for enrolling in these AI-related courses?",
+		"Answer": "Most courses at this level typically require strong foundations in programming (e.g., Python or Java), data structures, algorithms, and often linear algebra or probability. It’s advisable to check specific course prerequisites in the catalog.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "Are the courses offered online or only in person?",
+		"Answer": "Traditionally  AI courses are offered on-campus. Verifying with the department each semester is essential.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What kinds of students typically enroll in this certificate?",
+		"Answer": "The program is often targeted toward:\n-Graduate students in CS or related fields wanting to specialize in AI\n-Working professionals seeking upskilling\n-Students exploring AI before committing to a full graduate degree.",
+		"Category": "Graduate Certificate Artificial Intelligence",
+		"Notes": ""
+	},
+	{
+		"Question": "What is the Computer Science 4+1 (BS/MS) program at the University of Delaware?",
+		"Answer": "The Computer Science 4+1 (BS/MS) program at the University of Delaware is designed for qualified undergraduates who want to earn both a bachelor’s and a master’s degree in computer science in an accelerated timeframe. It allows students to begin graduate coursework while completing their undergraduate degree, enabling them to potentially finish the master’s program in just one additional year. This structure can significantly reduce the overall time and cost required compared to completing the two degrees separately.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "When should students apply to the 4+1 program?",
+		"Answer": "Students typically apply in the spring semester of their junior year. More specifically, they should have completed at least 75 credits toward their undergraduate degree at the time of application. Actual enrollment in the program requires students to have completed at least 90 credits. This timing ensures that students are well into their major coursework and can handle graduate-level material while still undergraduates.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Who is eligible to apply for this program?",
+		"Answer": "Eligibility is restricted to full-time undergraduates at the University of Delaware. Students must be pursuing either a BS or BA in Computer Science or a BS in Information Systems. However, the program is also open to students in other bachelor’s programs that have their primary designation within the College of Engineering. This ensures that applicants have a strong technical foundation appropriate for graduate-level work in computer science.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the academic requirements for admission?",
+		"Answer": "To be considered for admission, applicants must meet specific academic thresholds. A minimum GPA of 3.2 in the major field of study and an overall cumulative GPA of at least 3.0 are required. These GPA standards reflect the expectation that students entering the program can perform successfully at the graduate level. In addition to GPA, students must show scholarly competence in several core areas: structured high-level programming (e.g., CISC106 or CISC108), systems programming (e.g., CISC210), data structures (e.g., CISC220), and mathematics such as calculus (MATH241), statistics (STAT200 or MATH205), or discrete mathematics (MATH210).",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "How does the dual-counting of credits work?",
+		"Answer": "One of the main benefits of the program is the ability to “dual-count” up to six graduate credits. This means students can take certain 600-level or higher Computer and Information Sciences courses during their undergraduate studies and have those credits count toward both their bachelor’s and master’s degrees. However, not all courses qualify: independent study or research courses cannot be dual-counted. This policy allows students to make meaningful progress on their master’s degree before officially completing their undergraduate program.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Can students transfer additional graduate credits beyond the dual-counted ones?",
+		"Answer": "Yes, students can transfer additional graduate credits beyond the six dual-counted credits, but there are conditions. First, these courses must be in excess of the total number of credits required for the bachelor’s degree. Second, the student must have earned a minimum grade of B- in those courses. Third, the courses cannot be older than five years at the time they are applied to the master’s degree. This ensures that the graduate coursework remains current and academically rigorous.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the options for completing the master’s degree in the program?",
+		"Answer": "Students in the 4+1 program can choose between a thesis and a non-thesis option for their master’s degree. The non-thesis option typically allows for faster completion, often within one additional year after earning the bachelor’s degree. The thesis option involves a research component and may take more time, but it can provide valuable experience for students interested in research careers or pursuing a Ph.D. later.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Are there any other important requirements to be aware of?",
+		"Answer": "Yes. Students must fulfill all the requirements for both the undergraduate and graduate degrees separately. Being accepted into the 4+1 program does not exempt students from any bachelor’s degree requirements. Additionally, applicants must be full-time students at the time of application to be considered. This maintains the academic intensity and continuity expected in an accelerated program.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Why might a student choose the 4+1 program instead of a traditional master’s program?",
+		"Answer": "The biggest advantage is efficiency. By taking graduate courses early and dual-counting credits, students can complete both degrees in less time, often saving a full academic year. This can also reduce tuition costs and allow graduates to enter the workforce sooner with a more advanced qualification. Moreover, staying at the same university provides continuity in faculty relationships, research opportunities, and campus resources.",
+		"Category": "Computer Science 4+1 (BA/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Is there an application fee for the 4+1 program?",
+		"Answer": "The Computer Science 4+1 (BA/MS) and Computer Science 4+1 (BS/MS) programs does not mention an application fee. The admission requirements listed in the catalogs focus on academic criteria such as GPA, credits completed, and specific course competencies.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "How far in advance should students prepare their 4+1 application?",
+		"Answer": "For the University of Delaware's Computer and Information Sciences (CIS) 4+1 graduate programs, students should prepare their application once they have completed at least 75 credits toward their undergraduate degree, as this is a minimum requirement for applying to the Accelerated Bachelor/Master of Science in Computer Science (4+1) and the Accelerated Bachelor/Masters in Artificial Intelligence 4+1 programs. Specifically for the Accelerated Bachelor/Masters in Bioinformatics Data Science 4+1 program, students apply in the spring semester of their junior year, or when they have completed 75 credits toward their undergraduate degree. For all 4+1 programs mentioned, applications are considered on a rolling basis.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "When is the deadline to apply to the 4+1 program?",
+		"Answer": "Students apply to the 4+1 program in the spring semester of their junior year, or when they have completed 75 credits toward their undergraduate degree. The catalog excerpts do not specify a particular application deadline date.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "How do students submit their 4+1 application? ",
+		"Answer": "According to the University of Delaware catalog, students applying to a 4+1 program, such as the Accelerated Bachelor/Master of Science in Computer Science (4+1), the Accelerated Bachelor/Masters in Artificial Intelligence 4+1, or the Accelerated Bachelor/Masters in Bioinformatics Data Science 4+1, must utilize a specialized 4+1 admission application. For the Computer Science 4+1 and Artificial Intelligence 4+1 programs, applicants must use the UD 4+1 admission application found at https://grad-admissions.udel.edu/register/?id=43fe0412-6be8-4bcb-9c8e-29811cf518c7. For the Artificial Intelligence 4+1 program, applicants should follow all instructions and upload requests, including the graduate course approval form and an unofficial UD Transcript. For the Bioinformatics Data Science 4+1 program, applications must be submitted through the University of Delaware’s Graduate Application Management system (SLATE). Applicants should follow the directions indicated when asked if they are a 4+1 applicant. This submission requires the graduate course approval form (found at https://www.udel.edu/content/dam/udelImages/grad-college/graduate-college-pdfs/4+1_Aproval.pdf), transcripts, three letters of recommendation, a resume, and answers to two essay questions.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Are part-time students eligible to apply to the 4+1 program?",
+		"Answer": "No, part-time students are not eligible to apply to the 4+1 program. According to both the Computer Science 4+1 (BA/MS) and Computer Science 4+1 (BS/MS) program requirements, \"Only full-time students at the time of application are eligible.\"",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "What GPA is required to be considered for the 4+1 program?",
+		"Answer": "To be considered for the 4+1 program in Computer Science, a minimum grade average of 3.2 in the major field of study and an overall cumulative index of 3.0 is required. Students typically apply in the spring semester of their junior year or after completing 75 undergraduate credits. They must also have completed at least 90 credits prior to actual enrollment in the program.\n\nAdditionally, scholarly competence is required in:\n-Structured high-level programming (e.g., CISC106, CISC 108, or equivalent)\n-Systems programming (e.g., CISC210 or equivalent)\n-Data structures (e.g., CISC 220 or equivalent)\n-Calculus (e.g., MATH 241 or equivalent) or statistics (e.g., STAT200 or MATH 205 or equivalent) or discrete math (e.g., MATH 210 or equivalent)",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Can international students apply to the 4+1 program?",
+		"Answer": "Yes, if an international student is currently a qualified undergraduate student at the University of Delaware, they may apply to the 4+1 programs.\n\nThe descriptions for the Accelerated Bachelor/Master of Science in Computer Science (4+1), Accelerated Bachelor/Masters in Artificial Intelligence 4+1, and Accelerated Bachelor/Masters in Bioinformatics Data Science 4+1 programs all specify that they are \"open to UD undergraduates\" or \"limited to UD students.\" They do not list separate or additional requirements for international students who are already enrolled as undergraduates at the University of Delaware.\n\nKey eligibility criteria for these programs include:\n-Being a current full-time UD undergraduate student.\n-Having completed a minimum number of credits towards their undergraduate degree (e.g., 90 credits for the Computer Science 4+1, 75 credits for AI and Bioinformatics Data Science 4+1 programs).\n-Meeting specific GPA and scholarly competence requirements.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "How long does it typically take to complete the 4+1 program?",
+		"Answer": "The 4+1 program allows qualified University of Delaware undergraduate students to begin working on their Master of Science in Computer Science (MS) as a senior and complete the Master's degree in as little as one additional year. Students can choose between a non-thesis or a thesis option, with the thesis option potentially requiring more time.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "How many credits can be dual-counted toward both degrees?",
+		"Answer": "For the Computer Science 4+1 (BS/MS) program, up to 6 credits of graduate coursework (600 level and above) taken as an undergraduate may be dual-counted toward both the Bachelor's and Master's degrees. These dual-counted courses must be established classes in computer and information sciences at the 600 level and above, and independent study or research cannot be dual-counted.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Can students take electives outside the CS department for their master’s portion for the 4+1 program?",
+		"Answer": "Yes, students in the Computer and Information Sciences (MS) program are encouraged to take graduate-level elective courses in areas outside of computer and information sciences to satisfy their elective requirements. To do so, students must submit a course substitution request.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "Can students switch from thesis to non-thesis (or vice versa) after enrolling for the 4+1 program?",
+		"Answer": "For the University of Delaware's Computer Science 4+1 (BS/MS) program, students have the option to pursue either a non-thesis or thesis track for their Master of Science (MS) degree. According to the MS in Computer and Information Sciences program description, students initially begin the program following the non-thesis track. Entry to the thesis track occurs once the student’s advisory committee is approved by the Department. This indicates that switching from the non-thesis track to the thesis track after enrolling is possible, provided departmental approval of an advisory committee.\n\nThe catalog excerpts do not explicitly detail a process for switching from the thesis track to the non-thesis track after enrolling.\n\nAccording to https://catalog.udel.edu/preview_program.php?catoid=93&poid=84462&returnto=30534, students in the 4+1 program \"may choose the non-thesis or the thesis option.\" The general MS program requirements, which the 4+1 program leads to, state that \"Students begin the program following the non-thesis track. ... Entry to the thesis track occurs once the student’s advisory committee is approved by the Department\" https://catalog.udel.edu/preview_program.php?catoid=93&poid=84133&returnto=30534..",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "How can students strengthen their application to be more competitive?",
+		"Answer": "To strengthen an application and be more competitive for the University of Delaware's 4+1 Computer Science programs (BS/MS or BA/MS), students should focus on meeting and exceeding the stated admission requirements.\n\nKey areas to focus on include:\n\n1. Academic Performance:\n-Maintain a grade average significantly above the minimum requirement of 3.2 in the major field of study.\n-Maintain an overall cumulative index well above the minimum requirement of 3.0.\n\n2. Scholarly Competence:\n-Demonstrate strong proficiency in foundational computer science and mathematics coursework. This includes courses equivalent to:\n-Structured high-level programming (e.g., CISC106, CISC 108)\n-Systems programming (e.g., CISC210)\n-Data structures (e.g., CISC 220)\n-Calculus (e.g., MATH 241), statistics (e.g., STAT200 or MATH 205), or discrete math (e.g., MATH 210).\n\nStudents are eligible to apply in the spring semester of their junior year or once they have completed 75 credits toward their undergraduate degree. They must be full-time students at the time of application and have completed at least 90 credits toward their undergraduate degree prior to actual enrollment in the program.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "What’s the main difference between the 4+1 program and applying to the graduate program separately?",
+		"Answer": "The main difference between the 4+1 program and applying to the graduate program separately lies in eligibility, application timeline, and the ability to dual-count credits:\n\n-Eligibility and Application: The 4+1 program is specifically for qualified University of Delaware undergraduates pursuing a BS or BA in Computer Science, or a BS in Information Systems (with consideration for other College of Engineering bachelor's candidates). Students apply in the spring semester of their junior year or after completing 75 undergraduate credits, needing a minimum 3.2 GPA in their major and 3.0 overall cumulative index, along with competence in specific foundational computer science and mathematics courses.\n-Credit Dual-Counting: A key advantage of the 4+1 program is that up to 6 graduate-level credits (600 level and above, excluding independent study or research) taken as an undergraduate may be dual-counted toward both the Bachelor's and the Master's degrees. This can allow students to complete the Master's degree in as little as one year after their bachelor's.\n-Separate Application: Applying to the Master of Science (MS) in Computer and Information Sciences program separately is the general pathway for all other applicants. While the degree requirements (thesis/non-thesis tracks, coursework) are the same, the specific benefits of dual-counting credits and an expedited timeline for current UD undergraduates are not mentioned for this general application route.\n\nBoth programs lead to the same MS degree and students must fulfill all the requirements for that degree, including choosing a non-thesis or thesis option.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	},
+	{
+		"Question": "What are the pros and cons of joining the 4+1 program versus waiting to apply after graduation?",
+		"Answer": "The University of Delaware's 4+1 program in Computer Science (BA/MS or BS/MS) offers an integrated path for qualified undergraduates to earn a Master's degree.\n\n* Pros of joining the 4+1 program:\n-Accelerated Completion: Qualified University of Delaware undergraduate students can begin work toward their Master of Science in Computer Science (MS) as a senior and complete the Master’s degree in as little as one year after their Bachelor's degree.\n-Credit Efficiency: Up to 6 credits of graduate coursework (600 level and above) taken as an undergraduate may be \"dual-counted\" toward both the Bachelor’s and the Master’s degrees. These dual-counted courses must be established Computer and Information Sciences classes at the 600 level and above, and independent study or research cannot be dual-counted.\n-Early Engagement: Students get to start their graduate-level coursework while still enrolled as undergraduates.\n\n* Cons of joining the 4+1 program (or factors to consider):\n-Specific Admission Requirements: Students must apply in the spring semester of their junior year, or when they have completed 75 credits. A minimum grade average of 3.2 in the major field of study and an overall cumulative index of 3.0 is required. Applicants must be full-time students at the time of application and must have completed at least 90 credits toward their undergraduate degree prior to actual enrollment in the program.\n-Eligibility Restrictions: The program is limited to University of Delaware undergraduates pursuing a BS or BA in Computer Science, or the BS in Information Systems. Consideration is also given to Bachelor degree candidates with a primary designation within the College of Engineering.\n-Thesis Option Time: Choosing the thesis option for the Master's degree may require more time.\n\n* Pros of waiting to apply after graduation:\nThe provided catalog excerpts do not explicitly list any pros for waiting to apply for the MS degree after completing your undergraduate studies.\n\nCons of waiting to apply after graduation:\nBased on the benefits of the 4+1 program, waiting to apply after graduation would mean:\n-You would not benefit from the ability to dual-count up to 6 graduate credits toward both your Bachelor's and Master's degrees, potentially requiring more overall credits or time to complete both degrees separately.\n-You would not be on the accelerated timeline that allows for the Master's degree to be completed in as little as one year immediately following your Bachelor's.",
+		"Category": "Computer Science 4+1 (BS/MS)",
+		"Notes": ""
+	}
+]
