@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import axios from "axios";
 import cors from "cors";
 import JSON_DATASET from "./JSON/Fall_25_Spr26_Q&A_For_Model_Training.json";
 
@@ -10,7 +9,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-// const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
 app.use(express.json());
@@ -22,27 +20,13 @@ app.use(
 	})
 );
 
-// async function fetchDataSourceJSON() {
-// 	try {
-// 		const response = await axios.get(
-// 			"https://bpb-us-w2.wpmucdn.com/sites.udel.edu/dist/4/14087/files/2025/04/QnA_3.json"
-// 		);
-
-// 		return response.data;
-// 	} catch (error) {
-// 		return { error: "Failed to fetch JSON data" };
-// 	}
-// }
-
 app.get("/api/data-source-json", async (req, res) => {
-	// const data = await fetchDataSourceJSON();
 	return res.json(JSON_DATASET);
 });
 
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	try {
 		const { query } = req.body;
-		// const jsonData = await fetchDataSourceJSON();
 
 		const context = `
 			You are a Q&A chatbot for University of Delaware Graduate Computer Science.
@@ -96,7 +80,7 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	}
 });
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
 });
 
