@@ -4,7 +4,7 @@ This backend aims to power the chatbot functionality for the **CIS Advisor Chatb
 It provides a secure proxy layer for interacting with the Google Gemini API and ensures that no API keys are exposed in the client application.
 
 **Note:** at this time (2025), Gemini-2.5-flash was utilized. If, in the future, this version of Gemini gets voided or no longer maintained, you may need to change it if needed.
-
+**UPDATE:** as of February 2026, Gemini-2.5-flash-lite is now being used.
 ---
 
 ## Core Goals
