@@ -24,11 +24,11 @@ app.get("/api/data-source-json", (req, res) => {
 });
 
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
-	try {
-		const { query } = req.body;
+	const { query } = req.body;
+	const geminiRag = new RAG();
 
-		const geminiRag = new RAG();
-		geminiRag.createAndGetEmbeddings();
+	try {
+		await geminiRag.createAndGetEmbeddings();
 		const result: string | undefined = (await geminiRag.computeSimilarity(
 			query
 		)) as string | undefined;
@@ -38,6 +38,8 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 			query
 		);
 
+		console.log(await geminiRag.debug(query));
+
 		return res.json({ answer });
 	} catch (err) {
 		if ((err as any)?.status === 429) {
@@ -46,15 +48,17 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 			);
 
 			if ((retryInfo as any)?.retryDelay) {
-				return res.status(429).json({
-					error: "Rate limited by AI provider"
+				const result: string | undefined = (await geminiRag.computeSimilarity(
+					query
+				)) as string | undefined;
+
+				// If the error is a 429 Too Many Requests, we can provide a fallback response that includes the most relevant answer from the dataset based on the similarity computation. This way, even if the AI provider is rate-limiting requests, users can still receive some useful information related to their query while they wait for the rate limit to reset.
+				return res.json({
+					answer: `<p>Rate limited by AI provider. However, based on the similarity computation, the most relevant answer from the dataset is: ${
+						result || "No results found"
+					} For a more accurate and detailed response, please try again in an hour or two when the rate limit has reset.</p>`
 				});
 			}
-
-			return res.status(429).json({
-				error: "AI quota exhausted",
-				message: "Daily request limit reached"
-			});
 		}
 
 		console.error("Gemini error:", err);
