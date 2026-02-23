@@ -109,7 +109,7 @@ export class RAG {
 		} else {
 			const THRESHOLD = 0.6; // set a similarity threshold (this value can be adjusted based on testing and experimentation)
 			return mostSimilar[0].score < THRESHOLD
-				? "No valid results found for this query"
+				? "No valid results found for this query."
 				: JSON_DATASET[parseInt(mostSimilar[0].id.slice(1))].Answer; // remove the 'p' prefix to get the original index for accessing the JSON_DATASET
 		}
 	}
