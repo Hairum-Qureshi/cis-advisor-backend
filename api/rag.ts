@@ -122,6 +122,7 @@ export class RAG {
 		)) as SimilarityResult[];
 		if (debugResults && debugResults[0]) {
 			// attach readable question/answer to the first result for easier debugging (use `any` to avoid strict type errors)
+			// TODO - replace 'any' types here
 			(debugResults as unknown as any)[0].readableQuestion =
 				JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Question;
 			(debugResults as unknown as any)[0].readableAnswer =
