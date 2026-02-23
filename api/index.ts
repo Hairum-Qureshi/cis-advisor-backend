@@ -56,7 +56,7 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 				return res.json({
 					answer: `<p>Rate limited by AI provider. However, based on the similarity computation, the most relevant answer from the dataset is: ${
 						result || "No results found"
-					} For a more accurate and detailed response, please try again in an hour or two when the rate limit has reset.</p>`
+					} For a more accurate and detailed response, please make sure your query has no typos or please try again in an hour or two when the rate limit has reset.</p>`
 				});
 			}
 		}
