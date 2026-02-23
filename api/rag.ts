@@ -38,10 +38,13 @@ export class RAG {
 				// file doesn't exist
 				for (const rawEmbed of this.rawEmbedArray) {
 					// calls Python backend Fastify server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
-					const res = await axios.post("http://localhost:8000/embed", {
-						id: rawEmbed.id,
-						text: rawEmbed.text
-					});
+					const res = await axios.post(
+						`${process.env.PYTHON_SERVER_URL}/embed`,
+						{
+							id: rawEmbed.id,
+							text: rawEmbed.text
+						}
+					);
 					embeddings.push({ id: rawEmbed.id, embeddings: res.data.embedding });
 				}
 
@@ -62,7 +65,7 @@ export class RAG {
 		try {
 			// get the user's query embedded
 			const response = await axios.post(
-				"http://localhost:8000/query-to-embedding",
+				`${process.env.PYTHON_SERVER_URL}/query-to-embedding`,
 				{
 					text: userQuery
 				}
