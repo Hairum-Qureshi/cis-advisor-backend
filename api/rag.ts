@@ -39,7 +39,7 @@ export class RAG {
 			if ((error as any).code === "ENOENT") {
 				// file doesn't exist
 				for (const rawEmbed of this.rawEmbedArray) {
-					// calls Python backend Fastify server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
+					// calls Python backend Fast API server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
 					const res = await axios.post(
 						`${process.env.PYTHON_SERVER_URL}/embed`,
 						{
