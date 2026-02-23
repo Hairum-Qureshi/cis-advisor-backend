@@ -19,14 +19,6 @@ app.use(
 	})
 );
 
-interface JSONData {
-	id: number | string;
-	Question: string;
-	Answer: string;
-	Category: string;
-	Notes: string;
-}
-
 app.get("/api/data-source-json", (req, res) => {
 	return res.json(JSON_DATASET);
 });
