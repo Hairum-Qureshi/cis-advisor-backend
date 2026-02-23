@@ -5,6 +5,8 @@ import cosineSimilarity from "compute-cosine-similarity";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Embedding, RawEmbed, SimilarityResult } from "./interfaces";
 
+// * In the future, because of how big the dataset with embeddings is for a JSON data set that's only kilobytes in size (the embeddings file is in the megabytes!), in the future definitely consider switching to a more efficient vector database like Pinecone, Weaviate, or FAISS to store and query the embeddings instead of using a JSON file. This would allow for faster similarity searches and better scalability as the dataset grows.
+
 export class RAG {
 	private rawEmbedArray: RawEmbed[] = [];
 	private genAI;
