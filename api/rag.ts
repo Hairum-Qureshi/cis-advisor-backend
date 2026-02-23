@@ -26,7 +26,7 @@ export class RAG {
 	async createAndGetEmbeddings() {
 		// If you update the original JSON dataaset, delete the data_with_embeddings.json file to regenerate the embeddings with the new dataset. This is a simple caching mechanism to avoid redundant API calls to the embedding service, which can be time-consuming and costly. By checking for the existence of the embeddings file, we can ensure that we only generate embeddings when necessary, improving efficiency and reducing costs.
 
-		let embeddings: { id: string; embeddings: number }[] = [];
+		const embeddings: { id: string; embeddings: number }[] = [];
 		try {
 			const parsedJSON = JSON.parse(
 				fs.readFileSync("./JSON/data_with_embeddings.json", "utf8")
