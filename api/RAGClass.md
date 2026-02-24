@@ -2,8 +2,8 @@
 
 This class implements a **lightweight Retrieval-Augmented Generation (RAG) pipeline** using:
 
-- A local JSON Q&A dataset
-- Precomputed vector embeddings (cached to disk)
+- A dataset retrieved from MongoDB (or any external source) and passed into the constructor
+- Vector embeddings stored and retrieved from MongoDB
 - Cosine similarity for semantic search
 - A Python backend for embedding generation
 - Google Gemini for final response generation
@@ -14,14 +14,14 @@ The goal is to retrieve the most relevant answer from a curated dataset and opti
 
 ## High-Level Overview
 
-The RAG flow implemented here consists of four main stages:
+The RAG flow consists of four main stages:
 
 1. **Dataset Preparation**
-   - Converts a structured Q&A JSON dataset into a format suitable for embedding.
+   - Accepts a pre-fetched dataset and converts it into a format suitable for embedding.
 
 2. **Embedding Generation & Caching**
    - Generates vector embeddings for each dataset entry via a Python service.
-   - Stores embeddings locally to avoid recomputation.
+   - Stores embeddings in MongoDB for efficient retrieval and reuse.
 
 3. **Semantic Similarity Search**
    - Embeds the user query and compares it against stored embeddings using cosine similarity.
@@ -37,23 +37,21 @@ The RAG flow implemented here consists of four main stages:
 ### External Libraries
 
 - `axios` – HTTP client for communicating with the Python embedding server
-- `fs` – File system access for embedding cache
 - `compute-cosine-similarity` – Computes similarity between embeddings
 - `@google/generative-ai` – Gemini API SDK
 
 ### Internal Imports
 
-- `JSON_DATASET` – Local Q&A dataset
+- `VectorEmbed` – MongoDB model for storing embeddings
 - Interfaces:
   - `RawEmbed`
-  - `Embedding`
+  - `Vector`
   - `SimilarityResult`
+  - `DataSet`
 
 ---
 
 ## Environment Variables
-
-The class relies on the following environment variables:
 
 | Variable            | Description                                      |
 | ------------------- | ------------------------------------------------ |
@@ -64,7 +62,7 @@ The class relies on the following environment variables:
 
 ## Dataset Format
 
-The input dataset (`Fall_25_Spr26_Q&A_For_Model_Training.json`) is expected to contain objects with the following shape:
+The dataset passed to the `RAG` constructor must contain objects with the following shape:
 
 ```ts
 {
@@ -73,11 +71,15 @@ The input dataset (`Fall_25_Spr26_Q&A_For_Model_Training.json`) is expected to c
 }
 ```
 
-Each dataset entry is converted internally into a combined text format:
+Each entry is internally converted to a combined text format:
 
 ```
 Question: <question> Answer: <answer>
 ```
+
+and assigned a stable ID (`p0`, `p1`, …).
+
+> **Note:** The dataset must be retrieved from your external source (e.g., MongoDB) prior to instantiating the `RAG` class.
 
 ---
 
@@ -90,60 +92,42 @@ The `RAG` class encapsulates the entire retrieval and generation pipeline.
 ## Constructor
 
 ```ts
-constructor();
+constructor(dataSet: DataSet[])
 ```
 
 ### Responsibilities
 
-- Iterates over the JSON dataset and constructs an in-memory array of raw embedding inputs.
-- Assigns each entry a stable ID (`p0`, `p1`, `p2`, …).
+- Accepts a dataset (retrieved externally) and constructs an internal array of raw embedding inputs.
+- Assigns each entry a stable ID (`p0`, `p1`, …) for embedding and retrieval.
 - Initializes the Gemini client.
 - Instantiates the Gemini generative model (`gemini-2.5-flash-lite`).
 
 ### Internal State Initialized
 
-- `rawEmbedArray: RawEmbed[]`
-- `genAI: GoogleGenerativeAI`
-- `model: GenerativeModel`
+- `rawEmbedArray: RawEmbed[]` – prepared embedding inputs
+- `genAI: GoogleGenerativeAI` – Gemini SDK client
+- `model: GenerativeModel` – Gemini model instance
+- `JSON_DATASET: DataSet[]` – reference to the passed dataset
 
 ---
 
-## Method: `createAndGetEmbeddings`
+## Method: `createEmbeddings`
 
 ```ts
-async createAndGetEmbeddings(): Promise<Embedding[]>
+async createEmbeddings(): Promise<Vector[]>
 ```
 
 ### Purpose
 
-Creates vector embeddings for the dataset and caches them to disk for reuse.
+Creates vector embeddings for the dataset and caches them in MongoDB for reuse.
 
 ### Behavior
 
-1. Attempts to read `./JSON/data_with_embeddings.json`.
-2. If the file exists:
-   - Parses and returns the cached embeddings.
-
-3. If the file does not exist:
-   - Iterates over all dataset entries.
-   - Sends each entry to the Python embedding server.
-   - Collects returned embeddings.
-   - Writes them to `data_with_embeddings.json`.
-   - Returns the newly generated embeddings.
-
-### Output
-
-```ts
-{
-  id: string;
-  embeddings: number[];
-}[]
-```
-
-### Notes
-
-- Acts as a **simple persistent cache** to prevent repeated embedding generation.
-- Must be run at least once before similarity search.
+1. Checks whether embeddings already exist in MongoDB.
+2. If they exist, returns the existing embeddings.
+3. Otherwise, iterates over all dataset entries, sending each to the Python embedding server.
+4. Stores the returned embeddings in MongoDB via `VectorEmbed.create()`.
+5. Returns the newly created embeddings.
 
 ---
 
@@ -160,28 +144,17 @@ async computeSimilarity(
 
 Finds the dataset entry most semantically similar to a user query.
 
-### Parameters
-
-| Name        | Type      | Description                           |
-| ----------- | --------- | ------------------------------------- |
-| `userQuery` | `string`  | The user’s natural-language query     |
-| `debug`     | `boolean` | Whether to return raw similarity data |
-
 ### Behavior
 
-1. Sends the user query to the Python service to generate an embedding.
-2. Loads cached dataset embeddings from disk.
-3. Computes cosine similarity between the query embedding and each dataset embedding.
-4. Passes similarity scores to `getMostSimilarDocument`.
+- Sends the user query to the Python service to generate an embedding.
+- Loads stored embeddings from MongoDB.
+- Computes cosine similarity between the query embedding and each dataset embedding.
+- Passes similarity scores to `getMostSimilarDocument`.
 
 ### Return Value
 
-- If `debug === true`:
-  - Returns an array containing the top similarity result.
-
-- If `debug === false`:
-  - Returns the matched dataset answer **or**
-  - A fallback string if similarity is below threshold.
+- If `debug === true`: returns an array containing the top similarity result.
+- If `debug === false`: returns the matched dataset answer or a fallback string if similarity is below threshold.
 
 ---
 
@@ -202,18 +175,8 @@ Selects and formats the final similarity result.
 
 - Sorts results by descending similarity score.
 - Selects the top match.
-- Applies a similarity threshold.
+- Applies a similarity threshold (default 0.6).
 - Maps the internal ID back to the original dataset index.
-
-### Threshold Logic
-
-- If similarity score `< 0.6`, returns:
-
-  ```
-  "No valid results found for this query."
-  ```
-
-- Otherwise returns the matched dataset answer.
 
 ---
 
@@ -227,22 +190,13 @@ async debug(userQuery: string): Promise<SimilarityResult[]>
 
 Provides enriched debugging information for similarity search.
 
-### Behavior
-
 - Calls `computeSimilarity` with `debug = true`.
+
 - Attaches:
   - Original dataset question
   - Original dataset answer
 
-- Returns the augmented similarity result.
-
-### Use Case
-
-Useful for validating:
-
-- Embedding correctness
-- Similarity scoring
-- Dataset alignment
+- Useful for validating embedding correctness, similarity scoring, and dataset alignment.
 
 ---
 
@@ -252,19 +206,12 @@ Useful for validating:
 async queryGemini(
   ragQueryResult: string,
   userQuery: string
-): Promise<{ reply: string }>
+): Promise<{ answer: string }>
 ```
 
 ### Purpose
 
 Generates a final LLM response grounded strictly in retrieved data.
-
-### Parameters
-
-| Name             | Type     | Description              |
-| ---------------- | -------- | ------------------------ |
-| `ragQueryResult` | `string` | Retrieved dataset answer |
-| `userQuery`      | `string` | Original user question   |
 
 ### Behavior
 
@@ -274,27 +221,28 @@ Generates a final LLM response grounded strictly in retrieved data.
   - Disallows external knowledge
 
 - Sends the prompt to Gemini.
+
 - Extracts and returns the generated response.
+
 - Optionally logs token usage.
 
 ### Return Value
 
 ```ts
 {
-	reply: string;
+	answer: string;
 }
 ```
-
-If the model response is missing or malformed, a fallback message is returned.
 
 ---
 
 ## Typical Usage Flow
 
 ```ts
-const rag = new RAG();
+// Assume `dataSet` is fetched from MongoDB first
+const rag = new RAG(dataSet);
 
-await rag.createAndGetEmbeddings();
+await rag.createEmbeddings();
 
 const retrievedAnswer = await rag.computeSimilarity(userQuestion);
 
@@ -311,9 +259,9 @@ const finalResponse = await rag.queryGemini(
 This module provides:
 
 - A self-contained RAG pipeline
-- Deterministic dataset grounding
+- Deterministic dataset grounding from MongoDB
 - Cached embedding generation
 - Semantic search via cosine similarity
 - Optional LLM synthesis with strict context control
 
-It is designed to be straightforward, inspectable, and extensible while keeping all retrieval logic explicit and local.
+It is designed to be straightforward, inspectable, and extensible, while keeping all retrieval logic explicit and database-backed.
