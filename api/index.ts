@@ -41,8 +41,6 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 			query
 		);
 
-		console.log(await geminiRag.debug(query));
-
 		return res.json({ answer });
 	} catch (err) {
 		if ((err as any)?.status === 429) {
