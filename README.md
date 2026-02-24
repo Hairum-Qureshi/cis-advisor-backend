@@ -1,3 +1,7 @@
+Here’s a fully updated README reflecting your new architecture with **MongoDB**, removal of the JSON folder, new environment variables, and updated endpoints:
+
+---
+
 # CIS Advisor Backend
 
 ### Gemini-Powered Academic Q&A API with RAG
@@ -6,7 +10,7 @@ This backend powers the chatbot functionality for the **CIS Advisor Chatbot** fo
 
 It provides:
 
-- A secure proxy layer for interacting with the Google Gemini API
+- A secure backend layer for interacting with the Google Gemini API
 - A Retrieval-Augmented Generation (RAG) pipeline for grounded answers
 - Strict domain constraints to prevent off-topic responses
 - Zero exposure of API keys to the client
@@ -47,10 +51,9 @@ Client
   ▼
 Node / Express API (this repo)
   │
-  ├─ Fetch relevant context via embeddings
-  │      ▼
-  │   Python FastAPI Embedding Backend
-  │      (vector search + similarity ranking)
+  ├─ Fetch dataset & embeddings from MongoDB
+  │
+  ├─ Compute similarity via Python FastAPI embedding backend (optional)
   │
   └─ Send retrieved context + query to Gemini
           ▼
@@ -61,6 +64,7 @@ This design cleanly separates:
 
 - **LLM orchestration** (Node backend)
 - **Embedding + retrieval logic** (Python backend)
+- **Dataset persistence** (MongoDB)
 
 ---
 
@@ -68,40 +72,40 @@ This design cleanly separates:
 
 ### Endpoints
 
-| Endpoint                | Method | Description                      |
-| ----------------------- | ------ | -------------------------------- |
-| `/api/data-source-json` | GET    | Displays the raw Q&A dataset     |
-| `/api/ask-gemini`       | POST   | Runs RAG + sends query to Gemini |
-| `/`                     | GET    | Basic server health check        |
+| Endpoint | Method | Description |
+| --- | --- | --- |
+| `/api/data-source` | GET | Returns the full dataset stored in MongoDB |
+| `/api/ask-gemini` | POST | Runs RAG + sends query to Gemini |
+| `/api/debug` | POST | Returns similarity scores and matched dataset entries |
+| `/api/admin/update-data` | POST | Admin endpoint to update dataset or regenerate embeddings |
+| `/` | GET | Basic server health check |
+
+> **Note:** The dataset and embeddings are now stored entirely in MongoDB. There is **no JSON folder** or local JSON files.
+
+---
 
 ### Retrieval-Augmented Generation (RAG)
-
-This backend uses a **class-based RAG implementation** to ensure that all Gemini responses are grounded in University of Delaware CIS program data.
 
 RAG responsibilities are encapsulated in a dedicated class that handles:
 
 - Query preprocessing
-- Context retrieval via embeddings
+- Context retrieval via embeddings from MongoDB
 - Prompt construction and constraint enforcement
 - Gemini request orchestration
 - Deterministic rejection of out-of-scope queries
 
-Rather than scattering this logic across route handlers, the RAG pipeline is centralized behind a single abstraction.
+The RAG pipeline is centralized behind a single abstraction rather than scattered across route handlers.
 
 #### RAG Class Design
 
-A full breakdown of the RAG class, including method-level responsibilities and control flow, is documented here:
+Documentation: 👉 [RAG Class Documentation](https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md)
 
-👉 **RAG Class Documentation** [https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md](https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md)
-
-This document explains:
+Explains:
 
 - How retrieved context is selected and formatted
 - How domain constraints are enforced
 - How prompts are constructed before being sent to Gemini
-- Where future improvements (confidence thresholds, intent gating, caching) can be added cleanly
-
-If you are modifying retrieval behavior, prompt strategy, or grounding logic, **start with the RAG class** rather than the API routes.
+- Future improvements (confidence thresholds, intent gating, caching)
 
 ---
 
@@ -109,19 +113,13 @@ If you are modifying retrieval behavior, prompt strategy, or grounding logic, **
 
 - Implemented using **Python + FastAPI**
 - Responsible for:
-  - Generating embeddings
+  - Generating embeddings for new queries or updated dataset entries
   - Performing similarity search
-  - Returning the most relevant context chunks
+  - Returning the most relevant context
 
-**Repository:** [https://github.com/Hairum-Qureshi/embedding-python-backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
+**Repository:** [Embedding Backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
 
-The Node backend invokes this service as part of the RAG pipeline before any request is sent to Gemini.
-
----
-
-If you delete `data_with_embeddings.json` and request updated embeddings, the Python backend **will regenerate the embeddings**.
-
-> This process **can take a minute or two** depending on dataset size. The new `data_with_embeddings.json` will appear once generation is complete. Be patient—do **not** interrupt the request.
+The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**.
 
 ---
 
@@ -143,65 +141,27 @@ This is a **prompt-control mechanism**, not a complete safety system. For produc
 
 ---
 
-## Folder Structure
-
-```
-CIS-ADVISOR-BACKEND/
-│
-├── api/                     # Vercel serverless directory
-│   ├── index.ts             # Main Express entry point
-│   ├── vercel.json          # Vercel deployment config
-│   ├── tsconfig.json        # TypeScript configuration
-│   ├── package.json
-│   ├── package-lock.json
-│   └── .gitignore
-│
-├── json/                    # Embedding-related JSON files
-│   ├── Fall_25_Spr26_Q&A_For_Model_Training.json.json     # Original Q&A data
-│   └── data_with_embeddings.json      # Generated embedding vectors
-```
-
----
-
-## ⚠️ Important Notes on the `json/` Folder
-
-- `Fall_25_Spr26_Q&A_For_Model_Training.json.json` is the **authoritative dataset**
-- `data_with_embeddings.json` is **derived data**
-
-### Updating the Data Source
-
-If you **change even a single value** in `Fall_25_Spr26_Q&A_For_Model_Training.json.json`:
-
-1. **Delete** `data_with_embeddings.json`
-2. Regenerate embeddings using the Python backend
-3. Commit the newly generated embeddings file
-
-If **no changes** are made to the original dataset:
-
-- **Do not touch** the embeddings file
-- Reusing it is expected and correct
-
-This avoids silent embedding/data mismatches.
-
----
-
 ## Environment Variables
 
-| Variable             | Required | Description                               |
-| -------------------- | -------- | ----------------------------------------- |
-| `GEMINI_API_KEY`     | ✅       | Google Generative AI API key              |
-| `PYTHON_BACKEND_URL` | ✅       | Base URL of the embedding FastAPI service |
-| `PORT`               | ❌       | Local dev port (default: 3000)            |
+| Variable | Required | Description |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | ✅ | Google Generative AI API key |
+| `PYTHON_SERVER_URL` | ✅ | Base URL of the Python FastAPI embedding service |
+| `MONGO_URI` | ✅ | MongoDB connection string |
+| `ADMIN_KEY` | ✅ | Key to authorize admin endpoints |
+| `PORT` | ❌ | Local dev port (default: 3000) |
 
 ### `.env` Example
 
 ```env
 GEMINI_API_KEY=your_key_here
-PYTHON_BACKEND_URL=http://localhost:8000
+PYTHON_SERVER_URL=http://localhost:8000
+MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/dbname
+ADMIN_KEY=supersecret
 PORT=3000
 ```
 
-\*\*If you're running the Python backend locally, use localhost; otherwise, use 'https://python-backend-rho.vercel.app' (Make sure to omit the trailing forward slash)
+If running locally, use `http://localhost:8000` for the `PYTHON_SERVER_URL`, otherwise feel free to set `PYTHON_SERVER_URL` to https://python-backend-rho.vercel.app
 
 ---
 
@@ -219,13 +179,15 @@ Start the development server:
 npm run dev
 ```
 
-The API will be available at:
+API will be available at:
 
 ```
 http://localhost:3000
 ```
 
-⚠️ Ensure the **Python embedding backend is running** before making requests to `/api/ask-gemini`. You don't necessarily need the Python backend running if your original data set is unchanged and there's no need to get an updated embeddings JSON file. However, if you need updated embeddings, delete the `data_with_embeddings.json` file and run your `/api/ask-gemini` endpoint (via Postman) and it will automatically generate a new `data_with_embeddings.json` for oyu.
+⚠️ If running locally, ensure the **Python embedding backend is running** before making requests to `/api/ask-gemini` or `/api/debug`.
+
+> Embeddings are now stored in MongoDB; regenerating embeddings will update existing documents in the database.
 
 ---
 
@@ -245,7 +207,7 @@ http://localhost:3000
 
 ```json
 {
-	"answer": "Submit your admission deferral request to the CIS Graduate Academic Advisor II for review."
+	"answer": "<p>Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.</p>"
 }
 ```
 
@@ -253,38 +215,59 @@ Responses are HTML-formatted for direct frontend rendering.
 
 ---
 
-## CORS Policy
+### POST `/api/debug`
 
-Current configuration:
+Returns the similarity score and dataset entries matched for a query.
 
-```js
-origin: "*";
+**Request body:**
+
+```json
+{
+	"query": "What courses are required for the CIS graduate program?"
+}
 ```
 
-This is acceptable for internal or academic deployment.
+**Response:**
 
-If exposed publicly:
+```json
+[
+	{
+		"id": "p12",
+		"score": 0.87,
+		"readableQuestion": "Which courses are required for the CIS graduate program?",
+		"readableAnswer": "The required courses are..."
+	}
+]
+```
 
-- Restrict allowed origins
-- Prevent third-party sites from abusing the LLM proxy
+---
+
+### POST `/api/admin/update-data`
+
+Admin-only endpoint (requires `ADMIN_KEY`) to update dataset or regenerate embeddings.
+
+**Request body:**
+
+```json
+{
+	"adminKey": "supersecret",
+	"updateType": "regenerateEmbeddings"
+}
+```
+
+**Behavior:**
+
+- Updates dataset entries in MongoDB if provided
+- Regenerates embeddings for updated or new entries
 
 ---
 
 ## Security Considerations
 
-| Concern                 | Current State  | Recommendation            |
-| ----------------------- | -------------- | ------------------------- |
-| API key exposure        | ✅ Server-only | Keep it that way          |
-| RAG grounding           | ✅ Implemented | Add confidence thresholds |
-| Client input validation | ⚠️ Minimal     | Validate schema strictly  |
-| Rate limiting           | ❌ None        | Add before public release |
-| CORS                    | `*`            | Lock down domains         |
-
----
-
-## Future Improvements
-
-- Move embeddings from JSON → external vector database (JSON files grow quickly and do not scale)
-- Add batch embedding regeneration tooling
-- Implement request-level caching
-- Add automated dataset / embedding consistency checks
+| Concern                 | Current State  | Recommendation             |
+| ----------------------- | -------------- | -------------------------- |
+| API key exposure        | ✅ Server-only | Keep it that way           |
+| RAG grounding           | ✅ Implemented | Add confidence thresholds  |
+| Client input validation | ⚠️ Minimal     | Validate schema strictly   |
+| Rate limiting           | ❌ None        | Add before public release  |
+| CORS                    | `*`            | Restrict for public deploy |
