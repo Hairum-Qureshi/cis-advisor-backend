@@ -3,9 +3,9 @@ interface SimilarityResult {
 	score: number;
 }
 
-interface Embedding {
+interface Vector {
 	id: string;
-	embeddings: number[];
+	embedding: number[];
 }
 
 interface RawEmbed {
@@ -13,4 +13,12 @@ interface RawEmbed {
 	text: string;
 }
 
-export { SimilarityResult, Embedding, RawEmbed };
+interface DataSet {
+	id: string;
+	Question: string;
+	Answer: string;
+	Category: string;
+	Notes: string;
+}
+
+export { SimilarityResult, Vector, RawEmbed, DataSet };

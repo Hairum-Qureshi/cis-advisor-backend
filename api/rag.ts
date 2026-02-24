@@ -1,22 +1,21 @@
-import JSON_DATASET from "./JSON/Fall_25_Spr26_Q&A_For_Model_Training.json";
 import axios from "axios";
-import fs from "fs";
 import cosineSimilarity from "compute-cosine-similarity";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Embedding, RawEmbed, SimilarityResult } from "./interfaces";
-
-// * In the future, because of how big the dataset with embeddings is for a JSON data set that's only kilobytes in size (the embeddings file is in the megabytes!), in the future definitely consider switching to a more efficient vector database like Pinecone, Weaviate, or FAISS to store and query the embeddings instead of using a JSON file. This would allow for faster similarity searches and better scalability as the dataset grows.
+import { Vector, RawEmbed, SimilarityResult, DataSet } from "./interfaces";
+import VectorEmbed from "./models/VectorEmbed";
 
 export class RAG {
 	private rawEmbedArray: RawEmbed[] = [];
 	private genAI;
 	private model;
+	private JSON_DATASET: DataSet[];
 
-	constructor() {
-		for (let i = 0; i < JSON_DATASET.length; i++) {
+	constructor(dataSet: DataSet[]) {
+		this.JSON_DATASET = dataSet;
+		for (let i = 0; i < this.JSON_DATASET.length; i++) {
 			this.rawEmbedArray.push({
 				id: `p${i}`,
-				text: `Question: ${JSON_DATASET[i].Question} Answer: ${JSON_DATASET[i].Answer}`
+				text: `Question: ${this.JSON_DATASET[i].Question} Answer: ${this.JSON_DATASET[i].Answer}`
 			});
 		}
 		this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
@@ -25,44 +24,47 @@ export class RAG {
 		});
 	}
 
-	async createAndGetEmbeddings() {
-		// If you update the original JSON dataaset, delete the data_with_embeddings.json file to regenerate the embeddings with the new dataset. This is a simple caching mechanism to avoid redundant API calls to the embedding service, which can be time-consuming and costly. By checking for the existence of the embeddings file, we can ensure that we only generate embeddings when necessary, improving efficiency and reducing costs.
+	async getEmbeddings(rawEmbed: RawEmbed) {
+		const res = await axios.post(`${process.env.PYTHON_SERVER_URL}/embed`, {
+			id: rawEmbed.id,
+			text: rawEmbed.text
+		});
 
-		const embeddings: { id: string; embeddings: number }[] = [];
+		return res;
+	}
+
+	async createEmbeddings() {
+		const embeddings: Vector[] = [];
 		try {
-			const parsedJSON = JSON.parse(
-				fs.readFileSync("./JSON/data_with_embeddings.json", "utf8")
-			);
-
-			return parsedJSON.embeddings;
-		} catch (error) {
-			if ((error as any).code === "ENOENT") {
-				// file doesn't exist
+			// check whether the embed collection exists in Mongo and that there are embeds stored in it
+			const existingEmbeds = await VectorEmbed.find({});
+			if (existingEmbeds.length > 0) {
+				// if embeds exist, use them
+				return existingEmbeds;
+			} else {
 				for (const rawEmbed of this.rawEmbedArray) {
 					// calls Python backend Fast API server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
-					const res = await axios.post(
-						`${process.env.PYTHON_SERVER_URL}/embed`,
-						{
-							id: rawEmbed.id,
-							text: rawEmbed.text
-						}
-					);
-					embeddings.push({ id: rawEmbed.id, embeddings: res.data.embedding });
+					const res = await this.getEmbeddings(rawEmbed);
+
+					// Create a MongoDB document containing the embedding data for each entry in the dataset. This allows for efficient storage and retrieval of embeddings, and can be particularly beneficial as the dataset grows in size, providing a more scalable solution compared to storing embeddings in a JSON file.
+					await VectorEmbed.create({
+						id: rawEmbed.id,
+						embedding: res.data.embedding
+					});
 				}
 
-				// create the JSON file with the embeddings for future use (caching)
-				fs.writeFileSync(
-					"./JSON/data_with_embeddings.json",
-					JSON.stringify({ embeddings }, null, 2)
-				);
-
 				return embeddings;
+			}
+		} catch (error) {
+			if (error) {
+				console.error("Error in createEmbeddings:", error);
+				throw new Error("Failed to create and get embeddings");
 			}
 		}
 	}
 
 	async computeSimilarity(userQuery: string, debug: boolean = false) {
-		// createAndGetEmbeddings MUST BE INVOKED BEFORE THIS METHOD to ensure that the data_with_embeddings.json file is generated and available for reading. This is because computeSimilarity relies on the embeddings stored in that file to calculate the similarity between the user's query and the dataset entries. If createAndGetEmbeddings has not been invoked, the necessary embeddings will not exist, and computeSimilarity will not be able to function properly, leading to errors or incorrect results.
+		// createEmbeddings MUST BE INVOKED BEFORE THIS METHOD to ensure that the data_with_embeddings.json file is generated and available for reading. This is because computeSimilarity relies on the embeddings stored in that file to calculate the similarity between the user's query and the dataset entries. If createEmbeddings has not been invoked, the necessary embeddings will not exist, and computeSimilarity will not be able to function properly, leading to errors or incorrect results.
 
 		try {
 			// get the user's query embedded
@@ -74,26 +76,18 @@ export class RAG {
 			);
 
 			const queryEmbedding: number[] = response.data.embedding;
-			const documents: Embedding[] = JSON.parse(
-				fs.readFileSync("./JSON/data_with_embeddings.json", "utf8")
-			).embeddings;
+			const documents: Vector[] = await VectorEmbed.find({}); // retrieve all documents with embeddings from MongoDB
 
-			const results = documents.map((doc: Embedding) => ({
+			const results = documents.map((doc: Vector) => ({
 				id: doc.id,
-				score: cosineSimilarity(queryEmbedding, doc.embeddings) || 0 // default to 0 if cosineSimilarity returns NaN
+				score: cosineSimilarity(queryEmbedding, doc.embedding) || 0 // default to 0 if cosineSimilarity returns NaN
 			}));
 
 			return this.getMostSimilarDocument(results, debug);
 		} catch (error) {
-			if ((error as any).code === "ENOENT") {
-				console.error(
-					"Embeddings file not found. Please run createAndGetEmbeddings() first to generate the embeddings."
-				);
-				throw new Error(
-					"Embeddings file not found. Please run createAndGetEmbeddings() first to generate the embeddings."
-				);
-			} else {
-				console.log(error);
+			if (error) {
+				console.error("Error in computeSimilarity:", error);
+				throw new Error("Failed to compute similarity");
 			}
 		}
 	}
@@ -110,9 +104,10 @@ export class RAG {
 			return mostSimilar;
 		} else {
 			const THRESHOLD = 0.6; // set a similarity threshold (this value can be adjusted based on testing and experimentation)
+
 			return mostSimilar[0].score < THRESHOLD
 				? "No valid results found for this query."
-				: JSON_DATASET[parseInt(mostSimilar[0].id.slice(1))].Answer; // remove the 'p' prefix to get the original index for accessing the JSON_DATASET
+				: this.JSON_DATASET[parseInt(mostSimilar[0].id.slice(1))].Answer; // remove the 'p' prefix to get the original index for accessing the JSON_DATASET
 		}
 	}
 
@@ -126,9 +121,9 @@ export class RAG {
 			// attach readable question/answer to the first result for easier debugging (use `any` to avoid strict type errors)
 			// TODO - replace 'any' types here
 			(debugResults as unknown as any)[0].readableQuestion =
-				JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Question;
+				this.JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Question;
 			(debugResults as unknown as any)[0].readableAnswer =
-				JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Answer;
+				this.JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Answer;
 		}
 
 		return debugResults;
@@ -140,6 +135,8 @@ export class RAG {
             Answer ONLY UD CS-related questions using the data below.
             Use only HTML formatting (<p>, <b>, <i>), and do not use header tags (<h1>-<h6>).
             Keep your answers concise.
+
+			If the user says hi/hello or asks how you are doing, respond with a friendly greeting and offer assistance with UD CS-related questions.
 
             User Question: ${userQuery}
 
