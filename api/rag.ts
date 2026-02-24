@@ -165,6 +165,6 @@ export class RAG {
 				`Total tokens used in the full request/response cycle: ${(result as any).usage_metadata.total_token_count}`
 			);
 
-		return { reply: text ?? "Unexpected model response." };
+		return { answer: text ?? "Unexpected model response." };
 	}
 }
