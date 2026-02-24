@@ -1,7 +1,3 @@
-Here’s a fully updated README reflecting your new architecture with **MongoDB**, removal of the JSON folder, new environment variables, and updated endpoints:
-
----
-
 # CIS Advisor Backend
 
 ### Gemini-Powered Academic Q&A API with RAG
