@@ -5,6 +5,7 @@ import { RAG } from "./rag";
 import mongoose from "mongoose";
 import DataSetQAndA from "./models/DataSetQAndA";
 import { DataSet } from "./interfaces";
+import VectorEmbed from "./models/VectorEmbed";
 
 dotenv.config();
 
@@ -26,29 +27,67 @@ app.get("/api/data-source-json", async (req, res) => {
 });
 
 // Invoke this endpoint to clear your data source by deleting all entries in the MongoDB collection. This can be useful for resetting your dataset during development or when you want to start fresh with a new set of Q&A pairs. Be cautious when using this endpoint, as it will permanently remove all data from the collection.
+// To prevent unauthorized access to this endpoint, it requires an admin key to be passed in the query parameters. Make sure to include the correct admin key when making a request to this endpoint, otherwise it will return a 403 Forbidden response.
 app.delete("/api/clear-data-source", async (req, res) => {
-	await DataSetQAndA.deleteMany({});
-	res.json({ message: "Data source cleared successfully" });
+	const { key } = req.query;
+
+	if (key !== process.env.ADMIN_KEY) {
+		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
+	} else {
+		try {
+			await DataSetQAndA.deleteMany({});
+			await VectorEmbed.deleteMany({});
+			res.json({ message: "Data source cleared successfully" });
+		} catch (error) {
+			console.error("Error clearing data source:", error);
+			res.status(500).json({ message: "Failed to clear data source" });
+		}
+	}
 });
 
 // Invoke this endpoint to add to your data source by passing in a JSON array of Q&A pairs in the request body. This will allow you to easily expand your dataset with new information, which can then be used to generate embeddings and improve the relevance of responses from the Gemini model when users ask questions related to the newly added data.
 app.post("/api/add-data-source", async (req, res) => {
-	const { JSON_DATASET } = req.body;
+	const { JSON_DATASET, key } = req.body;
+	const dataSet: DataSet[] = await DataSetQAndA.find({});
+	const geminiRag = new RAG(dataSet);
 
-	for (const entry of JSON_DATASET) {
-		const newEntry = new DataSetQAndA({
-			id: entry.id,
-			Question: entry.Question,
-			Answer: entry.Answer,
-			Category: entry.Category,
-			Notes: entry.Notes
-		});
-		await newEntry.save();
+	if (key !== process.env.ADMIN_KEY) {
+		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
+	} else {
+		try {
+			// ! NOTE: this method HAS NOT been tested and may result in unexpected errors or issues, so use with caution
+			for (const entry of JSON_DATASET) {
+				const newEntry = new DataSetQAndA({
+					id: entry.id,
+					Question: entry.Question,
+					Answer: entry.Answer,
+					Category: entry.Category,
+					Notes: entry.Notes
+				});
+				await newEntry.save();
+
+				// need to vectorize the new data as well
+				const rawEmbed = {
+					id: entry.id,
+					text: `Question: ${entry.Question} Answer: ${entry.Answer}`
+				};
+
+				const res = await geminiRag.getEmbeddings(rawEmbed);
+
+				await VectorEmbed.create({
+					id: rawEmbed.id,
+					embedding: res.data.embedding
+				});
+			}
+
+			res.status(201).json({
+				message: "Data source added successfully"
+			});
+		} catch (error) {
+			console.error("Error adding data source:", error);
+			res.status(500).json({ message: "Failed to add data source" });
+		}
 	}
-
-	res.status(201).json({
-		message: "Data source added successfully"
-	});
 });
 
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
@@ -57,7 +96,7 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	const geminiRag = new RAG(dataSet);
 
 	try {
-		await geminiRag.createAndGetEmbeddings();
+		await geminiRag.createEmbeddings();
 		const result: string | undefined = (await geminiRag.computeSimilarity(
 			query
 		)) as string | undefined;
