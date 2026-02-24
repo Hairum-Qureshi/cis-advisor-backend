@@ -72,15 +72,115 @@ This design cleanly separates:
 
 ### Endpoints
 
-| Endpoint | Method | Description |
-| --- | --- | --- |
-| `/api/data-source` | GET | Returns the full dataset stored in MongoDB |
-| `/api/ask-gemini` | POST | Runs RAG + sends query to Gemini |
-| `/api/debug` | POST | Returns similarity scores and matched dataset entries |
-| `/api/admin/update-data` | POST | Admin endpoint to update dataset or regenerate embeddings |
-| `/` | GET | Basic server health check |
+| Endpoint | Method | Description | Auth Required |
+| --- | --- | --- | --- |
+| `/` | GET | Basic server health check | No |
+| `/api/data-source-json` | GET | Returns the full Q&A dataset currently stored in MongoDB | No |
+| `/api/ask-gemini` | POST | Runs the RAG pipeline and queries Gemini for a grounded answer | No |
+| `/api/clear-data-source` | DELETE | Deletes all dataset entries **and embeddings** from MongoDB. Requires `ADMIN_KEY` query param | Yes |
+| `/api/add-data-source` | POST | Adds new Q&A entries to the dataset and generates embeddings. Requires `ADMIN_KEY` in body | Yes |
 
-> **Note:** The dataset and embeddings are now stored entirely in MongoDB. There is **no JSON folder** or local JSON files.
+---
+
+### Request & Response Examples
+
+#### GET `/api/data-source-json`
+
+**Response:**
+
+```json
+[
+	{
+		"_id": "6421f5e7abc1234567890abc",
+		"id": "p0",
+		"Question": "Which courses are required for CIS?",
+		"Answer": "The required courses are ...",
+		"Category": "Program Requirements",
+		"Notes": ""
+	},
+	{
+		"_id": "6421f5e7abc1234567890abd",
+		"id": "p1",
+		"Question": "How do I request an admissions deferment?",
+		"Answer": "Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.",
+		"Category": "Admissions",
+		"Notes": ""
+	}
+]
+```
+
+---
+
+#### POST `/api/ask-gemini`
+
+**Request Body:**
+
+```json
+{
+	"query": "How do I request an admissions deferment when I cannot attend during my expected enrollment term?"
+}
+```
+
+**Response:**
+
+```json
+{
+	"answer": "<p>Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.</p>"
+}
+```
+
+> Automatically fetches the dataset from MongoDB, generates embeddings if needed, computes similarity, and queries Gemini with grounded context.
+
+---
+
+#### DELETE `/api/clear-data-source`
+
+**Query Parameter:**
+
+```
+/api/clear-data-source?key=supersecret
+```
+
+**Response:**
+
+```json
+{
+	"message": "Data source cleared successfully"
+}
+```
+
+> Deletes all dataset documents and embeddings from MongoDB. Requires `ADMIN_KEY`.
+
+---
+
+#### POST `/api/add-data-source`
+
+**Request Body:**
+
+```json
+{
+	"key": "supersecret",
+	"JSON_DATASET": [
+		{
+			"id": "p10",
+			"Question": "What are the program deadlines?",
+			"Answer": "The deadlines for applications are ...",
+			"Category": "Admissions",
+			"Notes": ""
+		}
+	]
+}
+```
+
+**Response:**
+
+```json
+{
+	"message": "Data source added successfully"
+}
+```
+
+> Adds new dataset entries, generates embeddings for each, and stores them in MongoDB. Requires `ADMIN_KEY`.
 
 ---
 
@@ -188,77 +288,6 @@ http://localhost:3000
 ⚠️ If running locally, ensure the **Python embedding backend is running** before making requests to `/api/ask-gemini` or `/api/debug`.
 
 > Embeddings are now stored in MongoDB; regenerating embeddings will update existing documents in the database.
-
----
-
-## API Usage
-
-### POST `/api/ask-gemini`
-
-**Request body:**
-
-```json
-{
-	"query": "How do I request an admissions deferment when I cannot attend during my expected enrollment term?"
-}
-```
-
-**Response:**
-
-```json
-{
-	"answer": "<p>Submit your admission deferral request to the CIS Graduate Academic Advisor II for review.</p>"
-}
-```
-
-Responses are HTML-formatted for direct frontend rendering.
-
----
-
-### POST `/api/debug`
-
-Returns the similarity score and dataset entries matched for a query.
-
-**Request body:**
-
-```json
-{
-	"query": "What courses are required for the CIS graduate program?"
-}
-```
-
-**Response:**
-
-```json
-[
-	{
-		"id": "p12",
-		"score": 0.87,
-		"readableQuestion": "Which courses are required for the CIS graduate program?",
-		"readableAnswer": "The required courses are..."
-	}
-]
-```
-
----
-
-### POST `/api/admin/update-data`
-
-Admin-only endpoint (requires `ADMIN_KEY`) to update dataset or regenerate embeddings.
-
-**Request body:**
-
-```json
-{
-	"adminKey": "supersecret",
-	"updateType": "regenerateEmbeddings"
-}
-```
-
-**Behavior:**
-
-- Updates dataset entries in MongoDB if provided
-- Regenerates embeddings for updated or new entries
 
 ---
 
