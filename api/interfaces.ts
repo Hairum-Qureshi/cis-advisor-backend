@@ -5,7 +5,7 @@ interface SimilarityResult {
 
 interface Embedding {
 	id: string;
-	embeddings: number[];
+	embedding: number[];
 }
 
 interface RawEmbed {
