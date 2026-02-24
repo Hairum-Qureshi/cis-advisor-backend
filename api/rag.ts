@@ -28,7 +28,16 @@ export class RAG {
 		});
 	}
 
-	async createAndGetEmbeddings() {
+	async getEmbeddings(rawEmbed: RawEmbed) {
+		const res = await axios.post(`${process.env.PYTHON_SERVER_URL}/embed`, {
+			id: rawEmbed.id,
+			text: rawEmbed.text
+		});
+
+		return res;
+	}
+
+	async createEmbeddings() {
 		const embeddings: Vector[] = [];
 		try {
 			// check whether the embed collection exists in Mongo and that there are embeds stored in it
@@ -39,13 +48,7 @@ export class RAG {
 			} else {
 				for (const rawEmbed of this.rawEmbedArray) {
 					// calls Python backend Fast API server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
-					const res = await axios.post(
-						`${process.env.PYTHON_SERVER_URL}/embed`,
-						{
-							id: rawEmbed.id,
-							text: rawEmbed.text
-						}
-					);
+					const res = await this.getEmbeddings(rawEmbed);
 
 					// Create a MongoDB document containing the embedding data for each entry in the dataset. This allows for efficient storage and retrieval of embeddings, and can be particularly beneficial as the dataset grows in size, providing a more scalable solution compared to storing embeddings in a JSON file.
 					await VectorEmbed.create({
@@ -58,14 +61,14 @@ export class RAG {
 			}
 		} catch (error) {
 			if (error) {
-				console.error("Error in createAndGetEmbeddings:", error);
+				console.error("Error in createEmbeddings:", error);
 				throw new Error("Failed to create and get embeddings");
 			}
 		}
 	}
 
 	async computeSimilarity(userQuery: string, debug: boolean = false) {
-		// createAndGetEmbeddings MUST BE INVOKED BEFORE THIS METHOD to ensure that the data_with_embeddings.json file is generated and available for reading. This is because computeSimilarity relies on the embeddings stored in that file to calculate the similarity between the user's query and the dataset entries. If createAndGetEmbeddings has not been invoked, the necessary embeddings will not exist, and computeSimilarity will not be able to function properly, leading to errors or incorrect results.
+		// createEmbeddings MUST BE INVOKED BEFORE THIS METHOD to ensure that the data_with_embeddings.json file is generated and available for reading. This is because computeSimilarity relies on the embeddings stored in that file to calculate the similarity between the user's query and the dataset entries. If createEmbeddings has not been invoked, the necessary embeddings will not exist, and computeSimilarity will not be able to function properly, leading to errors or incorrect results.
 
 		try {
 			// get the user's query embedded
