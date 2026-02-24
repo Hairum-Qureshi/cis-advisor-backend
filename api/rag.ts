@@ -1,12 +1,12 @@
-// import JSON_DATASET from "./JSON/Fall_25_Spr26_Q&A_For_Model_Training.json";
 import axios from "axios";
-import fs from "fs";
 import cosineSimilarity from "compute-cosine-similarity";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Vector, RawEmbed, SimilarityResult, DataSet } from "./interfaces";
 import VectorEmbed from "./models/VectorEmbed";
 
 // * In the future, because of how big the dataset with embeddings is for a JSON data set that's only kilobytes in size (the embeddings file is in the megabytes!), in the future definitely consider switching to a more efficient vector database like Pinecone, Weaviate, or FAISS to store and query the embeddings instead of using a JSON file. This would allow for faster similarity searches and better scalability as the dataset grows.
+
+// TODO - create a method for adding new Q&A pairs to the dataset and generating embeddings for them without having to regenerate embeddings for the entire dataset. This would involve creating a new entry in the MongoDB collection for the new Q&A pair and generating its embedding using the same process as the initial dataset, allowing for more efficient updates to the dataset without redundant API calls for existing entries.
 
 export class RAG {
 	private rawEmbedArray: RawEmbed[] = [];
@@ -29,18 +29,14 @@ export class RAG {
 	}
 
 	async createAndGetEmbeddings() {
-		// If you update the original JSON dataset, delete the data_with_embeddings.json file to regenerate the embeddings with the new dataset. This is a simple caching mechanism to avoid redundant API calls to the embedding service, which can be time-consuming and costly. By checking for the existence of the embeddings file, we can ensure that we only generate embeddings when necessary, improving efficiency and reducing costs.
-
-		const embeddings: { id: string; embeddings: number }[] = [];
+		const embeddings: Vector[] = [];
 		try {
-			const parsedJSON = JSON.parse(
-				fs.readFileSync("./JSON/data_with_embeddings.json", "utf8")
-			);
-
-			return parsedJSON.embeddings;
-		} catch (error) {
-			if ((error as any).code === "ENOENT") {
-				// file doesn't exist
+			// check whether the embed collection exists in Mongo and that there are embeds stored in it
+			const existingEmbeds = await VectorEmbed.find({});
+			if (existingEmbeds.length > 0) {
+				// if embeds exist, use them
+				return existingEmbeds;
+			} else {
 				for (const rawEmbed of this.rawEmbedArray) {
 					// calls Python backend Fast API server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
 					const res = await axios.post(
@@ -59,6 +55,11 @@ export class RAG {
 				}
 
 				return embeddings;
+			}
+		} catch (error) {
+			if (error) {
+				console.error("Error in createAndGetEmbeddings:", error);
+				throw new Error("Failed to create and get embeddings");
 			}
 		}
 	}
