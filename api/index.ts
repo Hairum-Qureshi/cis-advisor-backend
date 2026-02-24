@@ -25,6 +25,32 @@ app.get("/api/data-source-json", async (req, res) => {
 	res.json(dataSet);
 });
 
+// Invoke this endpoint to clear your data source by deleting all entries in the MongoDB collection. This can be useful for resetting your dataset during development or when you want to start fresh with a new set of Q&A pairs. Be cautious when using this endpoint, as it will permanently remove all data from the collection.
+app.delete("/api/clear-data-source", async (req, res) => {
+	await DataSetQAndA.deleteMany({});
+	res.json({ message: "Data source cleared successfully" });
+});
+
+// Invoke this endpoint to add to your data source by passing in a JSON array of Q&A pairs in the request body. This will allow you to easily expand your dataset with new information, which can then be used to generate embeddings and improve the relevance of responses from the Gemini model when users ask questions related to the newly added data.
+app.post("/api/add-data-source", async (req, res) => {
+	const { JSON_DATASET } = req.body;
+
+	for (const entry of JSON_DATASET) {
+		const newEntry = new DataSetQAndA({
+			id: entry.id,
+			Question: entry.Question,
+			Answer: entry.Answer,
+			Category: entry.Category,
+			Notes: entry.Notes
+		});
+		await newEntry.save();
+	}
+
+	res.status(201).json({
+		message: "Data source added successfully"
+	});
+});
+
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	const { query } = req.body;
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
