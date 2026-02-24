@@ -3,7 +3,7 @@ interface SimilarityResult {
 	score: number;
 }
 
-interface Embedding {
+interface Vector {
 	id: string;
 	embedding: number[];
 }
@@ -13,4 +13,4 @@ interface RawEmbed {
 	text: string;
 }
 
-export { SimilarityResult, Embedding, RawEmbed };
+export { SimilarityResult, Vector, RawEmbed };
