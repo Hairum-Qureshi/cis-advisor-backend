@@ -74,30 +74,6 @@ This design cleanly separates:
 | `/api/ask-gemini`       | POST   | Runs RAG + sends query to Gemini |
 | `/`                     | GET    | Basic server health check        |
 
----
-
-Yep — this is a good call, and it actually fixes a structural problem in the README right now.
-
-### What’s missing today (critique first)
-
-Your current **RAG** section explains _what_ the system does, but not _where the logic lives_ or _how it’s organized_. That makes the backend feel more “magic” than it actually is. Anyone skimming the repo won’t know:
-
-- that RAG is encapsulated behind a class boundary
-- which responsibilities live in Node vs Python
-- where to look if they want to modify retrieval behavior
-
-Linking the RAG class breakdown solves all of that without bloating the README.
-
----
-
-## Recommended change: replace / extend the RAG section
-
-Below is a **drop-in replacement** for your **Retrieval-Augmented Generation (RAG)** section. It keeps your tone, stays technical, and explicitly points readers to the class-level API.
-
-You don’t need to touch any other part of the README.
-
----
-
 ### Retrieval-Augmented Generation (RAG)
 
 This backend uses a **class-based RAG implementation** to ensure that all Gemini responses are grounded in University of Delaware CIS program data.
