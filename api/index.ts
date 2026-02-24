@@ -132,7 +132,7 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 			query
 		);
 
-		return res.json({ answer });
+		return res.json(answer);
 	} catch (err) {
 		if ((err as any)?.status === 429) {
 			const retryInfo = (err as any)?.errorDetails?.find((d: any) =>
