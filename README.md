@@ -201,6 +201,8 @@ PYTHON_BACKEND_URL=http://localhost:8000
 PORT=3000
 ```
 
+\*\*If you're running the Python backend locally, use localhost; otherwise, use 'https://python-backend-rho.vercel.app' (Make sure to omit the trailing forward slash)
+
 ---
 
 ## Installation & Local Development
