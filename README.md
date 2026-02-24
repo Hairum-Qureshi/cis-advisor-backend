@@ -119,21 +119,9 @@ The Node backend invokes this service as part of the RAG pipeline before any req
 
 ---
 
-## Why this is the _right_ place for the link
+If you delete `data_with_embeddings.json` and request updated embeddings, the Python backend **will regenerate the embeddings**.
 
-- The README stays **architectural**, not implementation-heavy
-- The RAGClass.md becomes the **source of truth** for behavior
-- Future contributors immediately know where to dig deeper
-- You avoid duplicating method explanations in two places
-
-If you want, next step I’d recommend is:
-
-- adding a tiny sequence diagram to `RAGClass.md`, or
-- adding a one-line comment in `index.ts` that explicitly says “RAG logic lives in `RAGClass`”
-
-Both reinforce the abstraction without extra prose.
-
-If you want me to sanity-check `RAGClass.md` for cohesion or suggest method renames, drop it in — that’s where the real design leverage is.
+> This process **can take a minute or two** depending on dataset size. The new `data_with_embeddings.json` will appear once generation is complete. Be patient—do **not** interrupt the request.
 
 ---
 
