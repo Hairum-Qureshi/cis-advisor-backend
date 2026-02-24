@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
-// import { GoogleGenerativeAI } from "@google/generative-ai";
 import cors from "cors";
 import JSON_DATASET from "./JSON/Fall_25_Spr26_Q&A_For_Model_Training.json";
 import { RAG } from "./rag";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -70,6 +70,21 @@ app.get("/", (_, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
 });
 
+const MONGO_URI: string = process.env.MONGO_URI!;
+
 app.listen(PORT, () => {
-	console.log(`Server is running at http://localhost:${PORT}`);
+	const connectToMongoDB = async () => {
+		try {
+			const conn = await mongoose.connect(MONGO_URI!);
+			console.log(
+				"Successfully connected to MongoDB on host:",
+				`${conn.connection.host}`
+			);
+			console.log(`Server listening on port ${PORT}!`);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	connectToMongoDB();
 });
