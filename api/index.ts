@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import JSON_DATASET from "./JSON/Fall_25_Spr26_Q&A_For_Model_Training.json";
 import { RAG } from "./rag";
 import mongoose from "mongoose";
 import DataSetQAndA from "./models/DataSetQAndA";
@@ -21,8 +20,9 @@ app.use(
 	})
 );
 
-app.get("/api/data-source-json", (req, res) => {
-	return res.json(JSON_DATASET);
+app.get("/api/data-source-json", async (req, res) => {
+	const dataSet: DataSet[] = await DataSetQAndA.find({});
+	res.json(dataSet);
 });
 
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
