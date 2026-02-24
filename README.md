@@ -76,9 +76,58 @@ This design cleanly separates:
 
 ---
 
-## Retrieval-Augmented Generation (RAG)
+Yep — this is a good call, and it actually fixes a structural problem in the README right now.
 
-This backend now uses a **functioning RAG implementation**.
+### What’s missing today (critique first)
+
+Your current **RAG** section explains _what_ the system does, but not _where the logic lives_ or _how it’s organized_. That makes the backend feel more “magic” than it actually is. Anyone skimming the repo won’t know:
+
+- that RAG is encapsulated behind a class boundary
+- which responsibilities live in Node vs Python
+- where to look if they want to modify retrieval behavior
+
+Linking the RAG class breakdown solves all of that without bloating the README.
+
+---
+
+## Recommended change: replace / extend the RAG section
+
+Below is a **drop-in replacement** for your **Retrieval-Augmented Generation (RAG)** section. It keeps your tone, stays technical, and explicitly points readers to the class-level API.
+
+You don’t need to touch any other part of the README.
+
+---
+
+### Retrieval-Augmented Generation (RAG)
+
+This backend uses a **class-based RAG implementation** to ensure that all Gemini responses are grounded in University of Delaware CIS program data.
+
+RAG responsibilities are encapsulated in a dedicated class that handles:
+
+- Query preprocessing
+- Context retrieval via embeddings
+- Prompt construction and constraint enforcement
+- Gemini request orchestration
+- Deterministic rejection of out-of-scope queries
+
+Rather than scattering this logic across route handlers, the RAG pipeline is centralized behind a single abstraction.
+
+#### RAG Class Design
+
+A full breakdown of the RAG class, including method-level responsibilities and control flow, is documented here:
+
+👉 **RAG Class Documentation** [https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md](https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md)
+
+This document explains:
+
+- How retrieved context is selected and formatted
+- How domain constraints are enforced
+- How prompts are constructed before being sent to Gemini
+- Where future improvements (confidence thresholds, intent gating, caching) can be added cleanly
+
+If you are modifying retrieval behavior, prompt strategy, or grounding logic, **start with the RAG class** rather than the API routes.
+
+---
 
 ### Embedding Backend
 
@@ -90,7 +139,25 @@ This backend now uses a **functioning RAG implementation**.
 
 **Repository:** [https://github.com/Hairum-Qureshi/embedding-python-backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
 
-The Node backend calls this service before sending prompts to Gemini.
+The Node backend invokes this service as part of the RAG pipeline before any request is sent to Gemini.
+
+---
+
+## Why this is the _right_ place for the link
+
+- The README stays **architectural**, not implementation-heavy
+- The RAGClass.md becomes the **source of truth** for behavior
+- Future contributors immediately know where to dig deeper
+- You avoid duplicating method explanations in two places
+
+If you want, next step I’d recommend is:
+
+- adding a tiny sequence diagram to `RAGClass.md`, or
+- adding a one-line comment in `index.ts` that explicitly says “RAG logic lives in `RAGClass`”
+
+Both reinforce the abstraction without extra prose.
+
+If you want me to sanity-check `RAGClass.md` for cohesion or suggest method renames, drop it in — that’s where the real design leverage is.
 
 ---
 
