@@ -4,6 +4,8 @@ import cors from "cors";
 import JSON_DATASET from "./JSON/Fall_25_Spr26_Q&A_For_Model_Training.json";
 import { RAG } from "./rag";
 import mongoose from "mongoose";
+import DataSetQAndA from "./models/DataSetQAndA";
+import { DataSet } from "./interfaces";
 
 dotenv.config();
 
@@ -25,7 +27,8 @@ app.get("/api/data-source-json", (req, res) => {
 
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	const { query } = req.body;
-	const geminiRag = new RAG();
+	const dataSet: DataSet[] = await DataSetQAndA.find({});
+	const geminiRag = new RAG(dataSet);
 
 	try {
 		await geminiRag.createAndGetEmbeddings();
