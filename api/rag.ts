@@ -6,8 +6,6 @@ import VectorEmbed from "./models/VectorEmbed";
 
 // * In the future, because of how big the dataset with embeddings is for a JSON data set that's only kilobytes in size (the embeddings file is in the megabytes!), in the future definitely consider switching to a more efficient vector database like Pinecone, Weaviate, or FAISS to store and query the embeddings instead of using a JSON file. This would allow for faster similarity searches and better scalability as the dataset grows.
 
-// TODO - create a method for adding new Q&A pairs to the dataset and generating embeddings for them without having to regenerate embeddings for the entire dataset. This would involve creating a new entry in the MongoDB collection for the new Q&A pair and generating its embedding using the same process as the initial dataset, allowing for more efficient updates to the dataset without redundant API calls for existing entries.
-
 export class RAG {
 	private rawEmbedArray: RawEmbed[] = [];
 	private genAI;
