@@ -11,6 +11,28 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const MONGO_URI: string = process.env.MONGO_URI!;
+
+let cached: {
+	conn: typeof mongoose | null;
+	promise: Promise<typeof mongoose> | null;
+} = {
+	conn: null,
+	promise: null
+};
+
+async function dbConnect() {
+	if (cached.conn) return cached.conn;
+
+	if (!cached.promise) {
+		cached.promise = mongoose.connect(MONGO_URI!, {
+			serverSelectionTimeoutMS: 30000 // optional
+		});
+	}
+
+	cached.conn = await cached.promise;
+	return cached.conn;
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,6 +44,7 @@ app.use(
 );
 
 app.get("/api/data-source-json", async (req, res) => {
+	await dbConnect();
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	res.json(dataSet);
 });
@@ -29,6 +52,7 @@ app.get("/api/data-source-json", async (req, res) => {
 // Invoke this endpoint to clear your data source by deleting all entries in the MongoDB collection. This can be useful for resetting your dataset during development or when you want to start fresh with a new set of Q&A pairs. Be cautious when using this endpoint, as it will permanently remove all data from the collection.
 // To prevent unauthorized access to this endpoint, it requires an admin key to be passed in the query parameters. Make sure to include the correct admin key when making a request to this endpoint, otherwise it will return a 403 Forbidden response.
 app.delete("/api/clear-data-source", async (req, res) => {
+	await dbConnect();
 	const { key } = req.query;
 
 	if (key !== process.env.ADMIN_KEY) {
@@ -47,6 +71,7 @@ app.delete("/api/clear-data-source", async (req, res) => {
 
 // Invoke this endpoint to add to your data source by passing in a JSON array of Q&A pairs in the request body. This will allow you to easily expand your dataset with new information, which can then be used to generate embeddings and improve the relevance of responses from the Gemini model when users ask questions related to the newly added data.
 app.post("/api/add-data-source", async (req, res) => {
+	await dbConnect();
 	const { JSON_DATASET, key } = req.body;
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
@@ -91,6 +116,7 @@ app.post("/api/add-data-source", async (req, res) => {
 });
 
 app.post("/api/ask-gemini", async (req: Request, res: Response) => {
+	await dbConnect();
 	const { query } = req.body;
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
@@ -136,21 +162,6 @@ app.get("/", (_, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
 });
 
-const MONGO_URI: string = process.env.MONGO_URI!;
-
 app.listen(PORT, () => {
-	const connectToMongoDB = async () => {
-		try {
-			const conn = await mongoose.connect(MONGO_URI!);
-			console.log(
-				"Successfully connected to MongoDB on host:",
-				`${conn.connection.host}`
-			);
-			console.log(`Server listening on port ${PORT}!`);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	connectToMongoDB();
+	console.log(`Server listening on port ${PORT}`);
 });
