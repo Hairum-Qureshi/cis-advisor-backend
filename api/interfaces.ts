@@ -13,4 +13,12 @@ interface RawEmbed {
 	text: string;
 }
 
-export { SimilarityResult, Vector, RawEmbed };
+interface DataSet {
+	id: string;
+	Question: string;
+	Answer: string;
+	Category: string;
+	Notes: string;
+}
+
+export { SimilarityResult, Vector, RawEmbed, DataSet };
