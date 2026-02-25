@@ -124,7 +124,7 @@ app.post("/api/ask-gemini", async (req: Request, res: Response) => {
 	const geminiRag = new RAG(dataSet);
 
 	try {
-		await geminiRag.createEmbeddings();
+		await geminiRag.createEmbeddings(query);
 		const result: string | undefined = (await geminiRag.computeSimilarity(
 			query
 		)) as string | undefined;
