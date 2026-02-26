@@ -165,6 +165,7 @@ This provides a deterministic signal that the vector store no longer reflects th
 
 The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**.
 
+To learn more about the Rag class, see the documentation here: https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md
 ---
 
 ## Prompt Strategy
