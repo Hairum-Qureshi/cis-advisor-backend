@@ -10,13 +10,14 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", apiRouter);
 
 app.use(
 	cors({
 		origin: "*"
 	})
 );
+
+app.use("/api", apiRouter);
 
 app.get("/", (_, res: Response) => {
 	res.send("Welcome to the CIS Advisor Backend API");
