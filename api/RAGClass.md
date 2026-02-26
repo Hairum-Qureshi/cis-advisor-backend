@@ -17,22 +17,27 @@ A key design goal of this implementation is **embedding correctness over time**.
 The RAG flow consists of five main stages:
 
 1. **Dataset Preparation**
-   - Accepts a pre-fetched dataset and converts it into embedding-ready inputs.
+
+- Accepts a pre-fetched dataset and converts it into embedding-ready inputs.
 
 2. **Embedding Generation & Caching**
-   - Generates vector embeddings via a Python FastAPI service.
-   - Stores embeddings in MongoDB for reuse.
+
+- Generates vector embeddings via a Python FastAPI service.
+- Stores embeddings in MongoDB for reuse.
 
 3. **Embedding Verification (Golden Check)**
-   - Validates existing embeddings against a known reference question/answer.
-   - Automatically clears and regenerates embeddings if inconsistencies are found.
+
+- Validates existing embeddings against a known reference question/answer.
+- Automatically clears and regenerates embeddings if inconsistencies are found.
 
 4. **Semantic Similarity Search**
-   - Embeds the user query and compares it against stored embeddings using cosine similarity.
-   - Selects the most semantically similar dataset entry (with thresholding).
+
+- Embeds the user query and compares it against stored embeddings using cosine similarity.
+- Selects the most semantically similar dataset entry (with thresholding).
 
 5. **LLM Answer Generation (Optional)**
-   - Sends the retrieved answer as strict context to Gemini for final response generation.
+
+- Sends the retrieved answer as strict context to Gemini for final response generation.
 
 ---
 
@@ -47,11 +52,11 @@ The RAG flow consists of five main stages:
 ### Internal Imports
 
 - `VectorEmbed` – MongoDB model for storing embeddings
-- Interfaces:
-  - `RawEmbed`
-  - `Vector`
-  - `SimilarityResult`
-  - `DataSet`
+- **Interfaces:**
+- `RawEmbed`
+- `Vector`
+- `SimilarityResult`
+- `DataSet`
 
 ---
 
@@ -76,17 +81,14 @@ The dataset passed to the `RAG` constructor must contain objects with the follow
 	Answer: string;
 }
 ```
-````
 
 Each entry is internally converted into an embedding input of the form:
 
-```
-Question: <question>
-```
+`Question: <question>`
 
-and assigned a stable ID (`p0`, `p1`, …).
+and assigned a stable ID (`p0`, `p1`, ...).
 
-> **Note:** The dataset must be retrieved from your external source (e.g., MongoDB) before instantiating the `RAG` class.
+> [!NOTE] The dataset must be retrieved from your external source (e.g., MongoDB) before instantiating the `RAG` class.
 
 ---
 
@@ -100,6 +102,7 @@ The `RAG` class encapsulates the full retrieval, validation, and generation pipe
 
 ```ts
 constructor(dataSet: DataSet[])
+
 ```
 
 ### Responsibilities
@@ -122,6 +125,7 @@ constructor(dataSet: DataSet[])
 
 ```ts
 async createEmbeddings(userQuery: string)
+
 ```
 
 ### Purpose
@@ -131,14 +135,16 @@ Creates embeddings if they do not exist, or validates existing embeddings before
 ### Behavior
 
 1. Queries MongoDB for existing embeddings.
-2. If embeddings exist:
-   - Calls `verifyEmbeddings(userQuery)` to ensure they still match the dataset.
-   - Returns without regenerating unless verification fails.
+2. **If embeddings exist:**
 
-3. If no embeddings exist:
-   - Iterates over all prepared dataset entries.
-   - Sends each entry to the Python embedding service.
-   - Stores embeddings in MongoDB using `VectorEmbed.create()`.
+- Calls `verifyEmbeddings(userQuery)` to ensure they still match the dataset.
+- Returns without regenerating unless verification fails.
+
+3. **If no embeddings exist:**
+
+- Iterates over all prepared dataset entries.
+- Sends each entry to the Python embedding service.
+- Stores embeddings in MongoDB using `VectorEmbed.create()`.
 
 ### Key Property
 
@@ -150,6 +156,7 @@ This method **prevents silent embedding drift** by ensuring cached vectors alway
 
 ```ts
 private async verifyEmbeddings(userQuery: string)
+
 ```
 
 ### Purpose
@@ -161,9 +168,9 @@ Ensures cached embeddings in MongoDB are correct and up-to-date.
 - Runs a similarity search using the user query.
 - Retrieves the most similar dataset entry.
 - Compares it against a known **golden question/answer pair**.
-- If the comparison fails:
-  - Deletes all existing embeddings.
-  - Regenerates embeddings by calling `createEmbeddings`.
+- **If the comparison fails:**
+- Deletes all existing embeddings.
+- Regenerates embeddings by calling `createEmbeddings`.
 
 ### Why This Exists
 
@@ -175,9 +182,10 @@ Without verification, stale or mismatched embeddings can silently corrupt retrie
 
 ```ts
 async computeSimilarity(
-	userQuery: string,
-	debug: boolean = false
+  userQuery: string,
+  debug: boolean = false
 ): Promise<string | SimilarityResult[]>
+
 ```
 
 ### Purpose
@@ -191,7 +199,7 @@ Finds the dataset entry most semantically similar to a user query.
 - Computes cosine similarity between the query and each embedding.
 - Passes results to `getMostSimilarDocument`.
 
-> **Important:** `createEmbeddings()` must be called before invoking this method.
+> [!IMPORTANT] `createEmbeddings()` must be called before invoking this method.
 
 ### Return Value
 
@@ -204,9 +212,10 @@ Finds the dataset entry most semantically similar to a user query.
 
 ```ts
 private getMostSimilarDocument(
-	results: SimilarityResult[],
-	debug: boolean
+  results: SimilarityResult[],
+  debug: boolean
 ): SimilarityResult[] | string
+
 ```
 
 ### Purpose
@@ -227,6 +236,7 @@ Selects and formats the final similarity result.
 
 ```ts
 async debug(userQuery: string)
+
 ```
 
 ### Purpose
@@ -237,8 +247,8 @@ Provides enriched similarity diagnostics for development and validation.
 
 - Calls `computeSimilarity(userQuery, true)`.
 - Attaches:
-  - Human-readable dataset question
-  - Corresponding dataset answer
+- Human-readable dataset question
+- Corresponding dataset answer
 
 ### Use Case
 
@@ -254,9 +264,10 @@ Helps verify:
 
 ```ts
 async queryGemini(
-	ragQueryResult: string,
-	userQuery: string
+  ragQueryResult: string,
+  userQuery: string
 ): Promise<{ answer: string }>
+
 ```
 
 ### Purpose
@@ -266,9 +277,9 @@ Generates a final response grounded strictly in retrieved data.
 ### Behavior
 
 - Constructs a strict prompt that:
-  - Limits answers to UD CS–related questions
-  - Enforces HTML-only formatting (`<p>`, `<b>`, `<i>`)
-  - Disallows external knowledge
+- Limits answers to UD CS–related questions
+- Enforces HTML-only formatting (`<p>`, `<b>`, `<i>`)
+- Disallows external knowledge
 
 - Sends the prompt to Gemini.
 - Extracts and returns the generated response.
