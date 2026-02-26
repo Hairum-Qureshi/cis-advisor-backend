@@ -71,7 +71,7 @@ This design cleanly separates:
 
 ### Endpoints
 
-| Endpoint | Method | Description | Auth Required |
+| Endpoint | Method | Description | Admin Key Required |
 | --- | --- | --- | --- |
 | `/` | GET | Basic server health check | No |
 | `/api/data-source-json` | GET | Returns the full Q&A dataset currently stored in MongoDB | No |
