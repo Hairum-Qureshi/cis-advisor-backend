@@ -149,7 +149,7 @@ export class RAG {
 	): SimilarityResult[] | string {
 		const mostSimilar: SimilarityResult[] = results
 			.sort((a: SimilarityResult, b: SimilarityResult) => b.score - a.score)
-			.slice(0, 3) as SimilarityResult[]; // return top 1 most similar entry
+			.slice(0, 3) as SimilarityResult[]; // return top 3 most similar entry
 
 		if (debug) {
 			return mostSimilar;
