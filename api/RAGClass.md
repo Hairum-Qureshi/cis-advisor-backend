@@ -1,4 +1,3 @@
-````md
 # RAG (Retrieval-Augmented Generation) Class
 
 This class implements a **lightweight but self-validating Retrieval-Augmented Generation (RAG) pipeline** using:
