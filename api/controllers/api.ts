@@ -87,6 +87,22 @@ const addToDataSource = async (req: Request, res: Response) => {
 	}
 };
 
+function checkGreeting(query: string): boolean {
+	const greetings = [
+		"hi",
+		"hello",
+		"hey",
+		"heya",
+		"yo",
+		"greetings",
+		"good morning",
+		"good afternoon",
+		"good evening"
+	];
+	const lowerCaseQuery = query.toLowerCase();
+	return greetings.some(greeting => lowerCaseQuery.includes(greeting));
+}
+
 const queryGemini = async (req: Request, res: Response) => {
 	await dbConnect();
 	const { query } = req.body;
@@ -118,7 +134,7 @@ const queryGemini = async (req: Request, res: Response) => {
 
 				// If the error is a 429 Too Many Requests, we can provide a fallback response that includes the most relevant answer from the dataset based on the similarity computation. This way, even if the AI provider is rate-limiting requests, users can still receive some useful information related to their query while they wait for the rate limit to reset.
 				return res.json({
-					answer: `<p>${result || "I'm sorry, but I couldn't find any relevant results for your query. We're continuously improving the system, and your feedback would be greatly appreciated; let us know how we can improve or what kinds of questions you'd like answered in the future."} If this response doesn't seem accurate or doesn't fully address your question, please try again in a few hours after the rate limit resets, or consider rephrasing your question.</p>`
+					answer: `<p>${checkGreeting(query) ? "Hello, " + result?.split(" ")[0].replace(result?.[0][0], result?.[0][0].toLowerCase()) : result || "I'm sorry, but I couldn't find any relevant results for your query. We're continuously improving the system, and your feedback would be greatly appreciated; let us know how we can improve or what kinds of questions you'd like answered in the future."} If this response doesn't seem accurate or doesn't fully address your question, please try again in a few hours after the rate limit resets, or consider rephrasing your question.</p>`
 				});
 			}
 		}
