@@ -210,7 +210,7 @@ PORT=3000
 
 ```bash
 git clone <repo-url>
-cd CIS-ADVISOR-BACKEND
+cd api
 npm install
 npm run dev
 ```
