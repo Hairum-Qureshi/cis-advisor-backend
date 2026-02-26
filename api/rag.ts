@@ -9,18 +9,19 @@ export class RAG {
 	private genAI;
 	private model;
 	private JSON_DATASET: DataSet[];
+	private readonly GEMINI_MODEL = "gemini-2.0-flash";
 
 	constructor(dataSet: DataSet[]) {
 		this.JSON_DATASET = dataSet;
 		for (let i = 0; i < this.JSON_DATASET.length; i++) {
 			this.rawEmbedArray.push({
 				id: `p${i}`,
-				text: `Question: ${this.JSON_DATASET[i].Question} Answer: ${this.JSON_DATASET[i].Answer}`
+				text: `Question: ${this.JSON_DATASET[i].Question}`
 			});
 		}
 		this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 		this.model = this.genAI.getGenerativeModel({
-			model: "gemini-2.5-flash-lite"
+			model: this.GEMINI_MODEL
 		});
 	}
 
@@ -33,13 +34,63 @@ export class RAG {
 		return res;
 	}
 
-	async createEmbeddings() {
+	private async verifyEmbeddings(userQuery: string) {
+		const GOLDEN_DATA = {
+			Question: process.env.GOLDEN_QUESTION,
+			Answer: process.env.GOLDEN_ANSWER
+		}; // this object contains the "golden question" and "golden answer" that are used as a reference to verify the correctness of the existing embeddings in MongoDB. By comparing the embedding of the golden question and answer with the corresponding entry in the dataset, we can ensure that the embeddings are accurate and up-to-date, which is crucial for the similarity search to function correctly.
+
+		try {
+			const result = await this.computeSimilarity(userQuery);
+
+			if (typeof result === "string") {
+				// No valid results found for the user query, which indicates that the existing embeddings in MongoDB may not be accurate or relevant to the current dataset entries. In this case, we should ignore it because the user may have asked a question that is not represented in the dataset, and it does not necessarily indicate an issue with the embeddings.
+				return;
+			} else {
+				const data =
+					this.JSON_DATASET[
+						parseInt((result as SimilarityResult[])[0].id.slice(1))
+					]; // retrieve the original dataset entry corresponding to the most similar embedding found in MongoDB by using the ID from the similarity result (removing the 'p' prefix to get the original index)
+
+				if (
+					data.Question !== GOLDEN_DATA.Question &&
+					data.Answer !== GOLDEN_DATA.Answer
+				) {
+					// if the retrieved question and answer do not match the golden question and answer, it indicates that the existing embeddings in MongoDB may be outdated or incorrect, which could lead to inaccurate similarity search results. In this case, we need to clear the existing embeddings and regenerate them to ensure that they correspond correctly to the current dataset entries.
+
+					await VectorEmbed.deleteMany({});
+					await this.createEmbeddings(userQuery);
+
+					console.log(
+						"Existing embeddings were outdated or incorrect. Embeddings have been cleared and regenerated."
+					);
+
+					return;
+				}
+
+				console.log(
+					"Existing embeddings are correct and correspond to the current dataset. No need to regenerate embeddings."
+				);
+				return;
+			}
+		} catch (error) {
+			if (error) {
+				console.error("Error in verifyEmbeddings:", error);
+				throw new Error("Failed to verify embeddings");
+			}
+		}
+	}
+
+	async createEmbeddings(userQuery: string) {
 		const embeddings: Vector[] = [];
 		try {
 			// check whether the embed collection exists in Mongo and that there are embeds stored in it
 			const existingEmbeds = await VectorEmbed.find({});
 			if (existingEmbeds.length > 0) {
 				// if embeds exist, use them
+
+				await this.verifyEmbeddings(userQuery); // verify that the existing embeddings are correct and correspond to the current dataset (this is important to ensure that the similarity search will work correctly and that the embeddings are not outdated or mismatched with the dataset entries, which could lead to inaccurate similarity results)
+
 				return existingEmbeds;
 			} else {
 				for (const rawEmbed of this.rawEmbedArray) {
@@ -98,12 +149,12 @@ export class RAG {
 	): SimilarityResult[] | string {
 		const mostSimilar: SimilarityResult[] = results
 			.sort((a: SimilarityResult, b: SimilarityResult) => b.score - a.score)
-			.slice(0, 1) as SimilarityResult[]; // return top 1 most similar entry
+			.slice(0, 3) as SimilarityResult[]; // return top 1 most similar entry
 
 		if (debug) {
 			return mostSimilar;
 		} else {
-			const THRESHOLD = 0.6; // set a similarity threshold (this value can be adjusted based on testing and experimentation)
+			const THRESHOLD = 0.3; // set a similarity threshold (this value can be adjusted based on testing and experimentation)
 
 			return mostSimilar[0].score < THRESHOLD
 				? "No valid results found for this query."
