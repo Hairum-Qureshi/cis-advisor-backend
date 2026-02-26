@@ -163,9 +163,8 @@ This provides a deterministic signal that the vector store no longer reflects th
 
 **Repository:** [https://github.com/Hairum-Qureshi/embedding-python-backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
 
-The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**.
+The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**. To learn more about the RAG class, see the documentation here: https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md
 
-To learn more about the RAG class, see the documentation here: https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md
 ---
 
 ## Prompt Strategy
