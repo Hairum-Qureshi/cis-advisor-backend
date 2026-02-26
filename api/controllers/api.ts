@@ -118,7 +118,7 @@ const queryGemini = async (req: Request, res: Response) => {
 
 				// If the error is a 429 Too Many Requests, we can provide a fallback response that includes the most relevant answer from the dataset based on the similarity computation. This way, even if the AI provider is rate-limiting requests, users can still receive some useful information related to their query while they wait for the rate limit to reset.
 				return res.json({
-					answer: `<p>I apologize, but I'm currently unable to process your request due to high demand. However, based on the similarity computation, the most relevant answer from my dataset is: <strong>${result || "No results found."}</strong> If you feel this answer didn't make sense, please try again in an hour or two when the rate limit has reset.</p>`
+					answer: `<p>${result || "I'm sorry, but I couldn't find any relevant results for your query. We're continuously improving the system, and your feedback would be greatly appreciated; let us know how we can improve or what kinds of questions you'd like answered in the future."} If this response doesn't seem accurate or doesn't fully address your question, please try again in a few hours after the rate limit resets, or consider rephrasing your question.</p>`
 				});
 			}
 		}
