@@ -222,3 +222,9 @@ http://localhost:3000
 ```
 
 ⚠️ If running locally, ensure the **Python embedding backend is running** before calling `/api/ask-gemini`.
+
+---
+
+## Future Improvements
+This other project of mine utilizes @xenova/transformers for embedding generation: https://github.com/Hairum-Qureshi/semantic-search/blob/main/script.ts
+It's unclear whether switching from having Python handle the embedding logic to this Node.js embedding package may result in Vercel refusing to deploy.
