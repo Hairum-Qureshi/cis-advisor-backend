@@ -41,7 +41,7 @@ export class RAG {
 		}; // this object contains the "golden question" and "golden answer" that are used as a reference to verify the correctness of the existing embeddings in MongoDB. By comparing the embedding of the golden question and answer with the corresponding entry in the dataset, we can ensure that the embeddings are accurate and up-to-date, which is crucial for the similarity search to function correctly.
 
 		try {
-			const result = await this.computeSimilarity(userQuery);
+			const result = await this.computeSimilarity(GOLDEN_DATA.Question!); // compute the similarity between the golden question and the existing embeddings in MongoDB to verify that the most similar result corresponds to the golden question and answer in the dataset, which helps ensure that the embeddings are correct and relevant to the current dataset entries
 
 			if (typeof result === "string") {
 				// No valid results found for the user query, which indicates that the existing embeddings in MongoDB may not be accurate or relevant to the current dataset entries. In this case, we should ignore it because the user may have asked a question that is not represented in the dataset, and it does not necessarily indicate an issue with the embeddings.
