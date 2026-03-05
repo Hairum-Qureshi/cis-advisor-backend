@@ -9,7 +9,7 @@ export class RAG {
 	private genAI;
 	private model;
 	private JSON_DATASET: DataSet[];
-	private readonly GEMINI_MODEL = "gemini-2.0-flash";
+	private readonly GEMINI_MODEL = "gemini-2.5-flash-lite";
 
 	constructor(dataSet: DataSet[]) {
 		this.JSON_DATASET = dataSet;
