@@ -52,7 +52,7 @@ const addToDataSource = async (req: Request, res: Response) => {
 		try {
 			// ! NOTE: this method HAS NOT been tested and may result in unexpected errors or issues, so use with caution
 			for (const entry of JSON_DATASET) {
-				const newID = dataSet.length ? dataSet[dataSet.length - 1].id + 1 : 0;
+				const newID = dataSet.length ? parseInt(dataSet[dataSet.length - 1].id) + 1 : 0;
 				const newEntry = new DataSetQAndA({
 					// auto-increment the id based on the last entry in the dataset to ensure that each entry has a unique id, which is important for maintaining data integrity and allowing for proper referencing of entries when generating embeddings and computing similarity. If the dataset is empty, start with an id of 0
 					id: newID,
