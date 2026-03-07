@@ -22,10 +22,10 @@ const getDataSourceJSON = async (req: Request, res: Response) => {
 // Invoke this endpoint to clear your data source by deleting all entries in the MongoDB collection. This can be useful for resetting your dataset during development or when you want to start fresh with a new set of Q&A pairs. Be cautious when using this endpoint, as it will permanently remove all data from the collection.
 const clearDataSource = async (req: Request, res: Response) => {
 	await dbConnect();
-	const { key } = req.query;
+	const { key } = req.query as { key: string };
 
 	// To prevent unauthorized access to this endpoint, it requires an admin key to be passed in the query parameters. Make sure to include the correct admin key when making a request to this endpoint, otherwise it will return a 403 Forbidden response.
-	if (!key)
+	if (!key || !key.trim())
 		return res
 			.status(400)
 			.json({ message: "Bad Request: Admin key is required" });
@@ -50,6 +50,11 @@ const addToDataSource = async (req: Request, res: Response) => {
 	const { JSON_DATASET, key } = req.body;
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
+
+	if (!key || !key.trim())
+		return res
+			.status(400)
+			.json({ message: "Bad Request: Admin key is required" });
 
 	if (key !== process.env.ADMIN_KEY) {
 		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
