@@ -2,7 +2,8 @@ import { InferSchemaType, Schema, model } from "mongoose";
 
 const dataSetQandASchema = new Schema({
 	id: {
-		type: String
+		type: String,
+		isUnique: true
 	},
 	Question: {
 		type: String
