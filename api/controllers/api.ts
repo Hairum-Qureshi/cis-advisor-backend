@@ -48,6 +48,7 @@ const clearDataSource = async (req: Request, res: Response) => {
 const addToDataSource = async (req: Request, res: Response) => {
 	await dbConnect();
 	const { JSON_DATASET, key } = req.body;
+
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
 
@@ -60,6 +61,8 @@ const addToDataSource = async (req: Request, res: Response) => {
 		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
 	} else {
 		try {
+			if (!JSON_DATASET.length) return;
+
 			for (const entry of JSON_DATASET) {
 				let newID: number;
 				if (!dataSet.length) newID = -1;
