@@ -25,6 +25,11 @@ const clearDataSource = async (req: Request, res: Response) => {
 	const { key } = req.query;
 
 	// To prevent unauthorized access to this endpoint, it requires an admin key to be passed in the query parameters. Make sure to include the correct admin key when making a request to this endpoint, otherwise it will return a 403 Forbidden response.
+	if (!key)
+		return res
+			.status(400)
+			.json({ message: "Bad Request: Admin key is required" });
+
 	if (key !== process.env.ADMIN_KEY) {
 		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
 	} else {
