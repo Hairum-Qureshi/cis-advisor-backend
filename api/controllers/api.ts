@@ -50,9 +50,17 @@ const addToDataSource = async (req: Request, res: Response) => {
 		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
 	} else {
 		try {
-			// ! NOTE: this method HAS NOT been tested and may result in unexpected errors or issues, so use with caution
 			for (const entry of JSON_DATASET) {
-				const newID = dataSet.length ? parseInt(dataSet[dataSet.length - 1].id) + 1 : 0;
+				let newID: number;
+				if (!dataSet.length) newID = -1;
+				else {
+					const lastEntry = dataSet[dataSet.length - 1];
+					newID = parseInt(lastEntry.id) + 1;
+					while (dataSet.some(data => parseInt(data.id) === newID)) {
+						newID++;
+					}
+				}
+
 				const newEntry = new DataSetQAndA({
 					// auto-increment the id based on the last entry in the dataset to ensure that each entry has a unique id, which is important for maintaining data integrity and allowing for proper referencing of entries when generating embeddings and computing similarity. If the dataset is empty, start with an id of 0
 					id: newID,
