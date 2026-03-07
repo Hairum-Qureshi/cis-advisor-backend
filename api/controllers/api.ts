@@ -44,10 +44,27 @@ const clearDataSource = async (req: Request, res: Response) => {
 	}
 };
 
+function simpleJSONCheck(JSON_OBJECT: DataSet[]): boolean {
+	try {
+		JSON.parse(JSON.stringify(JSON_OBJECT));
+		return true;
+	} catch (error) {
+		return false;
+	}
+}
+
 // Invoke this endpoint to add to your data source by passing in a JSON array of Q&A pairs in the request body. This will allow you to easily expand your dataset with new information, which can then be used to generate embeddings and improve the relevance of responses from the Gemini model when users ask questions related to the newly added data.
 const addToDataSource = async (req: Request, res: Response) => {
 	await dbConnect();
 	const { JSON_DATASET, key } = req.body;
+
+	const validJSON =
+		Array.isArray(JSON_DATASET) && simpleJSONCheck(JSON_DATASET);
+
+	if (!validJSON)
+		return res
+			.status(400)
+			.json({ message: "Bad Request: Invalid JSON dataset format" });
 
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
