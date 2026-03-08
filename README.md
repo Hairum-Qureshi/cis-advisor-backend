@@ -226,5 +226,7 @@ http://localhost:3000
 ---
 
 ## Future Improvements
-This other project of mine utilizes @xenova/transformers for embedding generation: https://github.com/Hairum-Qureshi/semantic-search/blob/main/script.ts
-It's unclear whether switching from having Python handle the embedding logic to this Node.js embedding package may result in Vercel refusing to deploy.
+
+This other project of mine utilizes @xenova/transformers for embedding generation: https://github.com/Hairum-Qureshi/semantic-search/blob/main/script.ts It's unclear whether switching from having Python handle the embedding logic to this Node.js embedding package may result in Vercel refusing to deploy.
+
+In terms of design, using an 'id' property was used prior to the shift of utilizing a database and implementing a RAG model. The RAG model can definitely be improved so it no longer relies on the 'id' field and instead utilizes the unique MongoDB '\_id' property.
