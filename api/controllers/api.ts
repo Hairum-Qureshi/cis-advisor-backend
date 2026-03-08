@@ -58,6 +58,8 @@ const addToDataSource = async (req: Request, res: Response) => {
 	await dbConnect();
 	const { JSON_DATASET, key } = req.body;
 
+	if (!JSON_DATASET.length) return;
+
 	const validJSON =
 		Array.isArray(JSON_DATASET) && simpleJSONCheck(JSON_DATASET);
 
@@ -78,32 +80,25 @@ const addToDataSource = async (req: Request, res: Response) => {
 		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
 	} else {
 		try {
-			if (!JSON_DATASET.length) return;
+			let newID = dataSet.length
+				? parseInt(dataSet[dataSet.length - 1].id) + 1
+				: 0;
 
 			for (const entry of JSON_DATASET) {
-				let newID: number;
-				if (!dataSet.length) newID = -1;
-				else {
-					const lastEntry = dataSet[dataSet.length - 1];
-					newID = parseInt(lastEntry.id) + 1;
-					while (dataSet.some(data => parseInt(data.id) === newID)) {
-						newID++;
-					}
-				}
+				const currentID = newID++;
 
 				const newEntry = new DataSetQAndA({
-					// auto-increment the id based on the last entry in the dataset to ensure that each entry has a unique id, which is important for maintaining data integrity and allowing for proper referencing of entries when generating embeddings and computing similarity. If the dataset is empty, start with an id of 0
-					id: newID,
+					id: currentID.toString(),
 					Question: entry.Question,
 					Answer: entry.Answer,
 					Category: entry.Category,
 					Notes: entry.Notes
 				});
+
 				await newEntry.save();
 
-				// need to vectorize the new data as well
 				const rawEmbed = {
-					id: `p${newID}`,
+					id: `p${currentID}`,
 					text: `Question: ${entry.Question} Answer: ${entry.Answer}`
 				};
 
