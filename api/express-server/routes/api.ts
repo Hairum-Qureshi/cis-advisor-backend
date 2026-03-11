@@ -7,7 +7,7 @@ import {
 	queryGemini,
 	regenerateEmbeddings
 } from "../controllers/api";
-import verifyCredentials from "../middleware/verifyCredentials";
+import verifyCredentials from "../controllers/middleware/verifyCredentials";
 const router = express.Router();
 
 router.get("/data-source-json", getDataSourceJSON);
