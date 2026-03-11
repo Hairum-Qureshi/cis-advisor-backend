@@ -228,7 +228,7 @@ export class RAG {
 			If the user says hi/hello or asks how you are doing, respond with a friendly greeting and offer assistance with UD CS-related questions.
 			User Question: ${userQuery}
 			Use ONLY the following data to answer: ${ragQueryResult}
-			If the question cannot be answered using the data above, respond exactly with:
+			If the data provided is just a link, just share that. Otherwise, if the question cannot be answered using the data above, or if the user just sends in gibberish, respond exactly with:
 			<p>I'm sorry, I cannot answer that question based on the provided data.</p>`;
 
 		const requestData = {
