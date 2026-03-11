@@ -6,10 +6,10 @@ This backend powers the chatbot functionality for the **CIS Advisor Chatbot** fo
 
 It provides:
 
-* A secure backend layer for interacting with the Google Gemini API
-* A Retrieval-Augmented Generation (RAG) pipeline for grounded answers
-* Strict domain constraints to prevent off-topic responses
-* Zero exposure of API keys to the client
+- A secure backend layer for interacting with the Google Gemini API
+- A Retrieval-Augmented Generation (RAG) pipeline for grounded answers
+- Strict domain constraints to prevent off-topic responses
+- Zero exposure of API keys to the client
 
 At no point does the frontend directly communicate with Gemini or the embedding system.
 
@@ -19,11 +19,11 @@ At no point does the frontend directly communicate with Gemini or the embedding 
 
 **Initial version (2025):**
 
-* `gemini-2.5-flash`
+- `gemini-2.5-flash`
 
 **Current version (February 2026):**
 
-* `gemini-2.5-flash-lite`
+- `gemini-2.5-flash-lite`
 
 If this model is deprecated or rate-limited in the future, update the model identifier in the Gemini client configuration accordingly.
 
@@ -31,12 +31,12 @@ If this model is deprecated or rate-limited in the future, update the model iden
 
 # Core Goals
 
-* Securely serve Gemini responses (no API keys in client code)
-* Ground responses using UD CIS program data via RAG
-* Constrain the model to **only** answer UD Grad CS questions
-* Reject irrelevant or out-of-scope queries deterministically
-* Output HTML-formatted responses for frontend rendering
-* Continuously verify embedding integrity via a golden Q&A benchmark
+- Securely serve Gemini responses (no API keys in client code)
+- Ground responses using UD CIS program data via RAG
+- Constrain the model to **only** answer UD Grad CS questions
+- Reject irrelevant or out-of-scope queries deterministically
+- Output HTML-formatted responses for frontend rendering
+- Continuously verify embedding integrity via a golden Q&A benchmark
 
 ---
 
@@ -61,9 +61,9 @@ Node / Express API (this repo)
 
 This design cleanly separates:
 
-* **LLM orchestration** (Node backend)
-* **Embedding + retrieval logic** (Python backend)
-* **Dataset persistence** (MongoDB)
+- **LLM orchestration** (Node backend)
+- **Embedding + retrieval logic** (Python backend)
+- **Dataset persistence** (MongoDB)
 
 ---
 
@@ -79,15 +79,15 @@ The following diagram illustrates how the Retrieval-Augmented Generation (RAG) p
 
 ## Endpoints
 
-| Endpoint                     | Method | Description                                                    | Admin Key Required |
-| ---------------------------- | ------ | -------------------------------------------------------------- | ------------------ |
-| `/`                          | GET    | Basic server health check                                      | No                 |
-| `/api/data-source-json`      | GET    | Returns the full Q&A dataset currently stored in MongoDB       | No                 |
-| `/api/ask-gemini`            | POST   | Runs the RAG pipeline and queries Gemini for a grounded answer | No                 |
-| `/api/add-data-source`       | POST   | Adds new Q&A entries and generates embeddings                  | Yes                |
-| `/api/regenerate-embeddings` | PUT    | Regenerates embeddings for the entire dataset                  | Yes                |
-| `/api/q-and-a/:id`           | DELETE | Deletes a specific Q&A pair by its ID                          | Yes                |
-| `/api/clear-data-source`     | DELETE | Deletes all dataset entries **and embeddings**                 | Yes                |
+| Endpoint | Method | Description | Admin Key Required |
+| --- | --- | --- | --- |
+| `/` | GET | Basic server health check | No |
+| `/api/data-source-json` | GET | Returns the full Q&A dataset currently stored in MongoDB | No |
+| `/api/ask-gemini` | POST | Runs the RAG pipeline and queries Gemini for a grounded answer | No |
+| `/api/add-data-source` | POST | Adds new Q&A entries and generates embeddings | Yes |
+| `/api/regenerate-embeddings` | PUT | Regenerates embeddings for the entire dataset | Yes |
+| `/api/q-and-a/:id` | DELETE | Deletes a specific Q&A pair by its ID | Yes |
+| `/api/clear-data-source` | DELETE | Deletes all dataset entries **and embeddings** | Yes |
 
 For all admin endpoints, the request body must include:
 
@@ -146,10 +146,10 @@ Regenerates embeddings for **all Q&A entries currently stored in MongoDB**.
 
 This endpoint is primarily used when:
 
-* The embedding model changes
-* Dataset entries are modified outside the normal ingestion pipeline
-* The golden benchmark detects embedding drift
-* Embedding corruption is suspected
+- The embedding model changes
+- Dataset entries are modified outside the normal ingestion pipeline
+- The golden benchmark detects embedding drift
+- Embedding corruption is suspected
 
 ### Request Body
 
@@ -213,12 +213,12 @@ Deletes **all Q&A entries and their embeddings** from MongoDB.
 
 RAG responsibilities are encapsulated in a dedicated class that handles:
 
-* Query preprocessing
-* Context retrieval via embeddings from MongoDB
-* Prompt construction and constraint enforcement
-* Gemini request orchestration
-* Deterministic rejection of out-of-scope queries
-* Embedding integrity verification via a golden Q&A pair
+- Query preprocessing
+- Context retrieval via embeddings from MongoDB
+- Prompt construction and constraint enforcement
+- Gemini request orchestration
+- Deterministic rejection of out-of-scope queries
+- Embedding integrity verification via a golden Q&A pair
 
 The RAG pipeline is centralized behind a single abstraction rather than scattered across route handlers.
 
@@ -232,9 +232,9 @@ A known question–answer pair from the dataset is embedded and evaluated at run
 
 ### Purpose
 
-* Detect silent embedding drift
-* Catch accidental dataset corruption
-* Trigger automatic embedding regeneration when similarity falls below an acceptable threshold
+- Detect silent embedding drift
+- Catch accidental dataset corruption
+- Trigger automatic embedding regeneration when similarity falls below an acceptable threshold
 
 This provides a deterministic signal that the vector store no longer reflects the source dataset accurately.
 
@@ -242,13 +242,13 @@ This provides a deterministic signal that the vector store no longer reflects th
 
 # Embedding Backend
 
-* Implemented using **Python + FastAPI**
+- Implemented using **Python + FastAPI**
 
 Responsible for:
 
-* Generating embeddings for new queries or updated dataset entries
-* Performing similarity search
-* Returning the most relevant context
+- Generating embeddings for new queries or updated dataset entries
+- Performing similarity search
+- Returning the most relevant context
 
 Repository:
 
@@ -266,10 +266,10 @@ For detailed documentation on the RAG orchestration layer:
 
 Gemini is explicitly instructed to:
 
-* Answer **only** University of Delaware Graduate CS questions
-* Reject unrelated or general-knowledge queries
-* Use **only retrieved context** when forming answers
-* Output HTML (no headers, frontend-safe markup)
+- Answer **only** University of Delaware Graduate CS questions
+- Reject unrelated or general-knowledge queries
+- Use **only retrieved context** when forming answers
+- Output HTML (no headers, frontend-safe markup)
 
 This is a **prompt-control mechanism**, not a complete safety system.
 
@@ -277,15 +277,15 @@ This is a **prompt-control mechanism**, not a complete safety system.
 
 # Environment Variables
 
-| Variable            | Required | Description                                                       |
-| ------------------- | -------- | ----------------------------------------------------------------- |
-| `GEMINI_API_KEY`    | Yes      | Google Generative AI API key                                      |
-| `PYTHON_SERVER_URL` | Yes      | Base URL of the Python FastAPI embedding service                  |
-| `MONGO_URI`         | Yes      | MongoDB connection string                                         |
-| `ADMIN_KEY`         | Yes      | Key to authorize admin endpoints                                  |
-| `GOLDEN_QUESTION`   | Yes      | Verbatim question from the dataset used as an embedding benchmark |
-| `GOLDEN_ANSWER`     | Yes      | Verbatim answer corresponding to `GOLDEN_QUESTION`                |
-| `PORT`              | No       | Local dev port (default: 3000)                                    |
+| Variable | Required | Description |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | Yes | Google Generative AI API key |
+| `PYTHON_SERVER_URL` | Yes | Base URL of the Python FastAPI embedding service |
+| `MONGO_URI` | Yes | MongoDB connection string |
+| `ADMIN_KEY` | Yes | Key to authorize admin endpoints |
+| `GOLDEN_QUESTION` | Yes | Verbatim question from the dataset used as an embedding benchmark |
+| `GOLDEN_ANSWER` | Yes | Verbatim answer corresponding to `GOLDEN_QUESTION` |
+| `PORT` | No | Local dev port (default: 3000) |
 
 ---
 
@@ -324,6 +324,6 @@ If running locally, ensure the **Python embedding backend is running** before ca
 
 # Future Improvements
 
-In terms of design, using an `id` property was implemented prior to the shift toward using a database-backed RAG architecture.
+- In terms of design, using an `id` property was implemented prior to the shift toward using a database-backed RAG architecture. The system can be simplified by removing this field and instead relying entirely on MongoDB's native `_id` property for record identity and retrieval.
 
-The system can be simplified by removing this field and instead relying entirely on MongoDB's native `_id` property for record identity and retrieval.
+- Instead of having the Python embedding backend in a separate repo, integrate it in this repo so it's all in one place. Cause of concern is needing to update Vercel config and at this point in time, I'm not looking to break things while things are working as I don't have the knowledge of how to do this with Vercel yet.
