@@ -222,7 +222,6 @@ export class RAG {
 	}
 
 	async queryGemini(ragQueryResult: string, userQuery: string) {
-		console.log("result", ragQueryResult);
 		const context = `
  			You are a Q&A chatbot for University of Delaware Graduate Computer Science.
  			Answer ONLY UD CS-related questions using the data below. Use only HTML formatting (<p>, <b>, <i>), and do not use header tags (<h1>-<h6>). Keep your answers concise.
