@@ -183,9 +183,9 @@ export class RAG {
 
 		// 2. Check if the winner actually beats the threshold
 		if (bestMatch && bestMatch.score >= THRESHOLD) {
-			const index = parseInt(bestMatch.id.slice(1));
+			const bestMatchID = parseInt(bestMatch.id.slice(1));
 			const answer = this.JSON_DATASET.find(
-				(entry, i) => entry.id === index.toString()
+				(entry, i) => entry.id === bestMatchID.toString()
 			)?.Answer;
 
 			if (answer) {
