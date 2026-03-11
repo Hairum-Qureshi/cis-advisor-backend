@@ -142,7 +142,7 @@ const queryGemini = async (req: Request, res: Response) => {
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
 
-	// console.log(await geminiRag.debug(query));
+	console.log(await geminiRag.debug(query));
 
 	try {
 		await geminiRag.createEmbeddings(query);
@@ -206,10 +206,47 @@ const deleteQAndAPair = async (req: Request, res: Response) => {
 	}
 };
 
+const regenerateEmbeddings = async (req: Request, res: Response) => {
+	await dbConnect();
+	const { key } = req.body;
+
+	if (!key || !key.trim()) {
+		return res.status(400).json({ message: "Missing key" });
+	}
+	if (key !== process.env.ADMIN_KEY) {
+		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
+	}
+
+	try {
+		const dataSet: DataSet[] = await DataSetQAndA.find({});
+		const geminiRag = new RAG(dataSet);
+
+		for (const entry of dataSet) {
+			const rawEmbed = {
+				id: `p${entry.id}`,
+				text: `Question: ${entry.Question} Answer: ${entry.Answer}`
+			};
+
+			const res = await geminiRag.getEmbeddings(rawEmbed);
+
+			await VectorEmbed.findOneAndUpdate(
+				{ id: rawEmbed.id },
+				{ embedding: res.data.embedding },
+				{ upsert: true }
+			);
+		}
+		res.json({ message: "Embeddings regenerated successfully" });
+	} catch (error) {
+		console.error("Error regenerating embeddings:", error);
+		res.status(500).json({ message: "Failed to regenerate embeddings" });
+	}
+};
+
 export {
 	getDataSourceJSON,
 	clearDataSource,
 	addToDataSource,
 	queryGemini,
-	deleteQAndAPair
+	deleteQAndAPair,
+	regenerateEmbeddings
 };
