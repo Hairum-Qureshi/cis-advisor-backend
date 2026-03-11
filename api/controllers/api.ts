@@ -185,12 +185,14 @@ const deleteQAndAPair = async (req: Request, res: Response) => {
 
 const regenerateEmbeddings = async (req: Request, res: Response) => {
 	// If you feel that the relevance of the Gemini model's responses has decreased after adding new Q&A pairs to your dataset, you can invoke this endpoint to regenerate all embeddings for the entire dataset. This will ensure that the similarity search is using the most up-to-date embeddings based on the current dataset, which can help improve the relevance of responses when users ask questions related to the newly added data. Keep in mind that regenerating embeddings for a large dataset may take some time, so it's best to use this endpoint during off-peak hours or when you don't expect a high volume of user queries.
-	
+
 	await dbConnect();
 
 	try {
 		const dataSet: DataSet[] = await DataSetQAndA.find({});
 		const geminiRag = new RAG(dataSet);
+
+		await VectorEmbed.deleteMany({});
 
 		for (const entry of dataSet) {
 			const rawEmbed = {
