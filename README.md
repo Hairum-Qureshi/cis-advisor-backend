@@ -15,7 +15,7 @@ At no point does the frontend directly communicate with Gemini or the embedding 
 
 ---
 
-## Model Versioning
+# Model Versioning
 
 **Initial version (2025):**
 
@@ -29,7 +29,7 @@ If this model is deprecated or rate-limited in the future, update the model iden
 
 ---
 
-## Core Goals
+# Core Goals
 
 - Securely serve Gemini responses (no API keys in client code)
 - Ground responses using UD CIS program data via RAG
@@ -40,7 +40,7 @@ If this model is deprecated or rate-limited in the future, update the model iden
 
 ---
 
-## High-Level Architecture
+# High-Level Architecture
 
 ```
 Client
@@ -57,7 +57,6 @@ Node / Express API (this repo)
   └─ Send retrieved context + query to Gemini
           ▼
        Gemini API
-
 ```
 
 This design cleanly separates:
@@ -68,26 +67,35 @@ This design cleanly separates:
 
 ---
 
-## How It Works
+# How It Works
 
-### Endpoints
+## Endpoints
 
 | Endpoint | Method | Description | Admin Key Required |
 | --- | --- | --- | --- |
 | `/` | GET | Basic server health check | No |
 | `/api/data-source-json` | GET | Returns the full Q&A dataset currently stored in MongoDB | No |
 | `/api/ask-gemini` | POST | Runs the RAG pipeline and queries Gemini for a grounded answer | No |
-| `/api/add-data-source` | POST | Adds new Q&A entries and generates embeddings. Requires `ADMIN_KEY` in body | Yes |
-| `/api/q-and-a/:id` | DELETE | Deletes a specific Q&A pair by its ID. Requires `ADMIN_KEY` query param | Yes |
-| `/api/clear-data-source` | DELETE | Deletes all dataset entries **and embeddings**. Requires `ADMIN_KEY` query param | Yes |
+| `/api/add-data-source` | POST | Adds new Q&A entries and generates embeddings | Yes |
+| `/api/regenerate-embeddings` | PUT | Regenerates embeddings for the entire dataset | Yes |
+| `/api/q-and-a/:id` | DELETE | Deletes a specific Q&A pair by its ID | Yes |
+| `/api/clear-data-source` | DELETE | Deletes all dataset entries **and embeddings** | Yes |
+
+For all admin endpoints, the request body must include:
+
+```
+{
+  "key": "your_admin_key"
+}
+```
 
 ---
 
-### Request & Response Examples
+# Request & Response Examples
 
-#### GET `/api/data-source-json`
+## GET `/api/data-source-json`
 
-**Response:**
+**Response**
 
 ```json
 [
@@ -104,9 +112,9 @@ This design cleanly separates:
 
 ---
 
-#### POST `/api/ask-gemini`
+# POST `/api/ask-gemini`
 
-**Request Body:**
+### Request Body
 
 ```json
 {
@@ -114,7 +122,7 @@ This design cleanly separates:
 }
 ```
 
-**Response:**
+### Response
 
 ```json
 {
@@ -124,17 +132,76 @@ This design cleanly separates:
 
 ---
 
-#### DELETE `/api/q-and-a/:id`
+# PUT `/api/regenerate-embeddings`
 
-**URL Params:** `id=[string]`
+Regenerates embeddings for **all Q&A entries currently stored in MongoDB**.
 
-**Query Params:** `adminKey=[your_admin_key]`
+This endpoint is primarily used when:
 
-**Example:** `DELETE /api/q-and-a/p0?adminKey=supersecret`
+- The embedding model changes
+- Dataset entries are modified outside the normal ingestion pipeline
+- The golden benchmark detects embedding drift
+- Embedding corruption is suspected
+
+### Request Body
+
+```json
+{
+	"key": "your_admin_key"
+}
+```
+
+### Response
+
+```json
+{
+	"message": "Embeddings successfully regenerated."
+}
+```
 
 ---
 
-## Retrieval-Augmented Generation (RAG)
+# DELETE `/api/q-and-a/:id`
+
+Deletes a specific Q&A entry by its ID.
+
+### URL Params
+
+```
+id=[string]
+```
+
+### Request Body
+
+```json
+{
+	"key": "your_admin_key"
+}
+```
+
+Example request:
+
+```
+DELETE /api/q-and-a/p0
+```
+
+---
+
+# DELETE `/api/clear-data-source`
+
+Deletes **all Q&A entries and their embeddings** from MongoDB.
+
+### Request Body
+
+```json
+{
+	"key": "your_admin_key"
+}
+```
+
+---
+
+# Retrieval-Augmented Generation (RAG)
 
 RAG responsibilities are encapsulated in a dedicated class that handles:
 
@@ -149,7 +216,7 @@ The RAG pipeline is centralized behind a single abstraction rather than scattere
 
 ---
 
-## Golden Q&A Embedding Verification
+# Golden Q&A Embedding Verification
 
 To ensure long-term embedding correctness, the system supports a **golden benchmark check**.
 
@@ -165,21 +232,29 @@ This provides a deterministic signal that the vector store no longer reflects th
 
 ---
 
-## Embedding Backend
+# Embedding Backend
 
 - Implemented using **Python + FastAPI**
-- Responsible for:
+
+Responsible for:
+
 - Generating embeddings for new queries or updated dataset entries
 - Performing similarity search
 - Returning the most relevant context
 
-**Repository:** [https://github.com/Hairum-Qureshi/embedding-python-backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
+Repository:
 
-The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**. To learn more about the RAG class, see the documentation here: [https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md](https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md)
+[https://github.com/Hairum-Qureshi/embedding-python-backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
+
+The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**.
+
+For detailed documentation on the RAG orchestration layer:
+
+[https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md](https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md)
 
 ---
 
-## Prompt Strategy
+# Prompt Strategy
 
 Gemini is explicitly instructed to:
 
@@ -192,19 +267,21 @@ This is a **prompt-control mechanism**, not a complete safety system.
 
 ---
 
-## Environment Variables
+# Environment Variables
 
 | Variable | Required | Description |
 | --- | --- | --- |
-| `GEMINI_API_KEY` | ✅ | Google Generative AI API key |
-| `PYTHON_SERVER_URL` | ✅ | Base URL of the Python FastAPI embedding service |
-| `MONGO_URI` | ✅ | MongoDB connection string |
-| `ADMIN_KEY` | ✅ | Key to authorize admin endpoints |
-| `GOLDEN_QUESTION` | ✅ | Verbatim question from the dataset used as an embedding benchmark |
-| `GOLDEN_ANSWER` | ✅ | Verbatim answer corresponding to `GOLDEN_QUESTION` |
-| `PORT` | ❌ | Local dev port (default: 3000) |
+| `GEMINI_API_KEY` | Yes | Google Generative AI API key |
+| `PYTHON_SERVER_URL` | Yes | Base URL of the Python FastAPI embedding service |
+| `MONGO_URI` | Yes | MongoDB connection string |
+| `ADMIN_KEY` | Yes | Key to authorize admin endpoints |
+| `GOLDEN_QUESTION` | Yes | Verbatim question from the dataset used as an embedding benchmark |
+| `GOLDEN_ANSWER` | Yes | Verbatim answer corresponding to `GOLDEN_QUESTION` |
+| `PORT` | No | Local dev port (default: 3000) |
 
-### `.env` Example
+---
+
+## `.env` Example
 
 ```env
 GEMINI_API_KEY=your_key_here
@@ -214,32 +291,31 @@ ADMIN_KEY=supersecret
 GOLDEN_QUESTION="How do I request an admissions deferment?"
 GOLDEN_ANSWER="Submit your admission deferral request to the CIS Graduate Academic Advisor II for review."
 PORT=3000
-
 ```
 
 ---
 
-## Installation & Local Development
+# Installation & Local Development
 
 ```bash
 git clone <repo-url>
 cd api
 npm install
 npm run dev
-
 ```
 
 API will be available at:
 
 ```
 http://localhost:3000
-
 ```
 
-⚠️ If running locally, ensure the **Python embedding backend is running** before calling `/api/ask-gemini`.
+If running locally, ensure the **Python embedding backend is running** before calling `/api/ask-gemini`.
 
 ---
 
-## Future Improvements
+# Future Improvements
 
-In terms of design, using an 'id' property was used prior to the shift of utilizing a database and implementing a RAG model. The RAG model can definitely be improved so it no longer relies on the 'id' field and instead utilizes the unique MongoDB '\_id' property.
+In terms of design, using an `id` property was implemented prior to the shift toward using a database-backed RAG architecture.
+
+The system can be simplified by removing this field and instead relying entirely on MongoDB's native `_id` property for record identity and retrieval.
