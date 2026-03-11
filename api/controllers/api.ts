@@ -25,22 +25,14 @@ const clearDataSource = async (req: Request, res: Response) => {
 	const { key } = req.query as { key: string };
 
 	// To prevent unauthorized access to this endpoint, it requires an admin key to be passed in the query parameters. Make sure to include the correct admin key when making a request to this endpoint, otherwise it will return a 403 Forbidden response.
-	if (!key || !key.trim())
-		return res
-			.status(400)
-			.json({ message: "Bad Request: Admin key is required" });
 
-	if (key !== process.env.ADMIN_KEY) {
-		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
-	} else {
-		try {
-			await DataSetQAndA.deleteMany({});
-			await VectorEmbed.deleteMany({});
-			res.json({ message: "Data source cleared successfully" });
-		} catch (error) {
-			console.error("Error clearing data source:", error);
-			res.status(500).json({ message: "Failed to clear data source" });
-		}
+	try {
+		await DataSetQAndA.deleteMany({});
+		await VectorEmbed.deleteMany({});
+		res.json({ message: "Data source cleared successfully" });
+	} catch (error) {
+		console.error("Error clearing data source:", error);
+		res.status(500).json({ message: "Failed to clear data source" });
 	}
 };
 
@@ -71,52 +63,43 @@ const addToDataSource = async (req: Request, res: Response) => {
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
 
-	if (!key || !key.trim())
-		return res
-			.status(400)
-			.json({ message: "Bad Request: Admin key is required" });
+	try {
+		let newID = dataSet.length
+			? parseInt(dataSet[dataSet.length - 1].id) + 1
+			: 0;
 
-	if (key !== process.env.ADMIN_KEY) {
-		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
-	} else {
-		try {
-			let newID = dataSet.length
-				? parseInt(dataSet[dataSet.length - 1].id) + 1
-				: 0;
+		for (const entry of JSON_DATASET) {
+			const currentID = newID++;
 
-			for (const entry of JSON_DATASET) {
-				const currentID = newID++;
-
-				const newEntry = new DataSetQAndA({
-					id: currentID.toString(),
-					Question: entry.Question,
-					Answer: entry.Answer,
-					Category: entry.Category,
-					Notes: entry.Notes
-				});
-
-				await newEntry.save();
-
-				const rawEmbed = {
-					id: `p${currentID}`,
-					text: `Question: ${entry.Question} Answer: ${entry.Answer}`
-				};
-
-				const res = await geminiRag.getEmbeddings(rawEmbed);
-
-				await VectorEmbed.create({
-					id: rawEmbed.id,
-					embedding: res.data.embedding
-				});
-			}
-
-			res.status(201).json({
-				message: "Data source added successfully"
+			const newEntry = new DataSetQAndA({
+				id: currentID.toString(),
+				Question: entry.Question,
+				Answer: entry.Answer,
+				Category: entry.Category,
+				Notes: entry.Notes
 			});
-		} catch (error) {
-			console.error("Error adding data source:", error);
-			res.status(500).json({ message: "Failed to add data source" });
+
+			await newEntry.save();
+
+			const rawEmbed = {
+				id: `p${currentID}`,
+				text: `Question: ${entry.Question} Answer: ${entry.Answer}`
+			};
+
+			const res = await geminiRag.getEmbeddings(rawEmbed);
+
+			await VectorEmbed.create({
+				id: rawEmbed.id,
+				embedding: res.data.embedding
+			});
 		}
+
+		res.status(201).json({
+			message: "Data source added successfully"
+		});
+	} catch (error) {
+		console.error("Error adding data source:", error);
+		res.status(500).json({ message: "Failed to add data source" });
 	}
 };
 
@@ -188,12 +171,6 @@ const deleteQAndAPair = async (req: Request, res: Response) => {
 		// 'id' must be the MongoDB ID (i.e. '_id') of the Q&A pair you want to delete; not to be confused with the 'id' field in the DataSetQAndA schema.
 		// To view the IDs, go to the /data-source-json endpoint and look for the '_id' field of each Q&A pair in the returned JSON array.
 
-		if (!key || !key.trim()) {
-			return res.status(400).json({ message: "Missing key" });
-		}
-		if (key !== process.env.ADMIN_KEY) {
-			return res.status(403).json({ message: "Forbidden: Invalid admin key" });
-		}
 		if (!id) {
 			return res.status(400).json({ message: "Missing id parameter" });
 		}
@@ -208,14 +185,6 @@ const deleteQAndAPair = async (req: Request, res: Response) => {
 
 const regenerateEmbeddings = async (req: Request, res: Response) => {
 	await dbConnect();
-	const { key } = req.body;
-
-	if (!key || !key.trim()) {
-		return res.status(400).json({ message: "Missing key" });
-	}
-	if (key !== process.env.ADMIN_KEY) {
-		return res.status(403).json({ message: "Forbidden: Invalid admin key" });
-	}
 
 	try {
 		const dataSet: DataSet[] = await DataSetQAndA.find({});
