@@ -168,6 +168,7 @@ const queryGemini = async (req: Request, res: Response) => {
 				)) as string | undefined;
 
 				// If the error is a 429 Too Many Requests, we can provide a fallback response that includes the most relevant answer from the dataset based on the similarity computation. This way, even if the AI provider is rate-limiting requests, users can still receive some useful information related to their query while they wait for the rate limit to reset.
+				// ! BUG - it writes 'Hello, i'm sorry' instead of 'Hello, I'm sorry'
 				return res.json({
 					answer: `<p>${checkGreeting(query) ? "Hello, " + result?.replace(result.split(" ")[0], result?.split(" ")[0].toLowerCase()) : result || "I'm sorry, but I couldn't find any relevant results for your query. We're continuously improving the system, and your feedback would be greatly appreciated; let us know how we can improve or what kinds of questions you'd like answered in the future."}</p>`
 				});
