@@ -1,11 +1,7 @@
 import axios from "axios";
-
 import cosineSimilarity from "compute-cosine-similarity";
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
 import { Vector, RawEmbed, SimilarityResult, DataSet } from "./interfaces";
-
 import VectorEmbed from "./models/VectorEmbed";
 
 export class RAG {
@@ -36,7 +32,6 @@ export class RAG {
 	async getEmbeddings(rawEmbed: RawEmbed) {
 		const res = await axios.post(`${process.env.PYTHON_SERVER_URL}/embed`, {
 			id: rawEmbed.id,
-
 			text: rawEmbed.text
 		});
 
@@ -187,6 +182,8 @@ export class RAG {
 			const answer = this.JSON_DATASET.find(
 				(entry, i) => entry.id === bestMatchID.toString()
 			)?.Answer;
+
+			console.log("bestMatch", bestMatch);
 
 			if (answer) {
 				return answer;
