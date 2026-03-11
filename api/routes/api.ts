@@ -4,7 +4,8 @@ import {
 	clearDataSource,
 	deleteQAndAPair,
 	getDataSourceJSON,
-	queryGemini
+	queryGemini,
+	regenerateEmbeddings
 } from "../controllers/api";
 const router = express.Router();
 
@@ -17,5 +18,7 @@ router.post("/add-data-source", addToDataSource);
 router.delete("/q-and-a/:id", deleteQAndAPair);
 
 router.post("/ask-gemini", queryGemini);
+
+router.put("/regenerate-embeddings", regenerateEmbeddings);
 
 export default router;
