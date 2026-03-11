@@ -197,7 +197,7 @@ const deleteQAndAPair = async (req: Request, res: Response) => {
 			return res.status(400).json({ message: "Missing id parameter" });
 		}
 
-		await DataSetQAndA.findOneAndDelete({ id });
+		await DataSetQAndA.findOneAndDelete({ _id: id });
 		await VectorEmbed.findOneAndDelete({ id: `p${id}` });
 		res.json({ message: `Q&A pair with id ${id} deleted successfully` });
 	} catch (error) {
