@@ -142,6 +142,8 @@ const queryGemini = async (req: Request, res: Response) => {
 	const dataSet: DataSet[] = await DataSetQAndA.find({});
 	const geminiRag = new RAG(dataSet);
 
+	// console.log(await geminiRag.debug(query));
+
 	try {
 		await geminiRag.createEmbeddings(query);
 		const result: string | undefined = (await geminiRag.computeSimilarity(
@@ -177,4 +179,35 @@ const queryGemini = async (req: Request, res: Response) => {
 	}
 };
 
-export { getDataSourceJSON, clearDataSource, addToDataSource, queryGemini };
+const deleteQAndAPair = async (req: Request, res: Response) => {
+	await dbConnect();
+	const { id } = req.params;
+	const { key } = req.body;
+	try {
+		// 'id' must be the MongoDB ID (i.e. '_id') of the Q&A pair you want to delete; not to be confused with the 'id' field in the DataSetQAndA schema.
+		
+		if (!key || !key.trim()) {
+			return res.status(400).json({ message: "Missing key" });
+		}
+		if (key !== process.env.ADMIN_KEY) {
+			return res.status(403).json({ message: "Forbidden: Invalid admin key" });
+		}
+		if (!id) {
+			return res.status(400).json({ message: "Missing id parameter" });
+		}
+
+		await DataSetQAndA.findOneAndDelete({ id });
+		await VectorEmbed.findOneAndDelete({ id: `p${id}` });
+		res.json({ message: `Q&A pair with id ${id} deleted successfully` });
+	} catch (error) {
+		console.error(`Error deleting Q&A pair with id ${id}:`, error);
+	}
+};
+
+export {
+	getDataSourceJSON,
+	clearDataSource,
+	addToDataSource,
+	queryGemini,
+	deleteQAndAPair
+};
