@@ -1,7 +1,11 @@
 import axios from "axios";
+
 import cosineSimilarity from "compute-cosine-similarity";
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
 import { Vector, RawEmbed, SimilarityResult, DataSet } from "./interfaces";
+
 import VectorEmbed from "./models/VectorEmbed";
 
 export class RAG {
@@ -13,13 +17,17 @@ export class RAG {
 
 	constructor(dataSet: DataSet[]) {
 		this.JSON_DATASET = dataSet;
+
 		for (let i = 0; i < this.JSON_DATASET.length; i++) {
 			this.rawEmbedArray.push({
 				id: `p${i}`,
+
 				text: `Question: ${this.JSON_DATASET[i].Question}`
 			});
 		}
+
 		this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
 		this.model = this.genAI.getGenerativeModel({
 			model: this.GEMINI_MODEL
 		});
@@ -28,6 +36,7 @@ export class RAG {
 	async getEmbeddings(rawEmbed: RawEmbed) {
 		const res = await axios.post(`${process.env.PYTHON_SERVER_URL}/embed`, {
 			id: rawEmbed.id,
+
 			text: rawEmbed.text
 		});
 
@@ -37,6 +46,7 @@ export class RAG {
 	private async verifyEmbeddings(userQuery: string) {
 		const GOLDEN_DATA = {
 			Question: process.env.GOLDEN_QUESTION,
+
 			Answer: process.env.GOLDEN_ANSWER
 		}; // this object contains the "golden question" and "golden answer" that are used as a reference to verify the correctness of the existing embeddings in MongoDB. By comparing the embedding of the golden question and answer with the corresponding entry in the dataset, we can ensure that the embeddings are accurate and up-to-date, which is crucial for the similarity search to function correctly.
 
@@ -45,6 +55,7 @@ export class RAG {
 
 			if (typeof result === "string") {
 				// No valid results found for the user query, which indicates that the existing embeddings in MongoDB may not be accurate or relevant to the current dataset entries. In this case, we should ignore it because the user may have asked a question that is not represented in the dataset, and it does not necessarily indicate an issue with the embeddings.
+
 				return;
 			} else {
 				const data =
@@ -59,6 +70,7 @@ export class RAG {
 					// if the retrieved question and answer do not match the golden question and answer, it indicates that the existing embeddings in MongoDB may be outdated or incorrect, which could lead to inaccurate similarity search results. In this case, we need to clear the existing embeddings and regenerate them to ensure that they correspond correctly to the current dataset entries.
 
 					await VectorEmbed.deleteMany({});
+
 					await this.createEmbeddings(userQuery);
 
 					console.log(
@@ -71,11 +83,13 @@ export class RAG {
 				console.log(
 					"Existing embeddings are correct and correspond to the current dataset. No need to regenerate embeddings."
 				);
+
 				return;
 			}
 		} catch (error) {
 			if (error) {
 				console.error("Error in verifyEmbeddings:", error);
+
 				throw new Error("Failed to verify embeddings");
 			}
 		}
@@ -83,9 +97,12 @@ export class RAG {
 
 	async createEmbeddings(userQuery: string) {
 		const embeddings: Vector[] = [];
+
 		try {
 			// check whether the embed collection exists in Mongo and that there are embeds stored in it
+
 			const existingEmbeds = await VectorEmbed.find({});
+
 			if (existingEmbeds.length > 0) {
 				// if embeds exist, use them
 
@@ -95,11 +112,14 @@ export class RAG {
 			} else {
 				for (const rawEmbed of this.rawEmbedArray) {
 					// calls Python backend Fast API server to compute embedding logic since it's faster and more efficient than doing it in Node.js with JavaScript
+
 					const res = await this.getEmbeddings(rawEmbed);
 
 					// Create a MongoDB document containing the embedding data for each entry in the dataset. This allows for efficient storage and retrieval of embeddings, and can be particularly beneficial as the dataset grows in size, providing a more scalable solution compared to storing embeddings in a JSON file.
+
 					await VectorEmbed.create({
 						id: rawEmbed.id,
+
 						embedding: res.data.embedding
 					});
 				}
@@ -109,6 +129,7 @@ export class RAG {
 		} catch (error) {
 			if (error) {
 				console.error("Error in createEmbeddings:", error);
+
 				throw new Error("Failed to create and get embeddings");
 			}
 		}
@@ -119,14 +140,16 @@ export class RAG {
 
 		try {
 			// get the user's query embedded
+
 			const response = await axios.post(
 				`${process.env.PYTHON_SERVER_URL}/query-to-embedding`,
 				{
-					text: userQuery
+					text: `Question: ${userQuery}` // Add the prefix here so it matches the storage format!
 				}
 			);
 
 			const queryEmbedding: number[] = response.data.embedding;
+
 			const documents: Vector[] = await VectorEmbed.find({}); // retrieve all documents with embeddings from MongoDB
 
 			const results = documents.map((doc: Vector) => ({
@@ -138,6 +161,7 @@ export class RAG {
 		} catch (error) {
 			if (error) {
 				console.error("Error in computeSimilarity:", error);
+
 				throw new Error("Failed to compute similarity");
 			}
 		}
@@ -147,34 +171,51 @@ export class RAG {
 		results: SimilarityResult[],
 		debug: boolean
 	): SimilarityResult[] | string {
-		const mostSimilar: SimilarityResult[] = results
-			.sort((a: SimilarityResult, b: SimilarityResult) => b.score - a.score)
-			.slice(0, 3) as SimilarityResult[]; // return top 3 most similar entry
+		// 1. Sort results so the highest score is at index 0
+		const mostSimilar = results.sort((a, b) => b.score - a.score);
 
 		if (debug) {
-			return mostSimilar;
-		} else {
-			const THRESHOLD = 0.3; // set a similarity threshold (this value can be adjusted based on testing and experimentation)
-
-			return mostSimilar[0].score < THRESHOLD
-				? "No valid results found for this query."
-				: this.JSON_DATASET[parseInt(mostSimilar[0].id.slice(1))].Answer; // remove the 'p' prefix to get the original index for accessing the JSON_DATASET
+			return mostSimilar.slice(0, 3);
 		}
+
+		const THRESHOLD = 0.4;
+		const bestMatch = mostSimilar[0]; // This is the winner
+
+		// 2. Check if the winner actually beats the threshold
+		if (bestMatch && bestMatch.score >= THRESHOLD) {
+			const bestMatchID = parseInt(bestMatch.id.slice(1));
+			const answer = this.JSON_DATASET.find(
+				(entry, i) => entry.id === bestMatchID.toString()
+			)?.Answer;
+
+			if (answer) {
+				return answer;
+			}
+		}
+
+		// 3. Fallback if no match was good enough
+		return "I'm sorry, I cannot answer that question based on the provided data.";
 	}
 
 	async debug(userQuery: string) {
 		// for debugging purposes, return the most similar document's ID, similarity score, and the original question and answer from the dataset to verify that the similarity search is working as expected. This can help identify if the issue lies in the embedding generation, similarity calculation, or if the dataset entries are not being matched correctly with user queries.
+
 		const debugResults = (await this.computeSimilarity(
 			userQuery,
+
 			true
 		)) as SimilarityResult[];
+
 		if (debugResults && debugResults[0]) {
 			// attach readable question/answer to the first result for easier debugging (use `any` to avoid strict type errors)
+
 			// TODO - replace 'any' types here
+
 			(debugResults as unknown as any)[0].readableQuestion =
-				this.JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Question;
+				this.JSON_DATASET[parseInt(debugResults[0].id.slice(1))]?.Question;
+
 			(debugResults as unknown as any)[0].readableAnswer =
-				this.JSON_DATASET[parseInt(debugResults[0].id.slice(1))].Answer;
+				this.JSON_DATASET[parseInt(debugResults[0].id.slice(1))]?.Answer;
 		}
 
 		return debugResults;
@@ -182,26 +223,19 @@ export class RAG {
 
 	async queryGemini(ragQueryResult: string, userQuery: string) {
 		const context = `
-			You are a Q&A chatbot for University of Delaware Graduate Computer Science.
-            Answer ONLY UD CS-related questions using the data below.
-            Use only HTML formatting (<p>, <b>, <i>), and do not use header tags (<h1>-<h6>).
-            Keep your answers concise.
-
+ 			You are a Q&A chatbot for University of Delaware Graduate Computer Science.
+ 			Answer ONLY UD CS-related questions using the data below. Use only HTML formatting (<p>, <b>, <i>), and do not use header tags (<h1>-<h6>). Keep your answers concise.
 			If the user says hi/hello or asks how you are doing, respond with a friendly greeting and offer assistance with UD CS-related questions.
-
-            User Question: ${userQuery}
-
-            Use ONLY the following data to answer:
-            ${ragQueryResult}
-
-            If the question cannot be answered using the data above, respond exactly with:
-            <p>I'm sorry, I cannot answer that question based on the provided data.</p>
-		`;
+			User Question: ${userQuery}
+			Use ONLY the following data to answer: ${ragQueryResult}
+			If the question cannot be answered using the data above, respond exactly with:
+			<p>I'm sorry, I cannot answer that question based on the provided data.</p>`;
 
 		const requestData = {
 			contents: [
 				{
 					role: "user",
+
 					parts: [{ text: context }]
 				}
 			]
