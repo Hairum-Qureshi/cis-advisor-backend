@@ -185,7 +185,8 @@ const deleteQAndAPair = async (req: Request, res: Response) => {
 	const { key } = req.body;
 	try {
 		// 'id' must be the MongoDB ID (i.e. '_id') of the Q&A pair you want to delete; not to be confused with the 'id' field in the DataSetQAndA schema.
-		
+		// To view the IDs, go to the /data-source-json endpoint and look for the '_id' field of each Q&A pair in the returned JSON array.
+
 		if (!key || !key.trim()) {
 			return res.status(400).json({ message: "Missing key" });
 		}
