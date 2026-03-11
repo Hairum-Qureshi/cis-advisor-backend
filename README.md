@@ -57,6 +57,7 @@ Node / Express API (this repo)
   └─ Send retrieved context + query to Gemini
           ▼
        Gemini API
+
 ```
 
 This design cleanly separates:
@@ -76,8 +77,9 @@ This design cleanly separates:
 | `/` | GET | Basic server health check | No |
 | `/api/data-source-json` | GET | Returns the full Q&A dataset currently stored in MongoDB | No |
 | `/api/ask-gemini` | POST | Runs the RAG pipeline and queries Gemini for a grounded answer | No |
-| `/api/clear-data-source` | DELETE | Deletes all dataset entries **and embeddings** from MongoDB. Requires `ADMIN_KEY` query param | Yes |
-| `/api/add-data-source` | POST | Adds new Q&A entries to the dataset and generates embeddings. Requires `ADMIN_KEY` in body | Yes |
+| `/api/add-data-source` | POST | Adds new Q&A entries and generates embeddings. Requires `ADMIN_KEY` in body | Yes |
+| `/api/q-and-a/:id` | DELETE | Deletes a specific Q&A pair by its ID. Requires `ADMIN_KEY` query param | Yes |
+| `/api/clear-data-source` | DELETE | Deletes all dataset entries **and embeddings**. Requires `ADMIN_KEY` query param | Yes |
 
 ---
 
@@ -122,6 +124,16 @@ This design cleanly separates:
 
 ---
 
+#### DELETE `/api/q-and-a/:id`
+
+**URL Params:** `id=[string]`
+
+**Query Params:** `adminKey=[your_admin_key]`
+
+**Example:** `DELETE /api/q-and-a/p0?adminKey=supersecret`
+
+---
+
 ## Retrieval-Augmented Generation (RAG)
 
 RAG responsibilities are encapsulated in a dedicated class that handles:
@@ -157,13 +169,13 @@ This provides a deterministic signal that the vector store no longer reflects th
 
 - Implemented using **Python + FastAPI**
 - Responsible for:
-  - Generating embeddings for new queries or updated dataset entries
-  - Performing similarity search
-  - Returning the most relevant context
+- Generating embeddings for new queries or updated dataset entries
+- Performing similarity search
+- Returning the most relevant context
 
 **Repository:** [https://github.com/Hairum-Qureshi/embedding-python-backend](https://github.com/Hairum-Qureshi/embedding-python-backend)
 
-The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**. To learn more about the RAG class, see the documentation here: https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md
+The Node backend invokes this service as part of the RAG pipeline **before any request is sent to Gemini**. To learn more about the RAG class, see the documentation here: [https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md](https://github.com/Hairum-Qureshi/cis-advisor-backend/blob/main/api/RAGClass.md)
 
 ---
 
@@ -202,6 +214,7 @@ ADMIN_KEY=supersecret
 GOLDEN_QUESTION="How do I request an admissions deferment?"
 GOLDEN_ANSWER="Submit your admission deferral request to the CIS Graduate Academic Advisor II for review."
 PORT=3000
+
 ```
 
 ---
@@ -213,12 +226,14 @@ git clone <repo-url>
 cd api
 npm install
 npm run dev
+
 ```
 
 API will be available at:
 
 ```
 http://localhost:3000
+
 ```
 
 ⚠️ If running locally, ensure the **Python embedding backend is running** before calling `/api/ask-gemini`.
@@ -226,7 +241,5 @@ http://localhost:3000
 ---
 
 ## Future Improvements
-
-This other project of mine utilizes @xenova/transformers for embedding generation: https://github.com/Hairum-Qureshi/semantic-search/blob/main/script.ts It's unclear whether switching from having Python handle the embedding logic to this Node.js embedding package may result in Vercel refusing to deploy.
 
 In terms of design, using an 'id' property was used prior to the shift of utilizing a database and implementing a RAG model. The RAG model can definitely be improved so it no longer relies on the 'id' field and instead utilizes the unique MongoDB '\_id' property.
