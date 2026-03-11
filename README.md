@@ -112,7 +112,7 @@ For all admin endpoints, the request body must include:
 
 ---
 
-# POST `/api/ask-gemini`
+## POST `/api/ask-gemini`
 
 ### Request Body
 
@@ -132,7 +132,7 @@ For all admin endpoints, the request body must include:
 
 ---
 
-# PUT `/api/regenerate-embeddings`
+## PUT `/api/regenerate-embeddings`
 
 Regenerates embeddings for **all Q&A entries currently stored in MongoDB**.
 
@@ -161,7 +161,7 @@ This endpoint is primarily used when:
 
 ---
 
-# DELETE `/api/q-and-a/:id`
+## DELETE `/api/q-and-a/:id`
 
 Deletes a specific Q&A entry by its ID.
 
@@ -187,7 +187,7 @@ DELETE /api/q-and-a/p0
 
 ---
 
-# DELETE `/api/clear-data-source`
+## DELETE `/api/clear-data-source`
 
 Deletes **all Q&A entries and their embeddings** from MongoDB.
 
